@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Waktu pembuatan: 10 Bulan Mei 2021 pada 04.54
+-- Waktu pembuatan: 10 Bulan Mei 2021 pada 13.31
 -- Versi server: 5.7.31
 -- Versi PHP: 7.3.21
 
@@ -191,7 +191,14 @@ CREATE TABLE IF NOT EXISTS `ap_pendidikan` (
   `pendidikan_id` int(11) NOT NULL AUTO_INCREMENT,
   `pendidikan_nama` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`pendidikan_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `ap_pendidikan`
+--
+
+INSERT INTO `ap_pendidikan` (`pendidikan_id`, `pendidikan_nama`) VALUES
+(1, 'Tidak / Belum Sekolah');
 
 -- --------------------------------------------------------
 
@@ -222,7 +229,7 @@ CREATE TABLE IF NOT EXISTS `ap_penduduk` (
   `id_agama` int(11) DEFAULT NULL,
   `penduduk_status_perkawinan` enum('BM','M','CM','CH') DEFAULT NULL COMMENT 'BM=Belum Menikah,M=Menikah,CM=Cerai Mati ,CH=Cerai Hidup',
   `id_pendidikan` int(11) DEFAULT NULL,
-  `penduduk_pekerjaan` int(11) DEFAULT NULL,
+  `penduduk_pekerjaan` varchar(200) DEFAULT NULL,
   `penduduk_kewarganeraan` enum('WNI','WNA') DEFAULT NULL,
   `penduduk_no_passport` varchar(255) DEFAULT NULL,
   `penduduk_no_kitas` varchar(255) DEFAULT NULL,
@@ -399,7 +406,17 @@ CREATE TABLE IF NOT EXISTS `ap_user` (
   `password` varchar(255) DEFAULT '',
   `level` enum('admin','kasi_1','kasi_2','kasi_3') DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `ap_user`
+--
+
+INSERT INTO `ap_user` (`user_id`, `nama_user`, `username`, `password`, `level`) VALUES
+(1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin'),
+(2, 'kasi_1', 'kasi_1', '50cab2fc7228cb2b138a7eafd338cfae', 'kasi_1'),
+(3, 'kasi_2', 'kasi_2', '75f18b88782a8d49eb122bc1fa0badca', 'kasi_2'),
+(4, 'kasi_3', 'kasi_3', '7861341b06105a680653c0c7d172a3cd', 'kasi_3');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
