@@ -2,11 +2,12 @@
 require_once '../konektor.php';
 require_once $LIB.'session.php';
 
-if($_SESSION['level']==''){
-	?>
-	<script>location.href="<?=$MASTER?>login/index.php"</script>
-	<?php
+if($admin==0){
+  ?>
+  <script>location.href="<?=$MASTER?>login/logout.php"</script>
+  <?php
 }
+
 
 $header = "Data Pendidikan";
 
@@ -65,7 +66,7 @@ $header = "Data Pendidikan";
 					</div>
 					<div class="pb-20">
 						<!-- <table class="table striped hover nowrap" id="table" width="100%"> -->
-							<table class="table hover strip nowrap" id="table" width="100%">
+							<table class="table hover stripe nowrap table-bordered" id="table" width="100%">
 							<thead>
 								<tr>
 									<th>No</th>

@@ -2,16 +2,12 @@
 require_once '../konektor.php';
 require_once $LIB.'session.php';
 
-if($_SESSION['level']==''){
+if($admin==0){
   ?>
-  <script>location.href="<?=$MASTER?>login/index.php"</script>
+  <script>location.href="<?=$MASTER?>login/logout.php"</script>
   <?php
 }
 
-if($admin==0){
-  echo "Anda Dilarang Mengakses Halaman Ini !! <a href='$MASTER'>Beranda</a>";
-  die();
-}
 
 $hasil = array();
 

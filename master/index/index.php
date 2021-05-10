@@ -4,7 +4,7 @@ require_once $LIB.'session.php';
 
 if($_SESSION['level']==''){
 	?>
-	<script>location.href="<?=$MASTER?>login/index.php"</script>
+	<script>location.href="<?=$MASTER?>login/logout.php"</script>
 	<?php
 }
 
