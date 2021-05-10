@@ -1,9 +1,12 @@
 <?php 
+require_once '../database/config.php';
+// load data instansi 
+$sql = "SELECT * FROM ap_instansi";
+$result = $Koneksi->query($sql);
+$data = $result->fetch_array();
 
 
-<!-- load data instansi -->
-
- ?>
+?>
 
 <!DOCTYPE html>
 <html>
@@ -63,7 +66,7 @@
 						<div class="login-title">
 							<h2 class="text-center text-primary">SI ADMINISTRASI KECAMATAN</h2>
 						</div>
-						<form>
+						<form action="" method="POST">
 							<!-- <div class="select-role">
 								<div class="btn-group btn-group-toggle" data-toggle="buttons">
 									<label class="btn active">
@@ -111,6 +114,7 @@
 											<input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
 										-->
 										<a class="btn btn-primary btn-lg btn-block" href="index.html">Sign In</a>
+										<button type="submit" class="btn btn-primary btn-lg btn-block">Masuk</button>
 									</div>
 									<!-- <div class="font-16 weight-600 pt-10 pb-10 text-center" data-color="#707373">OR</div>
 									<div class="input-group mb-0">
