@@ -1,5 +1,6 @@
 
 <?php 
+require_once '../../database/config.php';
 $ROOT = '../';
 $MASTER = '../../';
 $LAYOUT = '../layout/';
