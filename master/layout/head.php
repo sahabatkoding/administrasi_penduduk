@@ -6,6 +6,8 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="<?= $ROOT ?>assets/vendors/images/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="<?= $ROOT ?>assets/vendors/images/favicon-16x16.png">
  -->
+	<script src="<?= $ROOT ?>assets/src/plugins/jquery-3.6.0/dist/jquery.js"></script>
+	<script src="<?= $ROOT ?>assets/src/plugins/jquery-3.6.0/dist/jquery.min.js"></script>
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -18,7 +20,7 @@
 	<link rel="stylesheet" type="text/css" href="<?= $ROOT ?>assets/src/plugins/datatables/css/responsive.bootstrap4.min.css">
 	<link rel="stylesheet" type="text/css" href="<?= $ROOT ?>assets/vendors/styles/style.css">
 	<!-- jquery -->
-	<script src="<?= $ROOT ?>assets/src/scripts/jquery.min.js"></script>
+	<!-- <script src="<?= $ROOT ?>assets/src/scripts/jquery.min.js"></script> -->
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
