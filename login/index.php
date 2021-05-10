@@ -1,15 +1,22 @@
+<?php 
+
+
+<!-- load data instansi -->
+
+ ?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<!-- Basic Page Info -->
 	<meta charset="utf-8">
-	<title>DeskApp - Bootstrap Admin Dashboard HTML Template</title>
+	<title>Login</title>
 
 	<!-- Site favicon -->
-	<link rel="apple-touch-icon" sizes="180x180" href="../assets/vendors/images/apple-touch-icon.png">
+<!-- 	<link rel="apple-touch-icon" sizes="180x180" href="../assets/vendors/images/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="../assets/vendors/images/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="../assets/vendors/images/favicon-16x16.png">
-
+ -->
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -54,10 +61,10 @@
 				<div class="col-md-6 col-lg-5">
 					<div class="login-box bg-white box-shadow border-radius-10">
 						<div class="login-title">
-							<h2 class="text-center text-primary">Login To DeskApp</h2>
+							<h2 class="text-center text-primary">SI ADMINISTRASI KECAMATAN</h2>
 						</div>
 						<form>
-							<div class="select-role">
+							<!-- <div class="select-role">
 								<div class="btn-group btn-group-toggle" data-toggle="buttons">
 									<label class="btn active">
 										<input type="radio" name="options" id="admin">
@@ -72,7 +79,7 @@
 										Employee
 									</label>
 								</div>
-							</div>
+							</div> -->
 							<div class="input-group custom">
 								<input type="text" class="form-control form-control-lg" placeholder="Username">
 								<div class="input-group-append custom">
@@ -85,7 +92,7 @@
 									<span class="input-group-text"><i class="dw dw-padlock1"></i></span>
 								</div>
 							</div>
-							<div class="row pb-30">
+							<!-- <div class="row pb-30">
 								<div class="col-6">
 									<div class="custom-control custom-checkbox">
 										<input type="checkbox" class="custom-control-input" id="customCheck1">
@@ -95,7 +102,7 @@
 								<div class="col-6">
 									<div class="forgot-password"><a href="forgot-password.html">Forgot Password</a></div>
 								</div>
-							</div>
+							</div> -->
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="input-group mb-0">
@@ -105,10 +112,10 @@
 										-->
 										<a class="btn btn-primary btn-lg btn-block" href="index.html">Sign In</a>
 									</div>
-									<div class="font-16 weight-600 pt-10 pb-10 text-center" data-color="#707373">OR</div>
+									<!-- <div class="font-16 weight-600 pt-10 pb-10 text-center" data-color="#707373">OR</div>
 									<div class="input-group mb-0">
 										<a class="btn btn-outline-primary btn-lg btn-block" href="register.html">Register To Create Account</a>
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</form>
