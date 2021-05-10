@@ -1,14 +1,10 @@
 <?php 
 require_once '../database/config.php';
+require_once '../assets/library/anti_inject.php';
 // load data instansi 
 $sql = "SELECT * FROM ap_instansi";
 $result = $koneksi->query($sql);
 $data = $result->fetch_array();
-
-if(isset($_POST['masuk'])){
-	require_once 'login.php';
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +25,7 @@ if(isset($_POST['masuk'])){
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 	<!-- CSS -->
+	<script src="../assets/src/scripts/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="../assets/vendors/styles/core.css">
 	<link rel="stylesheet" type="text/css" href="../assets/vendors/styles/icon-font.min.css">
 	<link rel="stylesheet" type="text/css" href="../assets/vendors/styles/style.css">
@@ -53,7 +50,7 @@ if(isset($_POST['masuk'])){
 			</div>
 			<div class="login-menu">
 				<ul>
-					<li><a href="register.html">Register</a></li>
+					<li><span style="display: none;" id="fail_login" class="alert alert-danger">Username / Password Salah</span></li>
 				</ul>
 			</div>
 		</div>
@@ -138,3 +135,32 @@ if(isset($_POST['masuk'])){
 	<script src="../assets/vendors/scripts/layout-settings.js"></script>
 </body>
 </html>
+
+<?php 
+if(isset($_POST['masuk'])){
+
+$username = anti_inject($_POST['username']);
+$password = anti_inject(md5($_POST['password']));
+
+$sql = "SELECT * FROM ap_user WHERE username = '$username' AND password = '$password' ";
+$result = $koneksi->query($sql);
+$rows = $result->num_rows;
+$data = $result->fetch_array();
+
+
+iF($rows>0){
+	$_SESSION['user_id'] = $data['user_id'];
+	$_SESSION['nama_user'] = $data['nama_user'];
+	$_SESSION['level'] = $data['level'];
+}else{
+	?>
+<script>
+	$('#fail_login').css('display','block');
+	setTimeout(function(){
+		$('#fail_login').css('display','none');
+	},2000)
+</script>
+<?php
+}
+}
+ ?>

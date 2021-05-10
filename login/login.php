@@ -10,9 +10,18 @@ $result = $koneksi->query($sql);
 $rows = $result->num_rows;
 $data = $result->fetch_array();
 
-var_dump($rows);
 
 iF($rows>0){
-echo 'asd';
+	$_SESSION['user_id'] = $data['user_id'];
+	$_SESSION['nama_user'] = $data['nama_user'];
+	if($data['level'] != ''){
+		$_SESSION['level'] = $data['level'];
+	}else{
+		echo '<script>alert("Maaf Anda Dilarang Masuk")</script>';
+	}
+}else{
+	echo '<script>$("#fail_login").css("display","block")</script>';
 }
+
+
  ?>
