@@ -2,9 +2,12 @@
 require_once '../database/config.php';
 // load data instansi 
 $sql = "SELECT * FROM ap_instansi";
-$result = $Koneksi->query($sql);
+$result = $koneksi->query($sql);
 $data = $result->fetch_array();
 
+if(isset($_POST['masuk'])){
+	require_once 'login.php';
+}
 
 ?>
 
@@ -84,13 +87,13 @@ $data = $result->fetch_array();
 								</div>
 							</div> -->
 							<div class="input-group custom">
-								<input type="text" class="form-control form-control-lg" placeholder="Username">
+								<input type="text" class="form-control form-control-lg" placeholder="Username" required autocomplete="off" name="username">
 								<div class="input-group-append custom">
 									<span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
 								</div>
 							</div>
 							<div class="input-group custom">
-								<input type="password" class="form-control form-control-lg" placeholder="**********">
+								<input type="password" class="form-control form-control-lg" placeholder="**********" required autocomplete="off" name="password">
 								<div class="input-group-append custom">
 									<span class="input-group-text"><i class="dw dw-padlock1"></i></span>
 								</div>
@@ -113,8 +116,8 @@ $data = $result->fetch_array();
 											use code for form submit
 											<input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
 										-->
-										<a class="btn btn-primary btn-lg btn-block" href="index.html">Sign In</a>
-										<button type="submit" class="btn btn-primary btn-lg btn-block">Masuk</button>
+										<!-- <a class="btn btn-primary btn-lg btn-block" href="index.html">Sign In</a> -->
+										<button type="submit" class="btn btn-primary btn-lg btn-block" name="masuk">Masuk</button>
 									</div>
 									<!-- <div class="font-16 weight-600 pt-10 pb-10 text-center" data-color="#707373">OR</div>
 									<div class="input-group mb-0">
