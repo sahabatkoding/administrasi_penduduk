@@ -51,6 +51,7 @@ $data = $result->fetch_array();
 			<div class="login-menu">
 				<ul>
 					<li><span style="display: none;" id="fail_login" class="alert alert-danger">Username / Password Salah</span></li>
+					<li><span class="alert alert-success" id="success_login" style="display: none;">Berhasil Login</span></li>
 				</ul>
 			</div>
 		</div>
@@ -152,6 +153,14 @@ iF($rows>0){
 	$_SESSION['user_id'] = $data['user_id'];
 	$_SESSION['nama_user'] = $data['nama_user'];
 	$_SESSION['level'] = $data['level'];
+	?>
+	<script>
+	$('#success_login').css('display','block');
+	setTimeout(function(){
+		location.href="../master/index.php";
+	},2000)
+	</script>
+	<?php
 }else{
 	?>
 <script>
