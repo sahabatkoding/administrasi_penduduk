@@ -64,7 +64,8 @@ $header = "Data Pendidikan";
 						</h4>
 					</div>
 					<div class="pb-20">
-						<table class="table striped hover nowrap" id="table" width="100%">
+						<!-- <table class="table striped hover nowrap" id="table" width="100%"> -->
+							<table class="table hover strip nowrap" id="table" width="100%">
 							<thead>
 								<tr>
 									<th>No</th>
@@ -121,7 +122,12 @@ $header = "Data Pendidikan";
 	$(function () {
            /* Isi Table */
              $('#table').DataTable({
+             	   dom: "Bfrtip",
+       			 buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+       					 ],
                "scrollX": true,
+             
                "ajax": {
                    "url": "data.php",
                    "dataSrc": ""
