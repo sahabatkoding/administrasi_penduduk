@@ -49,6 +49,7 @@
 							<li><a href="<?= $ROOT ?>IMB/index.php">Ijin Mendirikan Bangunan</a></li>
 						</ul>
 					</li>
+					<?php if($admin==1){ ?>
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon dw dw-settings2"></span><span class="mtext">Manajemen</span>
@@ -60,6 +61,7 @@
 							<li><a href="<?= $ROOT ?>pendidikan/index.php">Pendidikan</a></li>
 						</ul>
 					</li>
+				<?php } ?>
 				</ul>
 			</div>
 		</div>
