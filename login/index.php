@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require_once '../database/config.php';
 require_once '../assets/library/anti_inject.php';
 // load data instansi 
@@ -139,7 +140,6 @@ $data = $result->fetch_array();
 
 <?php 
 if(isset($_POST['masuk'])){
-
 $username = anti_inject($_POST['username']);
 $password = anti_inject(md5($_POST['password']));
 
@@ -150,15 +150,17 @@ $data = $result->fetch_array();
 
 
 iF($rows>0){
+
 	$_SESSION['user_id'] = $data['user_id'];
 	$_SESSION['nama_user'] = $data['nama_user'];
 	$_SESSION['level'] = $data['level'];
+	var_dump($_SESSION);
 	?>
 	<script>
 	$('#success_login').css('display','block');
 	setTimeout(function(){
 		location.href="../master/index.php";
-	},2000)
+	},1000)
 	</script>
 	<?php
 }else{

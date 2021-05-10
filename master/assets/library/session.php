@@ -28,18 +28,18 @@ if($_SESSION['level']=='admin'){
   $kasi_3=0;
 }
 
-$sql="SELECT * FROM ap_user WHERE user_id = '$_SESSION[id]'";
+$sql="SELECT * FROM ap_user WHERE user_id = '$_SESSION[user_id]'";
 $query=$koneksi->query($sql);
 $dataAdm = $query->fetch_array();
 $countAdm = $query->num_rows;
 
 if($countAdm<=1){
-$dataAdm['nama'] = $dataAdm['user_nama_login'];
-$dataAdm['level'] = $dataAdm['user_level'];
+$dataAdm['nama'] = $dataAdm['nama_user'];
+$dataAdm['level'] = $dataAdm['level'];
 }
 
 // data Instansi
-$sql ="SELECT * FROM siakad_instansi";
+$sql ="SELECT * FROM ap_instansi";
 $result = $koneksi->query($sql);
 $dataInstansi = $result->fetch_array();
 ?>
