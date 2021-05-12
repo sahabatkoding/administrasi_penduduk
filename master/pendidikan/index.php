@@ -166,6 +166,52 @@ $header = "Data Pendidikan";
          	})         	
          })
 
+         function edit(isi){
+         	$('#pendidikan_id').val(isi);
+         	$('#edit').css('display','inline-block');
+         	$('#simpan').css('display','none');
+         	$.getJSON('data.php', {id: isi}, function(json) {
+         			$('#pendidikan_nama').val(json.pendidikan_nama);
+         	});
+         }
+
+         $('#edit').on('click',function(){
+         	$.ajax({
+         		url:'proses.php',
+         		type:'POST',
+         		dataType:'HTML',
+         		data:$('#modal_form').serialize(),
+         		success:function(isi){
+         			$('#modal').modal('hide');
+         			kosong();
+         			$('#table').DataTable().ajax.reload()
+         		}
+         	})
+         	.fail(function(){
+         		console.log("error");
+         	})
+         })
+
+         function hapus(isi){
+         	var n = confirm('Yakin Hapus?');
+
+         	if(n){
+         	$.ajax({
+         		url:'proses.php',
+         		type:'GET',
+         		dataType:'HTML',
+         		data: {id:isi},
+         		success:function(isi){
+         			$('#modal').modal('hide');
+         			kosong();
+         			$('#table').DataTable().ajax.reload()
+         		}
+         	})
+         	.fail(function(){
+         		console.log("error");
+         	})	
+         	}
+         }
 	</script>
 	<?php require_once $LAYOUT.'js.php'; ?>
 </body>

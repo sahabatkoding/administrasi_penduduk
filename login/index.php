@@ -154,7 +154,7 @@ iF($rows>0){
 	$_SESSION['user_id'] = $data['user_id'];
 	$_SESSION['nama_user'] = $data['nama_user'];
 	$_SESSION['level'] = $data['level'];
-	var_dump($_SESSION);
+	// var_dump($_SESSION);
 	?>
 	<script>
 	$('#success_login').css('display','block');
