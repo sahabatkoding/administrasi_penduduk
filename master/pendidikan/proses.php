@@ -17,7 +17,7 @@ if($_GET['id']){
   $sql = "UPDATE ap_pendidikan SET  pendidikan_nama = '$pendidikan_nama' WHERE pendidikan_id ='$_POST[pendidikan_id]'";
   $query = $koneksi->query($sql)or die($koneksi->error);
 }else{
-  $sql = "INSERT INTO ap_pendidikan (pendidikan_id,pendidikan_nama) VALUES (NULL,'$pendidikan_nama')";
+  $sql = "INSERT INTO ap_pendidikan (pendidikan_id,pendidikan_nama) VALUES ('','$pendidikan_nama')";
   $query = $koneksi->query($sql)or die($koneksi->error);
 }
 
