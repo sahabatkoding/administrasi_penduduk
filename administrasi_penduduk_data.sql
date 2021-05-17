@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Waktu pembuatan: 11 Bulan Mei 2021 pada 04.16
+-- Waktu pembuatan: 17 Bulan Mei 2021 pada 15.24
 -- Versi server: 5.7.31
--- Versi PHP: 7.3.21
+-- Versi PHP: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -87329,6 +87329,31 @@ CREATE TABLE IF NOT EXISTS `ap_kia` (
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `ap_pemohon`
+--
+
+DROP TABLE IF EXISTS `ap_pemohon`;
+CREATE TABLE IF NOT EXISTS `ap_pemohon` (
+  `pemohon_id` int(11) NOT NULL,
+  `tgl_reg` datetime DEFAULT NULL,
+  `tgl_update` datetime DEFAULT NULL,
+  `pemohon_nama` varchar(200) DEFAULT NULL,
+  `pemohon_tempat_lahir` varchar(50) DEFAULT NULL,
+  `pemohon_tanggal_lahir` date DEFAULT NULL,
+  `pemohon_alamat` text,
+  `pemohon_no_identitas_1` varchar(30) DEFAULT NULL,
+  `pemohon_no_identitas_2` varchar(30) DEFAULT NULL,
+  `pemohon_npwp` varchar(50) DEFAULT NULL,
+  `pemohon_penghasilan` double(20,2) DEFAULT NULL,
+  `pemohon_telepon_1` varchar(16) DEFAULT NULL,
+  `pemohon_telepon_2` varchar(16) DEFAULT NULL,
+  `pemohon_email` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`pemohon_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `ap_pendidikan`
 --
 
@@ -87337,7 +87362,7 @@ CREATE TABLE IF NOT EXISTS `ap_pendidikan` (
   `pendidikan_id` int(11) NOT NULL AUTO_INCREMENT,
   `pendidikan_nama` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`pendidikan_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `ap_pendidikan`
@@ -87346,7 +87371,8 @@ CREATE TABLE IF NOT EXISTS `ap_pendidikan` (
 INSERT INTO `ap_pendidikan` (`pendidikan_id`, `pendidikan_nama`) VALUES
 (1, 'Tidak / Belum Sekolah'),
 (2, 'SD'),
-(3, 'SMP');
+(3, 'SMP'),
+(4, 'SMK / SMA');
 
 -- --------------------------------------------------------
 
