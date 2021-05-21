@@ -1,7 +1,7 @@
 <?php 
 require_once '../konektor.php';
 require_once $LIB.'session.php';
-//require_once $LIB.'function.php';
+require_once $LIB.'function.php';
 
 if($admin==0){
   ?>
@@ -132,11 +132,11 @@ $header = "Data Pemohon Proposal/UMKM/IMB";
                               <div class="row">
                                 <div class="col-md-6">
                                   <label for="">No Identitas 1 (KTP)</label>
-                                  <input type="text" name="ni1" id="ni1" class="form-control" required onkeydown="hanyaAngka(event)">
+                                  <input type="text" name="ni1" id="ni1" class="form-control" required onkeydown="return hanyaAngka(event)">
                                 </div>
                                 <div class="col-md-6">
                                   <label for="">No Identitas 2 (SIM)</label>
-                                  <input type="text" name="ni2" id="ni2" class="form-control" required onkeydown="hanyaAngka(event)">
+                                  <input type="text" name="ni2" id="ni2" class="form-control" required onkeydown="return hanyaAngka(event)">
                                 </div>
                               </div>
                             </div>  
@@ -148,7 +148,7 @@ $header = "Data Pemohon Proposal/UMKM/IMB";
                                 </div>
                                 <div class="col-md-6">
                                   <label for="">Penghasilan</label>
-                                  <input type="text" name="penghasilan" id="penghasilan" class="form-control" required onkeydown="hanyaAngka(event)">
+                                  <input type="text" name="penghasilan" id="penghasilan" class="form-control" required onkeydown="return hanyaAngka(event)">
                                 </div>
                                 </div>
                             </div>  
@@ -156,11 +156,11 @@ $header = "Data Pemohon Proposal/UMKM/IMB";
                               <div class="row">
                                 <div class="col-md-6">
                                   <label for="">No Telepon</label>
-                                  <input type="text" name="telepon_1" id="telepon_1" class="form-control" required onkeydown="hanyaAngka(event)">
+                                  <input type="text" name="telepon_1" id="telepon_1" class="form-control" required onkeydown="return hanyaAngka(event)">
                                 </div>
                                 <div class="col-md-6">
                                   <label for="">No Telepon Alternatif</label>
-                                  <input type="text" name="telepon_2" id="telepon_2" class="form-control" required onkeydown="hanyaAngka(event)">
+                                  <input type="text" name="telepon_2" id="telepon_2" class="form-control" required onkeydown="return hanyaAngka(event)">
                                 </div>
                                 </div>
                             </div>  

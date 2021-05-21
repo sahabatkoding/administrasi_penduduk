@@ -1,7 +1,7 @@
 <?php 
 require_once '../konektor.php';
 require_once $LIB.'session.php';
-//require_once $LIB.'function.php';
+require_once $LIB.'function.php';
 
 if($admin==0){
   ?>
@@ -77,13 +77,13 @@ $hasil = $data->fetch_array();
                 <div class="col-md-6 col-sm-6">
                     <div class="form-group">
                      <label >No Identitas 1 (KTP)</label>
-                     <input type="text" name="ni1" id="ni1" class="form-control"  onkeydown="hanyaAngka(event)" required value="<?=$hasil['pemohon_no_identitas_1']?>">
+                     <input type="text" name="ni1" id="ni1" class="form-control"  onkeydown="return hanyaAngka(event)" required value="<?=$hasil['pemohon_no_identitas_1']?>">
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <div class="form-group">
                       <label >No Identitas 2 (SIM)</label>
-                      <input type="text" name="ni2" id="ni2" class="form-control"  onkeydown="hanyaAngka(event)" required value="<?=$hasil['pemohon_no_identitas_2']?>">
+                      <input type="text" name="ni2" id="ni2" class="form-control"  onkeydown="return hanyaAngka(event)" required value="<?=$hasil['pemohon_no_identitas_2']?>">
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
@@ -95,19 +95,19 @@ $hasil = $data->fetch_array();
                 <div class="col-md-6 col-sm-6">
                     <div class="form-group">
                       <label >Penghasilan</label>
-                      <input type="text" name="penghasilan" id="penghasilan" class="form-control" required onkeydown="hanyaAngka(event)" value="<?=$hasil['pemohon_penghasilan']?>">
+                      <input type="text" name="penghasilan" id="penghasilan" class="form-control" required onkeydown="return hanyaAngka(event)" value="<?=$hasil['pemohon_penghasilan']?>">
                     </div>
                 </div>
                  <div class="col-md-6 col-sm-6">
                     <div class="form-group">
                       <label>No Telepon</label>
-                      <input type="text" name="telepon_1" id="telepon_1" class="form-control" required onkeydown="hanyaAngka(event)" value="<?=$hasil['pemohon_telepon_1']?>">
+                      <input type="text" name="telepon_1" id="telepon_1" class="form-control" required onkeydown="return hanyaAngka(event)" value="<?=$hasil['pemohon_telepon_1']?>">
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <div class="form-group">
                       <label >No Telepon Alternatif</label>
-                      <input type="text" name="telepon_2" id="telepon_2" class="form-control" required onkeydown="hanyaAngka(event)" value="<?=$hasil['pemohon_telepon_2']?>">
+                      <input type="text" name="telepon_2" id="telepon_2" class="form-control" required onkeydown="return hanyaAngka(event)" value="<?=$hasil['pemohon_telepon_2']?>">
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
