@@ -44,6 +44,7 @@
 							<span class="micon dw dw-library"></span><span class="mtext">Pengajuan</span>
 						</a>
 						<ul class="submenu">
+							<li><a href="<?= $ROOT ?>pemohon-pui/index.php">Data Pemohon</a></li>
 							<li><a href="<?= $ROOT ?>proposal/index.php">Proposal</a></li>
 							<li><a href="<?= $ROOT ?>UMKM/index.php">UMKM</a></li>
 							<li><a href="<?= $ROOT ?>IMB/index.php">Ijin Mendirikan Bangunan</a></li>
