@@ -6,8 +6,10 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="<?= $ROOT ?>assets/vendors/images/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="<?= $ROOT ?>assets/vendors/images/favicon-16x16.png">
  -->
-	<script src="<?= $ROOT ?>assets/src/plugins/jquery-3.6.0/dist/jquery.js"></script>
-	<script src="<?= $ROOT ?>assets/src/plugins/jquery-3.6.0/dist/jquery.min.js"></script>
+	<!--<script src="<?= $ROOT ?>assets/src/plugins/jquery-3.6.0/dist/jquery.js"></script>
+	<script src="<?= $ROOT ?>assets/src/plugins/jquery-3.6.0/dist/jquery.min.js"></script> -->
+	<script src="<?= $ROOT ?>assets/src/plugins/jquery/dist/jquery.js"></script>
+	<script src="<?= $ROOT ?>assets/src/plugins/jquery/dist/jquery.min.js"></script>
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
