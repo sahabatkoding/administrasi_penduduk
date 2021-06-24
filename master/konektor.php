@@ -1,4 +1,5 @@
 <?php 
+error_reporting(0);
 require_once '../../database/config.php';
 $ROOT = '../';
 $MASTER = '../../';
