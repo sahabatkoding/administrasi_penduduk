@@ -49,12 +49,7 @@ $data = $result->fetch_array();
 					<img src="../assets/vendors/images/deskapp-logo.svg" alt="">
 				</a>
 			</div>
-			<div class="login-menu">
-				<ul>
-					<li><span style="display: none;" id="fail_login" class="alert alert-danger">Username / Password Salah</span></li>
-					<li><span class="alert alert-success" id="success_login" style="display: none;">Berhasil Login</span></li>
-				</ul>
-			</div>
+			<div id="alert-login" style="margin-bottom: -15px ;"></div>
 		</div>
 	</div>
 	<div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
@@ -68,23 +63,7 @@ $data = $result->fetch_array();
 						<div class="login-title">
 							<h2 class="text-center text-primary">SI ADMINISTRASI KECAMATAN</h2>
 						</div>
-						<form action="" method="POST">
-							<!-- <div class="select-role">
-								<div class="btn-group btn-group-toggle" data-toggle="buttons">
-									<label class="btn active">
-										<input type="radio" name="options" id="admin">
-										<div class="icon"><img src="../assets/vendors/images/briefcase.svg" class="svg" alt=""></div>
-										<span>I'm</span>
-										Manager
-									</label>
-									<label class="btn">
-										<input type="radio" name="options" id="user">
-										<div class="icon"><img src="../assets/vendors/images/person.svg" class="svg" alt=""></div>
-										<span>I'm</span>
-										Employee
-									</label>
-								</div>
-							</div> -->
+						<form id="submit" method="POST">
 							<div class="input-group custom">
 								<input type="text" class="form-control form-control-lg" placeholder="Username" required autocomplete="off" name="username">
 								<div class="input-group-append custom">
@@ -97,31 +76,11 @@ $data = $result->fetch_array();
 									<span class="input-group-text"><i class="dw dw-padlock1"></i></span>
 								</div>
 							</div>
-							<!-- <div class="row pb-30">
-								<div class="col-6">
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="customCheck1">
-										<label class="custom-control-label" for="customCheck1">Remember</label>
-									</div>
-								</div>
-								<div class="col-6">
-									<div class="forgot-password"><a href="forgot-password.html">Forgot Password</a></div>
-								</div>
-							</div> -->
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="input-group mb-0">
-										<!--
-											use code for form submit
-											<input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
-										-->
-										<!-- <a class="btn btn-primary btn-lg btn-block" href="index.html">Sign In</a> -->
-										<button type="submit" class="btn btn-primary btn-lg btn-block" name="masuk">Masuk</button>
+										<button type="submit" id="button" class="btn btn-primary btn-lg btn-block" name="masuk">Masuk</button>
 									</div>
-									<!-- <div class="font-16 weight-600 pt-10 pb-10 text-center" data-color="#707373">OR</div>
-									<div class="input-group mb-0">
-										<a class="btn btn-outline-primary btn-lg btn-block" href="register.html">Register To Create Account</a>
-									</div> -->
 								</div>
 							</div>
 						</form>
@@ -135,43 +94,42 @@ $data = $result->fetch_array();
 	<script src="../assets/vendors/scripts/script.min.js"></script>
 	<script src="../assets/vendors/scripts/process.js"></script>
 	<script src="../assets/vendors/scripts/layout-settings.js"></script>
+
+	<script type="text/javascript">
+		 $('#submit').submit(function(e){
+		    e.preventDefault();
+
+		    let formdata = new FormData(this);
+		    $.ajax({
+		        url : 'proses.php',
+		        data : formdata,
+		        type : 'POST',
+		        dataType : 'JSON',
+		        processData: false,
+		        contentType: false,
+		        beforeSend: function() {
+		          $('#button').attr('disable', 'disabled');
+		          $('#button').html('<i class="fa fa-spinner fa-spin"></i>')
+		        },
+		        complete: function(response) {
+		          $('#button').removeAttr('disabled');
+		          $('#button').html('Masuk');
+		        },
+		        success: function(response) {
+
+		        	if (response.gagal) {
+		        		$('#alert-login').html(response.gagal);
+		        	}else{
+		        		$('#alert-login').html(response.success);
+		        		window.location.href="../master"
+		        	}
+		            	
+		        },
+		        error: function(xhr, ajaxOptions, thrownError) {
+		          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError)
+		        }
+		    });
+		  });
+	</script>
 </body>
 </html>
-
-<?php 
-if(isset($_POST['masuk'])){
-$username = anti_inject($_POST['username']);
-$password = anti_inject(md5($_POST['password']));
-
-$sql = "SELECT * FROM ap_user WHERE username = '$username' AND password = '$password' ";
-$result = $koneksi->query($sql);
-$rows = $result->num_rows;
-$data = $result->fetch_array();
-
-
-iF($rows>0){
-
-	$_SESSION['user_id'] = $data['user_id'];
-	$_SESSION['nama_user'] = $data['nama_user'];
-	$_SESSION['level'] = $data['level'];
-	// var_dump($_SESSION);
-	?>
-	<script>
-	$('#success_login').css('display','block');
-	setTimeout(function(){
-		location.href="../master/index.php";
-	},1000)
-	</script>
-	<?php
-}else{
-	?>
-<script>
-	$('#fail_login').css('display','block');
-	setTimeout(function(){
-		$('#fail_login').css('display','none');
-	},2000)
-</script>
-<?php
-}
-}
- ?>
