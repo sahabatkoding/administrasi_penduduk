@@ -137,6 +137,7 @@ $header = "Data Provinsi";
                  "columns": [
                    {"data": "no"},
                    {"data": "pendidikan"},
+                   {"data": "detail"},
                    {"data": "edit"},
                    {"data": "hapus"},
                  ]
