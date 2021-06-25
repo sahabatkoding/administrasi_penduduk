@@ -22,11 +22,29 @@
 							<span class="micon dw dw-library"></span><span class="mtext">Master</span>
 						</a>
 						<ul class="submenu">
-							<li><a href="<?= $ROOT ?>penduduk/index.php">Penduduk</a></li>
-							<li><a href="<?= $ROOT ?>kelahiran/index.php">Kelahiran</a></li>
-							<li><a href="<?= $ROOT ?>kematian/index.php">Kematian</a></li>
-							<li><a href="<?= $ROOT ?>pindah_datang/index.php">Pindah Datang</a></li>
-							<li><a href="<?= $ROOT ?>pindah_keluar/index.php">Pindah Keluar</a></li>
+							<li class="dropdown">
+								<a href="javascript:;" class="dropdown-toggle">Data</a>
+								<ul class="submenu">
+									<li><a href="<?php echo $ROOT ?>penduduk/index.php">Penduduk</a></li>
+									<li><a href="<?= $ROOT ?>kelahiran/index.php">Kelahiran</a></li>
+									<li><a href="<?= $ROOT ?>kematian/index.php">Kematian</a></li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="javascript:;"  class="dropdown-toggle">Proses</a>
+								<ul class="submenu">
+									<li><a href="<?= $ROOT ?>pindah_datang/index.php">Pindah Datang</a></li>
+									<li><a href="<?= $ROOT ?>pindah_keluar/index.php">Pindah Keluar</a></li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="javascript:;" class="dropdown-toggle">Laporan</a>
+								<ul class="dropdown">
+									<li><a href="">Intine Laporan</a></li>
+								</ul>
+							</li>
+
+							
 						</ul>
 					</li>
 					<li class="dropdown">
@@ -34,9 +52,20 @@
 							<span class="micon dw dw-library"></span><span class="mtext">Permintaan</span>
 						</a>
 						<ul class="submenu">
-							<li><a href="<?= $ROOT ?>nikah/index.php">Pernikahan</a></li>
-							<li><a href="<?= $ROOT ?>cerai/index.php">Cerai</a></li>
-							<li><a href="<?= $ROOT ?>kia/index.php">Kartu Identitas Anak</a></li>
+							<li class="dropdown">
+								<a href="javascript:;" class="dropdown-toggle">Proses</a>
+								<ul class="submenu">
+									<li><a href="<?= $ROOT ?>nikah/index.php">Pernikahan</a></li>
+									<li><a href="<?= $ROOT ?>cerai/index.php">Cerai</a></li>
+									<li><a href="<?= $ROOT ?>kia/index.php">Kartu Identitas Anak</a></li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="javascript:;" class="dropdown-toggle">Laporan</a>
+								<ul class="submenu">
+									<li><a href="">Laporan ,,,,,</a></li>
+								</ul>
+							</li>
 						</ul>
 					</li>
 					<li class="dropdown">
@@ -44,10 +73,21 @@
 							<span class="micon dw dw-library"></span><span class="mtext">Pengajuan</span>
 						</a>
 						<ul class="submenu">
-							<li><a href="<?= $ROOT ?>pemohon-pui/index.php">Data Pemohon</a></li>
-							<li><a href="<?= $ROOT ?>proposal/index.php">Proposal</a></li>
-							<li><a href="<?= $ROOT ?>UMKM/index.php">UMKM</a></li>
-							<li><a href="<?= $ROOT ?>IMB/index.php">Ijin Mendirikan Bangunan</a></li>
+							<li class="dropdown">
+								<a href="javascript:;" class="dropdown-toggle">Proses</a>
+								<ul class="submenu">
+									<li><a href="<?= $ROOT ?>pemohon-pui/index.php">Data Pemohon</a></li>
+									<li><a href="<?= $ROOT ?>proposal/index.php">Proposal</a></li>
+									<li><a href="<?= $ROOT ?>UMKM/index.php">UMKM</a></li>
+									<li><a href="<?= $ROOT ?>IMB/index.php">Ijin Mendirikan Bangunan</a></li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="javascript:;" class="dropdown-toggle">Lapoaran</a>
+								<ul class="submenu">
+									<li><a href="">Laporan mu......</a></li>
+								</ul>
+							</li>
 						</ul>
 					</li>
 					<?php if($admin==1){ ?>
