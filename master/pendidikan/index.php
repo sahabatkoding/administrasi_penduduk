@@ -91,7 +91,7 @@ $header = "Data Pendidikan";
                               </button>
                             </div>
                             <form id="modal_form">
-                              <input type="text" name="pendidikan_id" id="pendidikan_id">
+                              <input type="hidden" name="pendidikan_id" id="pendidikan_id">
                               <div class="modal-body">
                                 <label for="">Pendidikan</label>
                                 <input type="text" name="pendidikan_nama" id="pendidikan_nama" class="form-control">
