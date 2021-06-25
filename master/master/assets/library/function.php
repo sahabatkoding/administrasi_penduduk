@@ -8,4 +8,11 @@ function hanyaAngka(evt) {
       return false;
     return true;
   }
+
+   function pecahnik($pemohon){
+   $pecah=explode('-', $pemohon);
+    return $pecah[0];
+
+  }
+
 </script>
