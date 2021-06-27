@@ -13,6 +13,7 @@ function cekLogin(){
    }
 }
 
+
 function alert($message, $alert){
     return '<div class="alert alert-'.$alert.' alert-dismissible fade show" role="alert">
         <strong>'.$message.'</strong>
@@ -23,15 +24,11 @@ function alert($message, $alert){
 }
 
 
-function filter($data){
-  global $koneksi;
-  return mysqli_real_escape_string($koneksi, htmlspecialchars($data));
+function anti_inject($kata){
+  $filter = stripslashes(stripcslashes(strip_tags(htmlspecialchars($kata,ENT_QUOTES))));
+  return $filter;
 }
 
-function query($query){
-  global $koneksi;
-  return mysqli_query($koneksi, $query)or die(mysqli_error($koneksi));
-}
 
 function find($tabel, $kolom, $id){
   global $koneksi;
@@ -51,36 +48,6 @@ function findAll($tabel, $kolom, $id=null){
   return $query;
   
 }
-
-
-function mask_rupiah($angka){
-  
-  $hasil_rupiah = number_format($angka,0,'',',');
-  return $hasil_rupiah;
- 
-}
-
-
-function tanggal_indo($date){
-        $BulanIndo = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
-
-        $tahun = substr($date, 0, 4);               
-        $bulan = substr($date, 5, 2);
-        $tgl   = substr($date, 8, 2);
-        $result = $tgl . " " . $BulanIndo[(int)$bulan-1]. " ". $tahun;
-        return($result);
-}
-
-  function waktu_tanggal($date){
-       $BulanIndo = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
-
-       $tahun = substr($date, 0, 4);               
-       $bulan = substr($date, 5, 2);
-       $tgl   = substr($date, 8, 2);
-       $jam   = substr($date, 11, 5);
-       $result = $jam." ". $tgl . " " . $BulanIndo[(int)$bulan-1]. " ". $tahun;
-       return($result);
-       }
 
 
 function setValidasi($pesan, $tipe){

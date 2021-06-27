@@ -1,7 +1,7 @@
 <?php 
 session_start();
 require_once '../database/config.php';
-require_once '../assets/library/anti_inject.php';
+require_once '../assets/library/function.php';
 // load data instansi 
 $sql = "SELECT * FROM ap_instansi";
 $result = $koneksi->query($sql);

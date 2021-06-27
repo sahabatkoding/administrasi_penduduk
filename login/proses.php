@@ -1,7 +1,6 @@
 <?php 
 session_start();
 require_once '../database/config.php';
-require_once '../assets/library/anti_inject.php';
 require_once '../assets/library/function.php';
 
 $username = anti_inject($_POST['username']);

@@ -9,12 +9,13 @@
 <script src="<?= $ROOT ?>assets/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 <!-- <script src="<?= $ROOT ?>assets/vendors/scripts/dashboard.js"></script> -->
 <!-- buttons for Export datatable -->
-	<script src="<?= $ROOT ?>assets/src/plugins/datatables/js/dataTables.buttons.min.js"></script>
-	<script src="<?= $ROOT ?>assets/src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
-	<script src="<?= $ROOT ?>assets/src/plugins/datatables/js/buttons.print.min.js"></script>
-	<script src="<?= $ROOT ?>assets/src/plugins/datatables/js/buttons.html5.min.js"></script>
-	<script src="<?= $ROOT ?>assets/src/plugins/datatables/js/buttons.flash.min.js"></script>
-	<script src="<?= $ROOT ?>assets/src/plugins/datatables/js/pdfmake.min.js"></script>
-	<script src="<?= $ROOT ?>assets/src/plugins/datatables/js/vfs_fonts.js"></script>
+<script src="<?= $ROOT ?>assets/src/plugins/datatables/js/dataTables.buttons.min.js"></script>
+<script src="<?= $ROOT ?>assets/src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
+<script src="<?= $ROOT ?>assets/src/plugins/datatables/js/buttons.print.min.js"></script>
+<script src="<?= $ROOT ?>assets/src/plugins/datatables/js/buttons.html5.min.js"></script>
+<script src="<?= $ROOT ?>assets/src/plugins/datatables/js/buttons.flash.min.js"></script>
+<script src="<?= $ROOT ?>assets/src/plugins/datatables/js/pdfmake.min.js"></script>
+<script src="<?= $ROOT ?>assets/src/plugins/datatables/js/vfs_fonts.js"></script>
 	<!-- Datatable Setting js -->
-	<script src="<?= $ROOT ?>assets/vendors/scripts/datatable-setting.js"></script></body>
+<script src="<?= $ROOT ?>assets/vendors/scripts/datatable-setting.js"></script></body>
+<script src="../<?php echo $ROOT ?>assets/library/function_js.php"></script>

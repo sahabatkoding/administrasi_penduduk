@@ -1,7 +1,6 @@
 <?php 
 require_once '../konektor.php';
-require_once $LIB.'session.php';
-
+  
 if($admin==0){
   ?>
   <script>location.href="<?=$MASTER?>login/logout.php"</script>
@@ -13,9 +12,7 @@ $hasil = array();
 
 $sql = "SELECT * FROM ap_pendidikan ";
 if($_GET['id']!='') $sql .= " WHERE pendidikan_id = '".$_GET['id']."'";
-
 $data = $koneksi->query($sql);
-
 if($_GET['id']){
   $hasil = $data->fetch_array();
 }else{

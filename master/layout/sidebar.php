@@ -98,7 +98,7 @@
 						<ul class="submenu">
 							<li><a href="<?= $ROOT ?>instansi/index.php">Instansi</a></li>
 							<li><a href="<?= $ROOT ?>akun/index.php">Akun</a></li>
-							<li><a href="<?= $ROOT ?>kota/index.php">Kota</a></li>
+							<li><a href="<?= $ROOT ?>kota/provinsi.php">Kota</a></li>
 							<li><a href="<?= $ROOT ?>pendidikan/index.php">Pendidikan</a></li>
 						</ul>
 					</li>

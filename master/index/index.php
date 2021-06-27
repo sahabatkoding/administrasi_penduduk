@@ -1,6 +1,5 @@
 <?php 
 require_once '../konektor.php';
-require_once $LIB.'session.php';
 
 if($_SESSION['level']==''){
 	?>

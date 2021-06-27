@@ -1,7 +1,6 @@
 <?php 
 require_once '../konektor.php';
 
-
 if($admin==0){
   ?>
   <script>location.href="<?=$MASTER?>login/logout.php"</script>
@@ -9,7 +8,7 @@ if($admin==0){
 }
 
 
-$header = "Data Pendidikan";
+$header = "Data Provinsi";
 
  ?>
 
@@ -70,7 +69,8 @@ $header = "Data Pendidikan";
 							<thead>
 								<tr>
 									<th>No</th>
-									<th>Pendidikan</th>
+									<th>Provinsi</th>
+									<th>Detail</th>
 									<th>Edit</th>
 									<th>Hapus</th>
 								</tr>
@@ -91,10 +91,10 @@ $header = "Data Pendidikan";
                               </button>
                             </div>
                             <form id="modal_form">
-                              <input type="hidden" name="pendidikan_id" id="pendidikan_id">
+                              <input type="text" name="provinsi_id" id="provinsi_id">
                               <div class="modal-body">
-                                <label for="">Pendidikan</label>
-                                <input type="text" name="pendidikan_nama" id="pendidikan_nama" class="form-control">
+                                <label for="">provinsi</label>
+                                <input type="text" name="provinsi_nama" id="provinsi_nama" class="form-control">
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -113,7 +113,7 @@ $header = "Data Pendidikan";
 	<!-- js -->
 	<script>
 	 	function kosong(){
-           $('#pendidikan_id').val('');
+           $('#provinsi_id').val('');
            $('#modal_form')[0].reset();
            $('#edit').css('display','none');
            $('#simpan').css('display','inline-block');
@@ -130,12 +130,13 @@ $header = "Data Pendidikan";
                "scrollX": true,
              
                "ajax": {
-                   "url": "data.php",
+                   "url": "data.php?data=provinsi",
                    "dataSrc": ""
                  },
                  "columns": [
                    {"data": "no"},
-                   {"data": "pendidikan"},
+                   {"data": "provinsi"},
+                   {"data": "detail"},
                    {"data": "edit"},
                    {"data": "hapus"},
                  ]
@@ -150,7 +151,7 @@ $header = "Data Pendidikan";
 
          $('#simpan').on('click',function(){
          	$.ajax({
-         		url: 'proses.php',
+         		url: 'proses.php?aksi=add_provinsi',
          		type: 'POST',
          		dataType: 'HTML',
          		data: $('#modal_form').serialize(),
@@ -167,17 +168,17 @@ $header = "Data Pendidikan";
          })
 
          function edit(isi){
-         	$('#pendidikan_id').val(isi);
+         	$('#provinsi_id').val(isi);
          	$('#edit').css('display','inline-block');
          	$('#simpan').css('display','none');
-         	$.getJSON('data.php', {id: isi}, function(json) {
-         			$('#pendidikan_nama').val(json.pendidikan_nama);
+         	$.getJSON('data.php?data=provinsi', {id: isi}, function(json) {
+         			$('#provinsi_nama').val(json.provinsi_nama);
          	});
          }
 
          $('#edit').on('click',function(){
          	$.ajax({
-         		url:'proses.php',
+         		url:'proses.php?aksi=edit_provinsi',
          		type:'POST',
          		dataType:'HTML',
          		data:$('#modal_form').serialize(),
@@ -197,10 +198,10 @@ $header = "Data Pendidikan";
 
          	if(n){
          	$.ajax({
-         		url:'proses.php',
-         		type:'GET',
+         		url:'proses.php?aksi=del_provinsi',
+         		type:'POST',
          		dataType:'HTML',
-         		data: {id:isi},
+         		data: {provinsi_id:isi},
          		success:function(isi){
          			$('#modal').modal('hide');
          			kosong();

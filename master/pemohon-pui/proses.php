@@ -1,6 +1,6 @@
 <?php 
 require_once '../konektor.php';
-require_once $LIB.'session.php';
+
 
 if($admin==0){
   ?>

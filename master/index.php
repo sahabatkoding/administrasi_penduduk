@@ -1,7 +1,7 @@
 <?php 
-include '../database/config.php';
-include 'assets/library/session.php';
-
+require_once '../database/config.php';
+require_once '../assets/library/function.php';
+require_once '../assets/library/session.php';
 if($_SESSION['level']!=''){
 	?>
 	<script>location.href="index"</script>
