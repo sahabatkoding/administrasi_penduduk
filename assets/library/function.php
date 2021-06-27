@@ -24,28 +24,28 @@ function alert($message, $alert){
 
 
 function filter($data){
-  global $conn;
-  return mysqli_real_escape_string($conn, htmlspecialchars($data));
+  global $koneksi;
+  return mysqli_real_escape_string($koneksi, htmlspecialchars($data));
 }
 
 function query($query){
-  global $conn;
-  return mysqli_query($conn, $query);
+  global $koneksi;
+  return mysqli_query($koneksi, $query)or die(mysqli_error($koneksi));
 }
 
 function find($tabel, $kolom, $id){
-  global $conn;
-  $query = mysqli_query($conn, "SELECT * FROM ".$tabel." WHERE ".$kolom."='$id' ");
+  global $koneksi;
+  $query = mysqli_query($koneksi, "SELECT * FROM ".$tabel." WHERE ".$kolom."='$id' ");
   return mysqli_fetch_array($query);
 }
 
 function findAll($tabel, $kolom, $id=null){
-  global $conn;
+  global $koneksi;
 
   if ($id != null) {
-    $query = mysqli_query($conn, "SELECT * FROM ".$tabel." WHERE $kolom='$id' ");
+    $query = mysqli_query($koneksi, "SELECT * FROM ".$tabel." WHERE $kolom='$id' ");
   }else{
-    $query = mysqli_query($conn, "SELECT * FROM ".$tabel);
+    $query = mysqli_query($koneksi, "SELECT * FROM ".$tabel);
   }
 
   return $query;
