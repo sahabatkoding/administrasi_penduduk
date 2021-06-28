@@ -24,14 +24,12 @@ function alert($message, $alert){
 }
 
 
-<<<<<<< Updated upstream
 function anti_inject($kata){
   $filter = stripslashes(stripcslashes(strip_tags(htmlspecialchars($kata,ENT_QUOTES))));
   return $filter;
 }
 
-=======
-<<<<<<< HEAD
+
 function filter($data){
   global $koneksi;
   return mysqli_real_escape_string($koneksi, htmlspecialchars($data));
@@ -41,14 +39,11 @@ function query($query){
   global $koneksi;
   return mysqli_query($koneksi, $query);
 }
-=======
+
 function anti_inject($kata){
   $filter = stripslashes(stripcslashes(strip_tags(htmlspecialchars($kata,ENT_QUOTES))));
   return $filter;
 }
->>>>>>> Stashed changes
-
->>>>>>> 347ab4c14707b9de78fc515c00aed349eaa1bd6b
 
 function find($tabel, $kolom, $id){
   global $koneksi;
