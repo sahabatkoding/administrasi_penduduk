@@ -40,10 +40,6 @@ function query($query){
   return mysqli_query($koneksi, $query);
 }
 
-function anti_inject($kata){
-  $filter = stripslashes(stripcslashes(strip_tags(htmlspecialchars($kata,ENT_QUOTES))));
-  return $filter;
-}
 
 function find($tabel, $kolom, $id){
   global $koneksi;
