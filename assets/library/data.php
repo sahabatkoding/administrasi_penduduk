@@ -1,5 +1,11 @@
 <?php
 
+function query($query){
+  global $koneksi;
+  return mysqli_query($koneksi, $query)or die(mysqli_error($koneksi));
+}
+
+
 function insert($table,$data){
   $field  = array_keys($data);
   $values = array_values($data);
@@ -32,11 +38,29 @@ function select_all($table){
   return $values;
 }
 
-
-
-function query($query){
+function lastID($table,$id){
   global $koneksi;
-  return mysqli_query($koneksi, $query)or die(mysqli_error($koneksi));
+  $sql = "SELECT MAX($id) as last FROM $table";
+  $query = mysqli_query($koneksi,$sql)or die(mysqli_error($koneksi));
+  $data = $query->fetch_array();
+
+  if(!$data['last'])
+    return 0;
+  else
+  return $data['last'];
 }
+
+function newID($table,$id){
+  $newID = lastID($table,$id);
+  return $newID+1;
+}
+
+function randomID(){
+  $r = rand();
+  $u = uniqid(getmypid() . $r . (double)microtime()*1000000,true);
+  $m = md5(session_id().$u);
+  return($m);  
+}
+
 
 ?>

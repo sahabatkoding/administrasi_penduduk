@@ -18,7 +18,6 @@ if($_GET['id']){
   $tabel  = "ap_pendidikan";
   $id     = "pendidikan_id = '".$_POST['pendidikan_id']."'";
   $data   = array(
-            "pendidikan_id" => $_POST['pendidikan_id'],
             "pendidikan_nama" => $pendidikan_nama,
             );
   $sql    = update($tabel,$data,$id);
@@ -26,10 +25,11 @@ if($_GET['id']){
 }else{
   $tabel = "ap_pendidikan";
   $data  = array(
-    "pendidikan_id" => "", 
+    "pendidikan_id" => newID($tabel,'pendidikan_id'), 
     "pendidikan_nama" => $pendidikan_nama,
   );
   $sql = insert($tabel,$data);
+  // echo $sql;
   query($sql);
 
 }

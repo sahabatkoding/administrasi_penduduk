@@ -91,6 +91,7 @@ $header = "Data Kabupaten ";
                               </button>
                             </div>
                             <form id="modal_form">
+                            	<input type="text" name="id_provinsi" id="id_provinsi" value="<?= $_GET['id_provinsi'] ?>">
                               <input type="text" name="kabupaten_id" id="kabupaten_id">
                               <div class="modal-body">
                                 <label for="">kabupaten</label>
@@ -105,7 +106,6 @@ $header = "Data Kabupaten ";
                           </div>
                         </div>
                       </div>
-                      <input type="hidden" name="id_provinsi" id="id_provinsi" value="<?= $_GET['id_provinsi'] ?>">
                       <!-- modal -->
 			</div>
 			<?php require_once $LAYOUT.'footer.php'; ?>
@@ -152,7 +152,7 @@ $header = "Data Kabupaten ";
 
          $('#simpan').on('click',function(){
          	$.ajax({
-         		url: 'proses.php?aksi=add_kabupaten&id_provinsi='+$('#id_provinsi').val(),
+         		url: 'proses.php?aksi=kabupaten',
          		type: 'POST',
          		dataType: 'HTML',
          		data: $('#modal_form').serialize(),
@@ -179,7 +179,7 @@ $header = "Data Kabupaten ";
 
          $('#edit').on('click',function(){
          	$.ajax({
-         		url:'proses.php?aksi=edit_kabupaten&id_provinsi='+$('#id_provinsi').val(),
+         		url:'proses.php?aksi=kabupaten',
          		type:'POST',
          		dataType:'HTML',
          		data:$('#modal_form').serialize(),
