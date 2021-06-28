@@ -1,6 +1,7 @@
 <div class="header">
 		<div class="header-left">
 			<div id="alert" style="margin-bottom: -15px ;"></div>
+			<div class="menu-icon dw dw-menu"></div>
 		</div>
 		<div class="header-right">
 			<div class="user-info-dropdown">

@@ -35,12 +35,6 @@ function filter($data){
   return mysqli_real_escape_string($koneksi, htmlspecialchars($data));
 }
 
-function query($query){
-  global $koneksi;
-  return mysqli_query($koneksi, $query);
-}
-
-
 function find($tabel, $kolom, $id){
   global $koneksi;
   $query = mysqli_query($koneksi, "SELECT * FROM ".$tabel." WHERE ".$kolom."='$id' ");
