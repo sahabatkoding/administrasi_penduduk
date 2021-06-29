@@ -55,6 +55,46 @@ switch ($_GET['aksi']) {
 		$sql   = delete($table,$id);
 		query($sql); 
 	break;
+	case 'kecamatan':
+		$table = "ap_kecamatan";
+		$key   = (!$_POST['kecamatan_id'])?newID($table,"kecamatan_id"):$_POST['kecamatan_id'];
+		$id    = "kecamatan_id = '".$key."'"; 
+		$data = array(
+				"kecamatan_id"=>$key,
+				"id_kabupaten"=>$_POST['id_kabupaten'],
+				"kecamatan_nama"=>$_POST['kecamatan_nama'],
+				);
+		$sql = (!$_POST['kecamatan_id'])?insert($table,$data):update($table,$data,$id);
+		// echo $sql;
+		query($sql);
+		break;
+	case 'del_kecamatan':
+		$table = "ap_kecamatan";
+		$id    = "kecamatan_id = '".$_POST['kecamatan_id']."'";
+		$sql   = delete($table,$id);
+		// echo $sql;
+		query($sql); 
+	break;
+	case 'kelurahan':
+		$table = "ap_kelurahan";
+		$key   = (!$_POST['kelurahan_id'])?newID($table,"kelurahan_id"):$_POST['kelurahan_id'];
+		$id    = "kelurahan_id = '".$key."'"; 
+		$data = array(
+				"kelurahan_id"=>$key,
+				"id_kecamatan"=>$_POST['id_kecamatan'],
+				"kelurahan_nama"=>$_POST['kelurahan_nama'],
+				);
+		$sql = (!$_POST['kelurahan_id'])?insert($table,$data):update($table,$data,$id);
+		// echo $sql;
+		query($sql);
+		break;
+	case 'del_kelurahan':
+		$table = "ap_kelurahan";
+		$id    = "kelurahan_id = '".$_POST['kelurahan_id']."'";
+		$sql   = delete($table,$id);
+		// echo $sql;
+		query($sql); 
+	break;
 
 	default:
 		break;

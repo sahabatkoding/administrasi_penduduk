@@ -8,7 +8,7 @@ if($admin==0){
 }
 
 
-$header = "Data Provinsi";
+$header = "Data kelurahan ";
 
  ?>
 
@@ -43,8 +43,8 @@ $header = "Data Provinsi";
 							<thead>
 								<tr>
 									<th>No</th>
-									<th>Provinsi</th>
-									<th>Detail</th>
+									<th>kelurahan</th>
+									<!-- <th>Detail</th> -->
 									<th>Edit</th>
 									<th>Hapus</th>
 								</tr>
@@ -65,10 +65,11 @@ $header = "Data Provinsi";
                               </button>
                             </div>
                             <form id="modal_form">
-                              <input type="hidden" name="provinsi_id" id="provinsi_id">
+                            	<input type="text" name="id_kecamatan" id="id_kecamatan" value="<?= $_GET['id_kecamatan'] ?>">
+                              <input type="text" name="kelurahan_id" id="kelurahan_id">
                               <div class="modal-body">
-                                <label for="">provinsi</label>
-                                <input type="text" name="provinsi_nama" id="provinsi_nama" class="form-control">
+                                <label for="">kelurahan</label>
+                                <input type="text" name="kelurahan_nama" id="kelurahan_nama" class="form-control">
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -87,7 +88,7 @@ $header = "Data Provinsi";
 	<!-- js -->
 	<script>
 	 	function kosong(){
-           $('#provinsi_id').val('');
+           $('#kelurahan_id').val('');
            $('#modal_form')[0].reset();
            $('#edit').css('display','none');
            $('#simpan').css('display','inline-block');
@@ -104,13 +105,13 @@ $header = "Data Provinsi";
                "scrollX": true,
              
                "ajax": {
-                   "url": "data.php?data=provinsi",
+                   "url": "data.php?data=kelurahan&id_kecamatan="+$('#id_kecamatan').val(),
                    "dataSrc": ""
                  },
                  "columns": [
                    {"data": "no"},
-                   {"data": "provinsi"},
-                   {"data": "detail"},
+                   {"data": "kelurahan"},
+                   // {"data": "detail"},
                    {"data": "edit"},
                    {"data": "hapus"},
                  ]
@@ -125,7 +126,7 @@ $header = "Data Provinsi";
 
          $('#simpan').on('click',function(){
          	$.ajax({
-         		url: 'proses.php?aksi=add_provinsi',
+         		url: 'proses.php?aksi=kelurahan',
          		type: 'POST',
          		dataType: 'HTML',
          		data: $('#modal_form').serialize(),
@@ -142,17 +143,17 @@ $header = "Data Provinsi";
          })
 
          function edit(isi){
-         	$('#provinsi_id').val(isi);
+         	$('#kelurahan_id').val(isi);
          	$('#edit').css('display','inline-block');
          	$('#simpan').css('display','none');
-         	$.getJSON('data.php?data=provinsi', {id: isi}, function(json) {
-         			$('#provinsi_nama').val(json.provinsi_nama);
+         	$.getJSON('data.php?data=kelurahan&id_kecamatan='+$('#id_kecamatan').val(), {id: isi}, function(json) {
+         			$('#kelurahan_nama').val(json.kelurahan_nama);
          	});
          }
 
          $('#edit').on('click',function(){
          	$.ajax({
-         		url:'proses.php?aksi=edit_provinsi',
+         		url:'proses.php?aksi=kelurahan',
          		type:'POST',
          		dataType:'HTML',
          		data:$('#modal_form').serialize(),
@@ -172,10 +173,10 @@ $header = "Data Provinsi";
 
          	if(n){
          	$.ajax({
-         		url:'proses.php?aksi=del_provinsi',
+         		url:'proses.php?aksi=del_kelurahan',
          		type:'POST',
          		dataType:'HTML',
-         		data: {provinsi_id:isi},
+         		data: {kelurahan_id:isi},
          		success:function(isi){
          			$('#modal').modal('hide');
          			kosong();
