@@ -8,9 +8,8 @@ if($admin==0){
 }
 
 
-$header = "Data Pemohon Proposal/UMKM/IMB";
-
-$dt_option=mysqli_query($koneksi,"SELECT * FROM ap_agama");
+$header = "Data Proposal";
+$dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
 
  ?>
 
@@ -71,19 +70,19 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_agama");
 							<thead>
 								<tr>
 									<th>No</th>
-                  <th>NIK</th>
-									<th>Nama Pemohon</th>
-                  <th>Tempat, Tgl lahir</th>
-                  <th>JK</th>
-                  <th>Agama</th>
-                  <th>Alamat</th>
-                  <th>No Identitas</th>
-                  <th>NPWP</th>
-                  <th>Penghasilan</th>
-                  <th>No Telp</th>
-                  <th>Email</th>
+                  <th>Kode Proposal</th>
+									<th>Nama Kegiatan</th>
+                  <th>Jenis Kegiatan</th>
+                  <th>Penyelenggara</th>
+                  <th>Tgl Kegiatan</th>
+                  <th>Lokasi</th>
+                  <th>Tujuan</th>
+                  <th>Bentuk Bantuan</th>
+                  <th>Uang</th>
+                  <th>Barang</th>
+                  <th>Status</th>
+                  <th>Keterangan</th>
                   <th>Tgl Reg</th>
-                  <th>Tgl Update</th>
 									<th>Edit</th>
 									<th>Hapus</th>
 								</tr>
@@ -104,16 +103,29 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_agama");
                               </button>
                             </div>
                             <form id="modal_form">
-                              <input type="hidden" name="pemohon_id" id="pemohon_id">
+                              <input type="hidden" name="proposal_id" id="proposal_id">
                             <div class="modal-body">
                               <div class="row">
                                 <div class="col-md-6">
                                   <label for="">Pemohon</label>
-                                  <input type="text" name="pemohon_nama" id="pemohon_nama" class="form-control" required>
+                                  <select class="form-control" name="pemohon" id="pemohon">
+                                     
+                                     <option id="atas">Silahkan Pilih</option>
+                                     
+
+                                     <?php while($vale=mysqli_fetch_array($dt_option)){
+                                      ?>
+                                      <option >
+                                        <?= $vale['pemohon_nik']." - ".$vale['pemohon_nama'];?>
+                                      </option>
+                                    <?php } ?>
+                                   
+                                  </select>
+                                  
                                 </div>
                                 <div class="col-md-6">
-                                  <label for="">NIK</label>
-                                  <input type="text" name="pemohon_nik" id="pemohon_nik" class="form-control" required onkeydown="return hanyaAngka(event)">
+                                  <label for="">Proposal Kode</label>
+                                  <input type="text" name="proposal_kode" id="proposal_kode" class="form-control" required >
                                 </div>
                               </div>
                             </div> 
@@ -121,95 +133,82 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_agama");
                             <div class="modal-body">  
                               <div class="row">  
                                 <div class="col-md-6">
-                                  <label for="">Tempat Lahir</label>
-                                  <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control" required>
+                                  <label for="">Nama Kegiatan</label>
+                                  <input type="text" name="nama_kegiatan" id="nama_kegiatan" class="form-control" required>
                                 </div>
                                 <div class="col-md-6">
-                                  <label for="">Tanggal Lahir</label>
-                                  <input type="date" name="tgl_lahir" id="tgl_lahir" class="form-control" required="">
+                                  <label for="">Jenis Kegiatan</label>
+                                  <input type="text" name="jenis_kegiatan" id="jenis_kegiatan" class="form-control" required="">
+                                </div>
+                                
+                                </div>
+                            </div> 
+                            <div class="modal-body">  
+                              <div class="row">  
+                                <div class="col-md-6">
+                                  <label for="">Tanggal Kegiatan</label>
+                                  <input type="date" name="tanggal_kegiatan" id="tanggal_kegiatan" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="">Lokasi Kegiatan</label>
+                                  <input type="text" name="lokasi_kegiatan" id="lokasi_kegiatan" class="form-control" required>
                                 </div>
                                 
                                 </div>
                             </div>
-                             <div class="modal-body">
-                              <div class="row">
-                                <div class="col-md-6">
-                                  <label for="">Jenis Kelamin</label>
-                                  <select class="form-control" name="jk" id="jk">
-                                    <option id="ijk">Silahkan Pilih</option>
-                                     
-                                    <option>L</option>
-                                    <option>P</option>
-                                    
-                                  </select>
-                                </div>
-                                <div class="col-md-6">
-                                  <label for="">Agama</label>
-                                  <select class="form-control" name="agama" id="agama">
-                                     
-                                     <option id="ag">Silahkan Pilih</option>
-                                     
-
-                                     <?php while($vale=mysqli_fetch_array($dt_option)){
-                                      ?>
-                                      <option>
-                                        <?= $vale['agama_nama'];?>
-                                      </option>
-                                    <?php } ?>
-                                   
-                                  </select>
-                                </div>
-                              </div>
-                            </div> 
                             <div class="modal-body">
                               <div class="row">
+                                
                                 <div class="col-md-6">
-                                  <label for="">Alamat</label>
-                                  <input type="text" name="alamat" id="alamat" class="form-control" required>
+                                  <label for="">Tujuan Kegiatan</label>
+                                  <input type="text" name="tujuan_kegiatan" id="tujuan_kegiatan" class="form-control" required="">
                                 </div>
                                 <div class="col-md-6">
-                                  <label for="">Email</label>
-                                  <input type="email" name="email" id="email" class="form-control" required="">
+                                  <label for="">Permohonan Bantuan</label>
+                                  <select class="form-control" name="bantuan_bentuk" id="bantuan_bentuk">
+                                    <option id="pb">Silahkan Pilih</option>
+                                     
+                                    <option>Uang</option>
+                                    <option>Barang</option>
+                                    <option>Uang dan Barang</option>
+                                  </select>
                                 </div>
                               </div>
                             </div>
 
                             <div class="modal-body">
                               <div class="row">
+                                
                                 <div class="col-md-6">
-                                  <label for="">No Identitas 1 (SIM)</label>
-                                  <input type="text" name="ni1" id="ni1" class="form-control" required onkeydown="return hanyaAngka(event)">
+                                  <label for="">Bantuan Uang</label>
+                                  <input type="text" name="bantuan_uang" id="bantuan_uang" class="form-control" required onkeydown="return hanyaAngka(event)">
                                 </div>
                                 <div class="col-md-6">
-                                  <label for="">No Identitas 2 (NIP)</label>
-                                  <input type="text" name="ni2" id="ni2" class="form-control" required onkeydown="return hanyaAngka(event)">
+                                  <label for="">Bantuan Barang</label>
+                                  <input type="text" name="bantuan_barang" id="bantuan_barang" class="form-control" required>
                                 </div>
                               </div>
                             </div>  
                             <div class="modal-body"> 
                             <div class="row">   
+                                
                                 <div class="col-md-6">
-                                  <label for="">NPWP</label>
-                                  <input type="text" name="npwp" id="npwp" class="form-control" required>
+                                  <label for="">Keterangan</label>
+                                  <input type="text"  name="keterangan" id="keterangan" class="form-control" required >
                                 </div>
-                                <div class="col-md-6">
-                                  <label for="">Penghasilan</label>
-                                  <input type="text" name="penghasilan" id="penghasilan" class="form-control" required onkeydown="return hanyaAngka(event)">
+
+                                <div class="col-md-6" id="stts" style="display:none">
+                                  <label for="">Status Proposal</label>
+                                  <select class="form-control" name="setatus">
+                                    <option id="ops"></option>
+                                    <option>Pengajuan</option>
+                                    <option>Diterima</option>
+                                    <option>Ditolak</option>
+                                  </select>
                                 </div>
                                 </div>
                             </div>  
-                            <div class="modal-body">
-                              <div class="row">
-                                <div class="col-md-6">
-                                  <label for="">No Telepon</label>
-                                  <input type="text" name="telepon_1" id="telepon_1" class="form-control" required onkeydown="return hanyaAngka(event)">
-                                </div>
-                                <div class="col-md-6">
-                                  <label for="">No Telepon Alternatif</label>
-                                  <input type="text" name="telepon_2" id="telepon_2" class="form-control" required onkeydown="return hanyaAngka(event)">
-                                </div>
-                                </div>
-                            </div>  
+                            
                             
                               
 
@@ -230,12 +229,13 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_agama");
 	<!-- js -->
 	<script>
 	 	function kosong(){
-           $('#pemohon_id').val('');
+           $('#proposal_id').val('');
            $('#modal_form')[0].reset();
            $('#edit').css('display','none');
            $('#simpan').css('display','inline-block');
-           $('#ijk').html('Silahkan Pilih');
-           $('#ag').html('Silahkan Pilih');
+          $('#pb').html('Silahkan Pilih');
+          $('#atas').html('Silahkan Pilih');
+           $('#stts').css('display','none');
          }
 
 
@@ -253,22 +253,22 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_agama");
                  },
                  "columns": [
                    {"data": "no"},
-                   {"data": "pemohon_nik"},
+                   {"data": "proposal_kode"},
+                   {"data": "nama_kegiatan"},
+                   {"data": "jenis_kegiatan"},
                    {"data": "pemohon_nama"},
-                   {"data": "tempat_lahir"},
-                   {"data": "jk"},
-                   {"data": "agama"},
-
-                   {"data": "alamat"},
-                   {"data": "identitas_1"},
+                   {"data": "tgl_kegiatan"},
                    
-                   {"data": "npwp"},
-                   {"data": "penghasilan"},
-                   {"data": "telp_1"},
+                   {"data": "lokasi_kegiatan"},
+                   {"data": "tujuan_kegiatan"},
                    
-                   {"data": "email"},
+                   {"data": "bentuk_bantuan"},
+                   {"data": "bantuan_uang"},
+                   {"data": "bantuan_barang"},
+                   
+                   {"data": "status"},
+                   {"data": "keterangan"},
                    {"data": "tgl_reg"},
-                   {"data": "tgl_update"},
                    {"data": "edit"},
                    {"data": "hapus"},
                  ]
@@ -300,24 +300,31 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_agama");
          })
 
          function edit(isi){
-         	$('#pemohon_id').val(isi);
+         	$('#proposal_id').val(isi);
          	$('#edit').css('display','inline-block');
          	$('#simpan').css('display','none');
+          $('#stts').css('display','inline-block');
+          //var select = document.getElementById('pemohon');
          	$.getJSON('data.php', {id: isi}, function(json) {
-         			$('#pemohon_nama').val(json.pemohon_nama);
-              $('#pemohon_nik').val(json.pemohon_nik);
-              $('#tempat_lahir').val(json.pemohon_tempat_lahir);
-              $('#tgl_lahir').val(json.pemohon_tanggal_lahir);
-              $('#alamat').val(json.pemohon_alamat);
-              $('#email').val(json.pemohon_email);
-             $('#ni1').val(json.pemohon_no_identitas_1);
-             $('#ni2').val(json.pemohon_no_identitas_2);
-             $('#npwp').val(json.pemohon_npwp);
-             $('#penghasilan').val(json.pemohon_penghasilan);
-             $('#telepon_1').val(json.pemohon_telepon_1);
-             $('#telepon_2').val(json.pemohon_telepon_2);
-             $('#ag').html(json.pemohon_agama);
-             $('#ijk').html(json.pemohon_jk);
+              $('#pb').html(json.proposal_bantuan_bentuk);
+         			
+              $('#proposal_kode').val(json.proposal_kode);
+              $('#nama_kegiatan').val(json.proposal_nama_kegiatan);
+              $('#jenis_kegiatan').val(json.proposal_jenis_kegiatan);
+              $('#lokasi_kegiatan').val(json.proposal_lokasi_kegiatan);
+              $('#tanggal_kegiatan').val(json.tgl_kegiatan);
+              $('#tujuan_kegiatan').val(json.proposal_tujuan_kegiatan);
+              $('#bantuan_uang').val(json.proposal_bantuan_uang);
+              $('#bantuan_barang').val(json.proposal_bantuan_barang);
+              $('#bantuan_uang').val(json.proposal_bantuan_uang);
+              $('#keterangan').val(json.proposal_keterangan);
+              $('#ops').html(json.proposal_status);
+              
+              $('#atas').html(json.pemohon_nik +' - '+json.pemohon_nama);
+
+              //$(select).append('<option value=' + json.pemohon_id + '>' + json.pemohon_nama + '</option>');
+
+              
          	});
          }
 

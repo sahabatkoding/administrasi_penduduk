@@ -72,4 +72,10 @@ function validasi(){
     }
 }
 
+function pn($pemohon){
+   $pecah=explode('-', $pemohon);
+    return $pecah[0];
+
+  }
+
 ?>
