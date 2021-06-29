@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2021 at 12:51 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.11
+-- Generation Time: Jun 29, 2021 at 02:37 AM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 7.4.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `administrasi_penduduk`
+-- Database: `administrasi_penduduk2`
 --
 
 -- --------------------------------------------------------
@@ -87321,8 +87321,8 @@ CREATE TABLE `ap_kia` (
   `kia_kode` varchar(255) DEFAULT NULL,
   `nik_anak` int(255) DEFAULT NULL,
   `nik_orang_tua` int(255) DEFAULT NULL,
-  `id_user` int(255) DEFAULT NULL,
-  `kia_berlaku` date DEFAULT NULL
+  `kia_berlaku` date DEFAULT NULL,
+  `id_user` int(255) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -87346,7 +87346,8 @@ CREATE TABLE `ap_pemohon` (
   `pemohon_penghasilan` double(20,2) DEFAULT NULL,
   `pemohon_telepon_1` varchar(16) DEFAULT NULL,
   `pemohon_telepon_2` varchar(16) DEFAULT NULL,
-  `pemohon_email` varchar(100) DEFAULT NULL
+  `pemohon_email` varchar(100) DEFAULT NULL,
+  `id_user` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
