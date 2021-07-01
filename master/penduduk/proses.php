@@ -9,8 +9,6 @@ if($admin==0){
 
 if ($_GET['action'] == 'simpan' ) {
 
-
-
 	$nik = filter($_POST['nik']);
 	$tgl_registrasi =  filter($_POST['tgl_registrasi']);
 	$tgl_update = null;
@@ -68,12 +66,46 @@ if ($_GET['action'] == 'simpan' ) {
 		$penduduk_photo = 'default.png';
 	}
 
-	// var_dump($id_kelurahan);
+	// var_dump((int)$id_kelurahan);
 	// die;
 
-	$sql = "INSERT INTO ap_penduduk (nik, tgl_registrasi, tgl_update, no_kk, no_akta, penduduk_nama, penduduk_tempat_lahir, penduduk_tanggal_lahir, penduduk_jenis_kelamin, penduduk_golongan_darah, penduduk_alamat, penduduk_rt, penduduk_rw, id_kelurahan, id_kecamatan, id_kabupaten, id_provinsi, id_agama, penduduk_status_perkawinan, id_pendidikan, penduduk_pekerjaan, penduduk_kewarganegaraan, penduduk_no_passport, penduduk_no_kitas, penduduk_nama_ayah, penduduk_nama_ibu, penduduk_status_keluarga, penduduk_status, penduduk_telepon, penduduk_photo, id_user) VALUES ( '$nik', '$tgl_registrasi', '$tgl_update', '$no_kk', '$no_akta', '$penduduk_nama', '$penduduk_tempat_lahir', '$penduduk_tanggal_lahir', '$penduduk_jenis_kelamin', '$penduduk_golongan_darah', '$penduduk_alamat', '$penduduk_rt', '$penduduk_rw', '$id_kelurahan', '$id_kecamatan', '$id_kabupaten', '$id_provinsi', '$id_agama', '$penduduk_status_perkawinan', '$id_pendidikan', '$penduduk_pekerjaan', '$penduduk_kewarganegaraan', '$penduduk_no_passport', '$penduduk_no_kitas', '$penduduk_nama_ayah', '$penduduk_nama_ibu', '$penduduk_status_keluarga', '$penduduk_status', '$penduduk_telepon', '$penduduk_photo', '$id_user')";
-
-		$query = $koneksi->query($sql)or die($koneksi->error);
+	$tabel = "ap_penduduk";
+  $data  = array(
+    "nik" => $nik, 
+    "tgl_registrasi" => $tgl_registrasi,
+    "tgl_update" => null, 
+    "no_kk" => $no_kk, 
+    "no_akta" => $no_akta, 
+    "penduduk_nama" => $penduduk_nama, 
+    "penduduk_tempat_lahir" => $penduduk_tempat_lahir, 
+    "penduduk_tanggal_lahir" => $penduduk_tanggal_lahir, 
+    "penduduk_jenis_kelamin" => $penduduk_jenis_kelamin, 
+    "penduduk_golongan_darah" => $penduduk_golongan_darah, 
+    "penduduk_alamat" => $penduduk_alamat, 
+    "penduduk_rt" => $penduduk_rt, 
+    "penduduk_rw" => $penduduk_rw, 
+    "id_kelurahan" => (int)o$id_kelurahan, 
+    "id_kecamatan" => $id_kecamatan, 
+    "id_kabupaten" => $id_kabupaten, 
+    "id_provinsi" => $id_provinsi, 
+    "id_agama" => $id_agama, 
+    "penduduk_status_perkawinan" => $penduduk_status_perkawinan, 
+    "id_pendidikan" => $id_pendidikan, 
+    "penduduk_pekerjaan" => $penduduk_pekerjaan, 
+    "penduduk_kewarganegaraan" => $penduduk_pekerjaan, 
+    "penduduk_no_passport" => $penduduk_no_passport, 
+    "penduduk_no_kitas" => $penduduk_no_kitas, 
+    "penduduk_nama_ayah" => $penduduk_nama_ayah, 
+    "penduduk_nama_ibu" => $penduduk_nama_ibu,
+    "penduduk_status_keluarga" => $penduduk_status_keluarga,
+    "penduduk_status" => $penduduk_status, 
+    "penduduk_telepon" => $penduduk_telepon, 
+    "penduduk_photo" => $penduduk_photo, 
+    "id_user" => $id_user
+  );
+  $sql = insert($tabel,$data);
+  
+  $query = query($sql);
 
 		if ($query) {
 			$msg = [
@@ -86,9 +118,7 @@ if ($_GET['action'] == 'simpan' ) {
 		}
 
 		echo json_encode($msg);
-
 }
-
 
 if ($_GET['action'] == 'get_kabupaten' ) {
 
