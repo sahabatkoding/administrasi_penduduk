@@ -17,6 +17,22 @@ $header = "Data Pengajuan Pernikahan";
 <html>
 <head>
 <?php require_once $LAYOUT.'head.php'; ?>
+<!-- css tambahan -->
+<style>
+      #ul1{
+        background-color:#eee;
+        cursor:pointer;
+        position: relative;
+        width: 95%;
+      }
+      #li1{
+        padding:12px;
+        border:thin solid #F0F8FF;
+      }
+      #li1:hover{
+        background-color:#7FFFD4;
+      }
+    </style>
 </head>
 <body>
 	<?php require_once $LAYOUT.'header.php'; ?>
@@ -75,6 +91,7 @@ $header = "Data Pengajuan Pernikahan";
 									<th>NIK</th>
 									<th>Nama Pemohon</th>
 									<th>Tempat Tanggal Lahir</th>
+									<th>Pekerjaan</th>
 									<th>Alamat</th>
 									<th>Tempat </th>
 									<th>Keterangan</th>
@@ -88,27 +105,45 @@ $header = "Data Pengajuan Pernikahan";
 				<!-- Simple Datatable End -->
 				<!-- modal -->
 
-                      <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
+                      <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel"><?php echo $Header ?></h5>
+                              <h5 class="modal-title" id="exampleModalLabel"><?php echo $header ?></h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
                             <form id="modal_form">
-                              <input type="text" name="nik_pemohon" id="nik_pemohon">
                               <input type="text" name="pnikah_id" id="pnikah_id">
+                              <input type="text" name="nik_pemohon" id="nik_pemohon">
                               <input type="text" name="id_user" id="id_user" value="<?php echo $dataAdm['user_id'] ?>">
-                              <input type="text" name="tgl_registrasi" id="tgl_registrasi" value="<?php echo date('Y-m-d') ?>">
-                              <input type="text" name="tgl_update" id="tgl_update" value="<?php echo date('Y-m-d') ?>">
+                              <input type="text" name="tgl_update" id="tgl_update" >
                               <div class="modal-body">
-                              	<div class="col-sm-12 col-md-12">
-                                <label for="">Nama penduduk</label>
-                                <input type="text" name="penduduk" id="penduduk" class="form-control" placeholder="ketik nik / nama">
-                                <div id="pendudukList"></div>
-                            </div>
+                              <div class="col-sm-12 col-md-12">
+	                                 <label for="">Tanggal Registrasi</label>
+	                                <input type="text" name="tgl_reg" id="tgl_reg" class="form-control" value="<?=date('Y-m-d')?>" readonly>
+                            	</div><div class="col-sm-12 col-md-12">
+	                                <label for="">Kode</label>
+	                                <input type="text" name="pnikah_kode" id="pnikah_kode" class="form-control" value="Nikah/<?=date('Y')."/".newID('ap_permohonan_nikah','pnikah_id')?>" >
+                            	</div>
+                            	<div class="col-sm-12 col-md-12">
+	                                <label for="">Nama penduduk</label>
+	                                <input type="text" name="penduduk" id="penduduk" class="form-control" placeholder="ketik nik / nama" required>
+	                                <div id="pendudukList"></div>
+                            	</div>
+                            	<div class="col-sm-12 col-md-12">
+	                                <label for="">Tanggal Rencana Pernikahan</label>
+	                                <input type="date" name="tgl_nikah" id="tgl_nikah" class="form-control" >
+                            	</div>
+                            	<div class="col-sm-12 col-md-12">
+	                                <label for="">Tempat Rencana Pernikahan</label>
+	                                <input type="text" name="pnikah_tempat" id="pnikah_tempat" class="form-control" >
+                            	</div>
+                            	<div class="col-sm-12 col-md-12">
+	                                <label for="">Keterangan</label>
+	                                <textarea class="form-control" name="pnikah_keterangan" id="pnikah_keterangan" rows="5"></textarea>
+                            	</div>
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -152,7 +187,7 @@ $header = "Data Pengajuan Pernikahan";
 		})
 
 	 	function kosong(){
-           $('#pendidikan_id').val('');
+           $('#pnikah_id').val('');
            $('#modal_form')[0].reset();
            $('#edit').css('display','none');
            $('#simpan').css('display','inline-block');
@@ -161,7 +196,7 @@ $header = "Data Pengajuan Pernikahan";
 
 	$(function () {
            /* Isi Table */
-             $('#table1').DataTable({
+             $('#table').DataTable({
              	   // dom: "Bfrtip",
        			 // buttons: [
             // 'copy', 'csv', 'excel', 'pdf', 'print'
@@ -173,10 +208,18 @@ $header = "Data Pengajuan Pernikahan";
                    "dataSrc": ""
                  },
                  "columns": [
-                   {"data": "no"},
-                   {"data": "pendidikan"},
-                   {"data": "edit"},
-                   {"data": "hapus"},
+                  {"data":"no"},
+									{"data":"kode"},
+									{"data":"tanggal_reg"},
+									{"data":"nik"},
+									{"data":"nama"},
+									{"data":"ttl"},
+									{"data":"pekerjaan"},
+									{"data":"alamat"},
+									{"data":"tempat "},
+									{"data":"keterangan"},
+									{"data":"edit"},
+									{"data":"hapus"},
                  ]
              });
            /* Isi Table */
@@ -187,7 +230,7 @@ $header = "Data Pengajuan Pernikahan";
          	kosong();
          })
 
-         $('#simpan').on('click',function(){
+         $('#simpan').on('click',function(){ 	
          	$.ajax({
          		url: 'proses.php',
          		type: 'POST',
@@ -202,15 +245,15 @@ $header = "Data Pengajuan Pernikahan";
          	})
          	.fail(function() {
          		console.log("error");
-         	})         	
+         	})
          })
 
          function edit(isi){
          	$('#pendidikan_id').val(isi);
          	$('#edit').css('display','inline-block');
          	$('#simpan').css('display','none');
-         	$.getJSON('data.php', {id: isi}, function(json) {
-         			$('#pendidikan_nama').val(json.pendidikan_nama);
+         			$.getJSON('data.php', {id: isi}, function(json) {
+         				$('#pendidikan_nama').val(json.pendidikan_nama);
          	});
          }
 

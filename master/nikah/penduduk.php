@@ -12,14 +12,14 @@ if($admin==0){
   if(isset($_POST["query"])){
     $output = '';
     $key = "%".strtoupper($_POST["query"])."%";
-    $sql = "SELECT * FROM ap_penduduk WHERE upper(penduduk_nama) LIKE '$key' LIMIT 10";
+    $sql = "SELECT * FROM ap_penduduk WHERE upper(penduduk_nama) LIKE '$key' OR nik LIKE '$key' LIMIT 10";
     $query = $koneksi->query($sql);
     // var_dump($query->fetch_array());
     // die();
-    $output = '<ul class="list-unstyled">';
+    $output = '<ul class="list-unstyled" id="ul1">';
     if(mysqli_num_rows($query) > 0){
       while ($row = $query->fetch_assoc()) {
-        $output .= '<li>'.$row["nik"]."-".$row["penduduk_nama"].'</li>';  
+        $output .= '<li id="li1" >'.$row["nik"]."-".$row["penduduk_nama"].'</li>';  
       }
     } else {
       $output .= '<li>Tidak ada yang cocok.</li>';  
