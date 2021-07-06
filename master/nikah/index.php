@@ -2,7 +2,7 @@
 require_once '../konektor.php';
 
 
-if($admin==0){
+if($admin==0 && $kasi_2==0){
   ?>
   <script>location.href="<?=$MASTER?>login/logout.php"</script>
   <?php
@@ -128,7 +128,7 @@ $header = "Data Pengajuan Pernikahan";
 	                                <input type="text" name="pnikah_kode" id="pnikah_kode" class="form-control" value="Nikah/<?=date('Y')."/".newID('ap_permohonan_nikah','pnikah_id')?>" >
                             	</div>
                             	<div class="col-sm-12 col-md-12">
-	                                <label for="">Nama penduduk</label>
+	                                <label for="">NIK / Nama penduduk</label>
 	                                <input type="text" name="penduduk" id="penduduk" class="form-control" placeholder="ketik nik / nama" required>
 	                                <div id="pendudukList"></div>
                             	</div>
