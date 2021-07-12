@@ -26,8 +26,5 @@ if($admin==0 && $kasi_2==0){
     }  
     $output .= '</ul>';
     // echo $output;
-    array_push($hasil, $output);
-    echo json_encode($hasil);
-
   }
 ?>
