@@ -8,7 +8,7 @@ if($admin==0){
 }
 
 
-$header = "Data Pendidikan";
+$header = "Data Penduduk";
 
  ?>
 
@@ -82,34 +82,6 @@ $header = "Data Pendidikan";
 	</div>
 	<!-- js -->
 	<script>
-	 	function kosong(){
-           $('#pendidikan_id').val('');
-           $('#modal_form')[0].reset();
-           $('#edit').css('display','none');
-           $('#simpan').css('display','inline-block');
-         }
-
-
-	// $(function () {
- //           /* Isi Table */
- //             $('#table').DataTable({
- //             	   order : false,
- //               "scrollX": true,
- //               "ajax": {
- //                   "url": "data.php",
- //                   "dataSrc": ""
- //                 },
- //             });
- //           /* Isi Table */
- //         });
-
-	//		  {
-   //            "className":'details-control',
-   //            "orderable":false,
-   //            "data":"kode_barang",
-   //            "defaultContent":''
-   //         },
-
    $(function () {
      /* Isi Table */
        $('#table').DataTable({
@@ -130,10 +102,6 @@ $header = "Data Pendidikan";
             previous: '<i class="ion-chevron-left"></i>'  
           }
         },
-      //       dom: "Bfrtip",
-      //   buttons: [
-      // 'copy', 'csv', 'excel', 'pdf', 'print'
-      //      ],
         "scrollX": false,
          "ajax": {
              "url": "data.php",
@@ -144,67 +112,16 @@ $header = "Data Pendidikan";
    });
 
 
-
-         $('#tambah').on('click',function(){
-         	kosong();
-         })
-
-         $('#simpan').on('click',function(){
-         	$.ajax({
-         		url: 'proses.php',
-         		type: 'POST',
-         		dataType: 'HTML',
-         		data: $('#modal_form').serialize(),
-         		// console.log(data);
-         		success:function(isi){
-         		$('#modal').modal('hide');
-                kosong();
-                $('#table').DataTable().ajax.reload();
-         		}
-         	})
-         	.fail(function() {
-         		console.log("error");
-         	})         	
-         })
-
-         function edit(isi){
-         	$('#pendidikan_id').val(isi);
-         	$('#edit').css('display','inline-block');
-         	$('#simpan').css('display','none');
-         	$.getJSON('data.php', {id: isi}, function(json) {
-         			$('#pendidikan_nama').val(json.pendidikan_nama);
-         	});
-         }
-
-         $('#edit').on('click',function(){
-         	$.ajax({
-         		url:'proses.php',
-         		type:'POST',
-         		dataType:'HTML',
-         		data:$('#modal_form').serialize(),
-         		success:function(isi){
-         			$('#modal').modal('hide');
-         			kosong();
-         			$('#table').DataTable().ajax.reload()
-         		}
-         	})
-         	.fail(function(){
-         		console.log("error");
-         	})
-         })
-
          function hapus(isi){
          	var n = confirm('Yakin Hapus?');
-
          	if(n){
          	$.ajax({
-         		url:'proses.php',
+         		url:'proses.php?action=hapus',
          		type:'GET',
-         		dataType:'HTML',
+         		dataType:'JSON',
          		data: {id:isi},
-         		success:function(isi){
-         			$('#modal').modal('hide');
-         			kosong();
+         		success:function(response){
+         			$('#alert').html(response.alert);
          			$('#table').DataTable().ajax.reload()
          		}
          	})

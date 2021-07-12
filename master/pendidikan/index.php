@@ -1,13 +1,11 @@
 <?php 
 require_once '../konektor.php';
 
-
 if($admin==0){
   ?>
   <script>location.href="<?=$MASTER?>login/logout.php"</script>
   <?php
 }
-
 
 $header = "Data Pendidikan";
 
@@ -85,7 +83,7 @@ $header = "Data Pendidikan";
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel"><?php echo $Header ?></h5>
+                              <h5 class="modal-title" id="exampleModalLabel"><?php echo $header ?></h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
@@ -146,7 +144,7 @@ $header = "Data Pendidikan";
 
          $('#tambah').on('click',function(){
          	kosong();
-         })
+         });
 
          $('#simpan').on('click',function(){
          	$.ajax({

@@ -25,9 +25,9 @@ if($admin==0){
       $output .= '<li>Tidak ada yang cocok.</li>';  
     }  
     $output .= '</ul>';
-    echo $output;
-    // array_push($hasil, $output);
-    // echo json_encode($hasil);
+    // echo $output;
+    array_push($hasil, $output);
+    echo json_encode($hasil);
 
   }
 ?>
