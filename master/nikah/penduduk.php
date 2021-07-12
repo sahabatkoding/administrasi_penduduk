@@ -25,6 +25,7 @@ if($admin==0 && $kasi_2==0){
       $output .= '<li>Tidak ada yang cocok.</li>';  
     }  
     $output .= '</ul>';
-    // echo $output;
+    echo $output;
+
   }
 ?>
