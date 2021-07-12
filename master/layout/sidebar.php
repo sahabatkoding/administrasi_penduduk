@@ -42,6 +42,7 @@
 								<a href="javascript:;" class="dropdown-toggle">Laporan</a>
 								<ul class="dropdown">
 									<li><a href="">Intine Laporan</a></li>
+									<li><a href="">Cetak KK</a></li>
 								</ul>
 							</li>
 
