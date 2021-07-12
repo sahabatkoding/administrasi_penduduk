@@ -21,3 +21,6 @@
 <script src="../<?php echo $ROOT ?>assets/library/function_js.php"></script>
 <script type="text/javascript" src="../<?php echo $ROOT ?>assets/src/plugins/jquery-validation/dist/jquery.validate.js"></script>
 <script type="text/javascript" src="../<?php echo $ROOT ?>assets/src/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+
+<script type="text/javascript" src="../<?php echo $ROOT ?>assets\src\plugins\md5\js\md5.min.js"></script>
+<script type="text/javascript" src="../<?php echo $ROOT ?>assets\src\plugins\md5\js\md5.js"></script>

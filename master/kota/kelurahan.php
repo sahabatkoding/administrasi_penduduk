@@ -65,8 +65,8 @@ $header = "Data kelurahan ";
                               </button>
                             </div>
                             <form id="modal_form">
-                            	<input type="text" name="id_kecamatan" id="id_kecamatan" value="<?= $_GET['id_kecamatan'] ?>">
-                              <input type="text" name="kelurahan_id" id="kelurahan_id">
+                            	<input type="hidden" name="id_kecamatan" id="id_kecamatan" value="<?= $_GET['id_kecamatan'] ?>">
+                              <input type="hidden" name="kelurahan_id" id="kelurahan_id">
                               <div class="modal-body">
                                 <label for="">kelurahan</label>
                                 <input type="text" name="kelurahan_nama" id="kelurahan_nama" class="form-control">
@@ -98,10 +98,10 @@ $header = "Data kelurahan ";
 	$(function () {
            /* Isi Table */
              $('#table').DataTable({
-             	   dom: "Bfrtip",
-       			 buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-       					 ],
+           //   	   dom: "Bfrtip",
+       			 // buttons: [
+           //  'copy', 'csv', 'excel', 'pdf', 'print'
+       				// 	 ],
                "scrollX": true,
              
                "ajax": {
