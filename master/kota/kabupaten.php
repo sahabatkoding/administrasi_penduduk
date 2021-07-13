@@ -69,7 +69,7 @@ $header = "Data Kabupaten ";
 							<thead>
 								<tr>
 									<th>No</th>
-									<th>Provinsi</th>
+									<th>Kabupaten</th>
 									<th>Detail</th>
 									<th>Edit</th>
 									<th>Hapus</th>

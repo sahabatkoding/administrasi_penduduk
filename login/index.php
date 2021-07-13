@@ -46,7 +46,8 @@ $data = $result->fetch_array();
 		<div class="container-fluid d-flex justify-content-between align-items-center">
 			<div class="brand-logo">
 				<a href="login.html">
-					<img src="../assets/vendors/images/deskapp-logo.svg" alt="">
+					<!-- <img src="../assets/vendors/images/deskapp-logo.svg" alt=""> -->
+					<h3>Administrasi Kecamatan</h3>
 				</a>
 			</div>
 			<div id="alert-login" style="margin-bottom: -15px ;"></div>

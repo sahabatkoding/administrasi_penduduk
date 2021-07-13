@@ -31,7 +31,6 @@ if($_GET['id']){
   $sql = insert($tabel,$data);
   // echo $sql;
   query($sql);
-
 }
 
 ?>

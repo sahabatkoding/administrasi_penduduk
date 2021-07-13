@@ -1,8 +1,9 @@
 <div class="left-side-bar">
 		<div class="brand-logo">
 			<a href="<?= $ROOT ?>">
-				<img src="<?= $ROOT ?>assets/vendors/images/deskapp-logo.svg" alt="" class="dark-logo">
-				<img src="<?= $ROOT ?>assets/vendors/images/deskapp-logo-white.svg" alt="" class="light-logo">
+				<!-- <img src="<?= $ROOT ?>assets/vendors/images/deskapp-logo.svg" alt="" class="dark-logo">
+				<img src="<?= $ROOT ?>assets/vendors/images/deskapp-logo-white.svg" alt="" class="light-logo"> -->
+				SI Administrasi
 			</a>
 			<div class="close-sidebar" data-toggle="left-sidebar-close">
 				<i class="ion-close-round"></i>
@@ -16,7 +17,7 @@
 							<span class="micon dw dw-house-1"></span><span class="mtext">Beranda</span>
 						</a>
 					</li>
-
+					<?php if($admin==1||$kasi_1==1): ?>
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon dw dw-library"></span><span class="mtext">Master</span>
@@ -41,12 +42,15 @@
 								<a href="javascript:;" class="dropdown-toggle">Laporan</a>
 								<ul class="dropdown">
 									<li><a href="">Intine Laporan</a></li>
+									<li><a href="">Cetak KK</a></li>
 								</ul>
 							</li>
 
 							
 						</ul>
 					</li>
+					<?php endif;  ?>
+					<?php if($admin==1||$kasi_2==1): ?>
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon dw dw-library"></span><span class="mtext">Permintaan</span>
@@ -68,6 +72,8 @@
 							</li>
 						</ul>
 					</li>
+					<?php endif; ?>
+					<?php if($admin==1||$kasi_3==1): ?>
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon dw dw-library"></span><span class="mtext">Pengajuan</span>
@@ -90,6 +96,7 @@
 							</li>
 						</ul>
 					</li>
+					<?php endif; ?>
 					<?php if($admin==1){ ?>
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">

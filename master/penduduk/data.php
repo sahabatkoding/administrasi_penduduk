@@ -1,6 +1,6 @@
 <?php 
 require_once '../konektor.php';
-require_once $LIB.'session.php';
+
 
 if($admin==0){
   ?>
@@ -57,7 +57,7 @@ if(isset($_GET['id'])){
     $isi[]=$value['penduduk_telepon'];
     $isi[]='<img href="../../assets/photo/'.$value['penduduk_photo'].'">';
     $isi[]=$value['nama_user'];
-    $isi[]='<center><a href="javascript:;" id="'.$value['nik'].'" onclick="edit(this.id)"><i class="dw dw-edit2" style="font-size:20px" data-toggle="modal" data-target="#modal"></i></a></center>';
+    $isi[]='<center><a href="edit.php?nik='.$value['nik'].'"><i class="dw dw-edit2" style="font-size:20px" data-toggle="modal" data-target="#modal"></i></a></center>';
     $isi[]='<center><a href="javascript:;" id="'.$value['nik'].'" onclick="return hapus(this.id)"><i class="dw dw-delete-3" style="font-size:20px"></i></a></center>';
     array_push($hasil,$isi);
   }

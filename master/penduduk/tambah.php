@@ -1,6 +1,6 @@
 <?php 
 require_once '../konektor.php';
-require_once $LIB.'session.php';
+
 
 if($admin==0){
   ?>
@@ -71,6 +71,7 @@ $header = "Tambah Data Penduduk";
 						<div class="form-group row col-md-4">
 							<label>Jenis Kelamin</label>
 							<select required="" class="form-control" name="jenis_kelamin">
+								<option value="">Pilih</option>
 								<option value="L">Laki-laki</option>
 								<option value="P">Perempuan</option>
 							</select>
@@ -89,6 +90,7 @@ $header = "Tambah Data Penduduk";
 						<div class="form-group row col-md-6">
 							<label>Provinsi</label>
 							<select required="" class="form-control" name="provinsi">
+								<option value="">Pilih</option>
 								<?php  
 								$select_provinsi = "SELECT * FROM ap_provinsi ORDER BY provinsi_nama ASC";
 
@@ -381,7 +383,6 @@ $header = "Tambah Data Penduduk";
 		        		$('#alert').html(response.success);
 		        		window.location.href="<?= $MASTER ?>master/penduduk/index.php"
 		        	}
-		            	
 		        },
 		        error: function(xhr, ajaxOptions, thrownError) {
 		          alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError)

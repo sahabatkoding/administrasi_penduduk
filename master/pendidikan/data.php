@@ -11,9 +11,9 @@ if($admin==0){
 $hasil = array();
 
 $sql = "SELECT * FROM ap_pendidikan ";
-if($_GET['id']!='') $sql .= " WHERE pendidikan_id = '".$_GET['id']."'";
+if(@$_GET['id']!='') $sql .= " WHERE pendidikan_id = '".$_GET['id']."'";
 $data = $koneksi->query($sql);
-if($_GET['id']){
+if(@$_GET['id']){
   $hasil = $data->fetch_array();
 }else{
   foreach($data as $key=>$value){

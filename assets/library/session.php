@@ -20,7 +20,7 @@ switch ($_SESSION['level']) {
 		
 		break;
 	default:
-		// code...
+		0;
 		break;
 }
 
