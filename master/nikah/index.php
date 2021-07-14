@@ -105,7 +105,7 @@ $header = "Data Pengajuan Pernikahan";
 				<!-- Simple Datatable End -->
 				<!-- modal -->
 
-                      <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal fade bd-example-modal-lg" id="modal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -116,7 +116,7 @@ $header = "Data Pengajuan Pernikahan";
                             </div>
                             <form id="modal_form">
                               <input type="text" name="pnikah_id" id="pnikah_id">
-                              <input type="text" name="nik_pemohon" id="nik_pemohon">
+                              <!-- <input type="text" name="nik_pemohon" id="nik_pemohon"> -->
                               <input type="text" name="id_user" id="id_user" value="<?php echo $dataAdm['user_id'] ?>">
                               <input type="text" name="tgl_update" id="tgl_update" >
                               <div class="modal-body">
@@ -129,8 +129,9 @@ $header = "Data Pengajuan Pernikahan";
                             	</div>
                             	<div class="col-sm-12 col-md-12">
 	                                <label for="">NIK / Nama penduduk</label>
-	                                <input type="text" name="penduduk" id="penduduk" class="form-control" placeholder="ketik nik / nama" required>
-	                                <div id="pendudukList"></div>
+	                                <select class="custom-select2 form-control" name="penduduk" id="penduduk" style="width: 100%;" required="required">
+	                                	
+	                                </select>
                             	</div>
                             	<div class="col-sm-12 col-md-12">
 	                                <label for="">Tanggal Rencana Pernikahan</label>
@@ -162,36 +163,60 @@ $header = "Data Pengajuan Pernikahan";
 	<!-- js -->
 	<script>
 
-		$(function(){
-			$('#penduduk').on('keyup',function(){
-			var data = $('#penduduk').val();
-			if(data!=''){
-				$.ajax({
-					url : "penduduk.php",
-					method : "POST",
-					data : {query:data},
-					success:function(data)
-					{
-                      $('#pendudukList').fadeIn();  
-                      $('#pendudukList').html(data);  
-					}
-				})
-			}
-			})
-			 $(document).on('click', 'li', function(value){
-			   var nik = $(this).text().split('-',1);
-			   $('#penduduk').val($(this).text());
-			   $('#nik_pemohon').val(nik);
-        	   $('#pendudukList').fadeOut();  
-      });  
-		})
+// $(document).ready(function() {
+// $('#penduduk').select2({
+// 	allowClear:true,
+// 	placeholder:'Penduduk'
+// })
+// })
+// $(function(){
+// 	$('#penduduk').select2();
+// })
+
+		// $(function(){
+		// 	$('#penduduk').on('keyup',function(){
+		// 	var data = $('#penduduk').val();
+		// 	if(data!=''){
+		// 		$.ajax({
+		// 			url : "penduduk.php",
+		// 			method : "POST",
+		// 			data : {query:data},
+		// 			success:function(data)
+		// 			{
+  //                     $('#pendudukList').fadeIn();  
+  //                     $('#pendudukList').html(data);  
+		// 			}
+		// 		})
+		// 	}
+		// 	})
+		// 	 $(document).on('click', 'li', function(value){
+		// 	   var nik = $(this).text().split('-',1);
+		// 	   $('#penduduk').val($(this).text());
+		// 	   $('#nik_pemohon').val(nik);
+  //       	   $('#pendudukList').fadeOut();  
+  //     });  
+		// })
 
 	 	function kosong(){
            $('#pnikah_id').val('');
            $('#modal_form')[0].reset();
            $('#edit').css('display','none');
            $('#simpan').css('display','inline-block');
+           penduduk();
          }
+
+         function penduduk(data){
+              var id_penduduk = data;
+              $.ajax({
+                type:"GET",
+                url:'penduduk.php',
+                // data:'id_kurikulum='+id_kurikulum,
+                success:function(isi){
+                  $('#penduduk').html(isi);
+                  $('#penduduk').val(id_penduduk);
+                }
+              })
+            }
 
 
 	$(function () {

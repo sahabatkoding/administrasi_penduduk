@@ -21,7 +21,9 @@
 	<link rel="stylesheet" type="text/css" href="<?= $ROOT ?>assets/src/plugins/datatables/css/dataTables.bootstrap4.min.css">
 	<link rel="stylesheet" type="text/css" href="<?= $ROOT ?>assets/src/plugins/datatables/css/responsive.bootstrap4.min.css">
 	<link rel="stylesheet" type="text/css" href="<?= $ROOT ?>assets/vendors/styles/style.css">
-	<!-- jquery -->
+	<!-- <link rel="stylesheet" type="text/css" href="<?php echo $ROOT ?>assets/src/plugins/select2/dist/css/select2.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $ROOT ?>assets/src/plugins/select2/dist/css/select2.min.css">
+ -->	<!-- jquery -->
 	<!-- <script src="<?= $ROOT ?>assets/src/scripts/jquery.min.js"></script> -->
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->

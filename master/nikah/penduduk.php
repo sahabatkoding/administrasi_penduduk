@@ -7,25 +7,11 @@ if($admin==0 && $kasi_2==0){
   <script>location.href="<?=$MASTER?>login/logout.php"</script>
   <?php
 }
-
-  // $hasil = array();
-  if(isset($_POST["query"])){
-    $output = '';
-    $key = "%".strtoupper($_POST["query"])."%";
-    $sql = "SELECT * FROM ap_penduduk WHERE upper(penduduk_nama) LIKE '$key' OR nik LIKE '$key' LIMIT 10";
-    $query = $koneksi->query($sql);
-    // var_dump($query->fetch_array());
-    // die();
-    $output = '<ul class="list-unstyled" id="ul1">';
-    if(mysqli_num_rows($query) > 0){
-      while ($row = $query->fetch_assoc()) {
-        $output .= '<li id="li1" >'.$row["nik"]."-".$row["penduduk_nama"].'</li>';  
-      }
-    } else {
-      $output .= '<li>Tidak ada yang cocok.</li>';  
-    }  
-    $output .= '</ul>';
-    echo $output;
-
-  }
-?>
+     $sql = "SELECT * FROM ap_penduduk ";
+     if($_GET['id_penduduk']) $sql .= " WHERE nik = '$_GET[id_penduduk]'";
+     $query=$koneksi->query($sql);
+     ?>
+        <option  value="" >- Pilih penduduk -</option>
+        <?php foreach($query as $data){ ?>
+        <option  value="<?=$data['nik']?>"> <?=$data['nik']." - ".$data['penduduk_nama']?>&nbsp;</option>
+        <?php } ?>

@@ -24,3 +24,8 @@
 
 <script type="text/javascript" src="../<?php echo $ROOT ?>assets\src\plugins\md5\js\md5.min.js"></script>
 <script type="text/javascript" src="../<?php echo $ROOT ?>assets\src\plugins\md5\js\md5.js"></script>
+<!-- <script type="text/javascript" src="../<?php echo $ROOT ?>assets\src\plugins\select2\dist\js\select2.js"></script>
+<script type="text/javascript" src="../<?php echo $ROOT ?>assets\src\plugins\select2\dist\js\select2.min.js"></script> -->
+<!-- <script type="text/javascript" src="<?php echo $ROOT ?>assets/src/plugins/bootstrap-select/dist/"></script> -->
+<!-- <script type="text/javascript" src="../<?php echo $ROOT ?>assets\src\plugins\select2\dist\js\select2.full.js"></script>
+<script type="text/javascript" src="../<?php echo $ROOT ?>assets\src\plugins\select2\dist\js\select2.full.min.js"></script> -->

@@ -121,10 +121,10 @@ $header = "Data Pendidikan";
 	$(function () {
            /* Isi Table */
              $('#table').DataTable({
-             	   dom: "Bfrtip",
-       			 buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-       					 ],
+           //   	   dom: "Bfrtip",
+       			 // buttons: [
+           //  'copy', 'csv', 'excel', 'pdf', 'print'
+       				// 	 ],
                "scrollX": true,
              
                "ajax": {
