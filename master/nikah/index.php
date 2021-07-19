@@ -88,6 +88,7 @@ $header = "Data Pengajuan Pernikahan";
 									<th>No</th>
 									<th>Kode</th>
 									<th>Tanggal Reg</th>
+									<th>Tanggal Acara</th>
 									<th>NIK</th>
 									<th>Nama Pemohon</th>
 									<th>Tempat Tanggal Lahir</th>
@@ -118,14 +119,14 @@ $header = "Data Pengajuan Pernikahan";
                               <input type="text" name="pnikah_id" id="pnikah_id">
                               <!-- <input type="text" name="nik_pemohon" id="nik_pemohon"> -->
                               <input type="text" name="id_user" id="id_user" value="<?php echo $dataAdm['user_id'] ?>">
-                              <input type="text" name="tgl_update" id="tgl_update" >
+                              <!-- <input type="text" name="tgl_update" id="tgl_update" > -->
                               <div class="modal-body">
                               <div class="col-sm-12 col-md-12">
 	                                 <label for="">Tanggal Registrasi</label>
-	                                <input type="text" name="tgl_reg" id="tgl_reg" class="form-control" value="<?=date('Y-m-d')?>" readonly>
+	                                <input type="text" name="tgl_reg" id="tgl_reg" class="form-control" value="<?=date('Y-m-d H:i:s')?>" readonly>
                             	</div><div class="col-sm-12 col-md-12">
 	                                <label for="">Kode</label>
-	                                <input type="text" name="pnikah_kode" id="pnikah_kode" class="form-control" value="Nikah/<?=date('Y')."/".newID('ap_permohonan_nikah','pnikah_id')?>" >
+	                                <input type="text" name="pnikah_kode" id="pnikah_kode" class="form-control" value="Nikah/<?=date('Y/m/d')."/".newID('ap_permohonan_nikah','pnikah_id')?>" >
                             	</div>
                             	<div class="col-sm-12 col-md-12">
 	                                <label for="">NIK / Nama penduduk</label>
@@ -222,11 +223,15 @@ $header = "Data Pengajuan Pernikahan";
 	$(function () {
            /* Isi Table */
              $('#table').DataTable({
-             	   // dom: "Bfrtip",
-       			 // buttons: [
-            // 'copy', 'csv', 'excel', 'pdf', 'print'
-       					 // ],
-               "scrollX": true,
+             	   dom: "Bfrtip",
+       			 buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+       					 ],
+               "scrollX": false,
+                "scrollCollapse": true,
+				        "autoWidth": false,
+				        "responsive": true,
+
              
                "ajax": {
                    "url": "data.php",
@@ -236,12 +241,13 @@ $header = "Data Pengajuan Pernikahan";
                   {"data":"no"},
 									{"data":"kode"},
 									{"data":"tanggal_reg"},
+									{"data":"tanggal_acara"},
 									{"data":"nik"},
 									{"data":"nama"},
 									{"data":"ttl"},
 									{"data":"pekerjaan"},
 									{"data":"alamat"},
-									{"data":"tempat "},
+									{"data":"tempat"},
 									{"data":"keterangan"},
 									{"data":"edit"},
 									{"data":"hapus"},
@@ -253,11 +259,13 @@ $header = "Data Pengajuan Pernikahan";
 
          $('#tambah').on('click',function(){
          	kosong();
+         	$('#pnikah_kode').attr('readonly',false)
+         	        	$('#penduduk').prop('readonly',false);
          })
 
          $('#simpan').on('click',function(){ 	
          	$.ajax({
-         		url: 'proses.php',
+         		url: 'proses.php?aksi=nikah                              ',
          		type: 'POST',
          		dataType: 'HTML',
          		data: $('#modal_form').serialize(),
@@ -274,22 +282,32 @@ $header = "Data Pengajuan Pernikahan";
          })
 
          function edit(isi){
-         	$('#pendidikan_id').val(isi);
+         	$('#pnikah_id').val(isi);
          	$('#edit').css('display','inline-block');
+         	$('#pnikah_kode').attr('readonly',true);
+         	$('#penduduk').prop('readonly',true);
          	$('#simpan').css('display','none');
          			$.getJSON('data.php', {id: isi}, function(json) {
-         				$('#pendidikan_nama').val(json.pendidikan_nama);
+         				// console.log(json);
+         				$('#tgl_reg').val(json.tgl_registrasi);
+         				$('#pnikah_kode').val(json.pnikah_kode);
+         				penduduk(json.nik_pemohon);
+         				$('#tgl_nikah').val(json.tgl_nikah);
+         				$('#pnikah_tempat').val(json.pnikah_tempat);
+         				$('#pnikah_keterangan').val(json.pnikah_keterangan);
          	});
          }
 
          $('#edit').on('click',function(){
+         	var isi = $('#modal_form').serialize();
          	$.ajax({
-         		url:'proses.php',
+         		url:'proses.php?aksi=nikah',
          		type:'POST',
          		dataType:'HTML',
          		data:$('#modal_form').serialize(),
          		success:function(isi){
          			$('#modal').modal('hide');
+         		console.log(isi);
          			kosong();
          			$('#table').DataTable().ajax.reload()
          		}
@@ -304,8 +322,8 @@ $header = "Data Pengajuan Pernikahan";
 
          	if(n){
          	$.ajax({
-         		url:'proses.php',
-         		type:'GET',
+         		url:'proses.php?aksi=del_nikah',
+         		type:'POST',
          		dataType:'HTML',
          		data: {id:isi},
          		success:function(isi){
