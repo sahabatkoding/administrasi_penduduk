@@ -29,7 +29,13 @@ switch ($_GET['aksi']) {
   // echo($sql);
   query($sql);
     break;
-  
+  case 'del_nikah':
+  $table="ap_permohonan_nikah";
+  $id="pnikah_id = ".$_POST['id'];
+  $sql = delete($table,$id);
+  query($sql);
+
+  break;
   default:
     // code...
     break;

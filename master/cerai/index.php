@@ -9,7 +9,7 @@ if($admin==0 && $kasi_2==0){
 }
 
 
-$header = "Data Pengajuan Pernikahan";
+$header = "Data Pengajuan Perceraian";
 
  ?>
 
@@ -88,7 +88,7 @@ $header = "Data Pengajuan Pernikahan";
 									<th>No</th>
 									<th>Kode</th>
 									<th>Tanggal Reg</th>
-									<th>Tanggal Acara</th>
+									<!-- <th>Tanggal Acara</th> -->
 									<th>NIK</th>
 									<th>Nama Pemohon</th>
 									<th>Tempat Tanggal Lahir</th>
@@ -116,7 +116,7 @@ $header = "Data Pengajuan Pernikahan";
                               </button>
                             </div>
                             <form id="modal_form">
-                              <input type="hidden" name="pnikah_id" id="pnikah_id">
+                              <input type="hidden" name="pcerai_id" id="pcerai_id">
                               <!-- <input type="hidden" name="nik_pemohon" id="nik_pemohon"> -->
                               <input type="hidden" name="id_user" id="id_user" value="<?php echo $dataAdm['user_id'] ?>">
                               <!-- <input type="text" name="tgl_update" id="tgl_update" > -->
@@ -126,7 +126,7 @@ $header = "Data Pengajuan Pernikahan";
 	                                <input type="text" name="tgl_reg" id="tgl_reg" class="form-control" value="<?=date('Y-m-d H:i:s')?>" readonly>
                             	</div><div class="col-sm-12 col-md-12">
 	                                <label for="">Kode</label>
-	                                <input type="text" name="pnikah_kode" id="pnikah_kode" class="form-control" value="Nikah/<?=date('Y/m/d')."/".newID('ap_permohonan_nikah','pnikah_id')?>" >
+	                                <input type="text" name="pcerai_kode" id="pcerai_kode" class="form-control" value="Cerai/<?=date('Y/m/d')."/".newID('ap_permohonan_cerai','pcerai_id')?>" >
                             	</div>
                             	<div class="col-sm-12 col-md-12">
 	                                <label for="">NIK / Nama penduduk</label>
@@ -134,17 +134,17 @@ $header = "Data Pengajuan Pernikahan";
 	                                	
 	                                </select>
                             	</div>
+                            	<!-- <div class="col-sm-12 col-md-12">
+	                                <label for="">Tanggal Rencana Perceraian</label>
+	                                <input type="date" name="tgl_cerai" id="tgl_cerai" class="form-control" >
+                            	</div> -->
                             	<div class="col-sm-12 col-md-12">
-	                                <label for="">Tanggal Rencana Pernikahan</label>
-	                                <input type="date" name="tgl_nikah" id="tgl_nikah" class="form-control" >
-                            	</div>
-                            	<div class="col-sm-12 col-md-12">
-	                                <label for="">Tempat Rencana Pernikahan</label>
-	                                <input type="text" name="pnikah_tempat" id="pnikah_tempat" class="form-control" >
+	                                <label for="">Tempat Rencana Perceraian</label>
+	                                <input type="text" name="pcerai_tempat" id="pcerai_tempat" class="form-control" >
                             	</div>
                             	<div class="col-sm-12 col-md-12">
 	                                <label for="">Keterangan</label>
-	                                <textarea class="form-control" name="pnikah_keterangan" id="pnikah_keterangan" rows="5"></textarea>
+	                                <textarea class="form-control" name="pcerai_keterangan" id="pcerai_keterangan" rows="5"></textarea>
                             	</div>
                               </div>
                               <div class="modal-footer">
@@ -199,7 +199,7 @@ $header = "Data Pengajuan Pernikahan";
 		// })
 
 	 	function kosong(){
-           $('#pnikah_id').val('');
+           $('#pcerai_id').val('');
            $('#modal_form')[0].reset();
            $('#edit').css('display','none');
            $('#simpan').css('display','inline-block');
@@ -241,7 +241,7 @@ $header = "Data Pengajuan Pernikahan";
                   {"data":"no"},
 									{"data":"kode"},
 									{"data":"tanggal_reg"},
-									{"data":"tanggal_acara"},
+									// {"data":"tanggal_acara"},
 									{"data":"nik"},
 									{"data":"nama"},
 									{"data":"ttl"},
@@ -259,13 +259,13 @@ $header = "Data Pengajuan Pernikahan";
 
          $('#tambah').on('click',function(){
          	kosong();
-         	$('#pnikah_kode').attr('readonly',false)
+         	$('#pcerai_kode').attr('readonly',false)
          	        	$('#penduduk').prop('readonly',false);
          })
 
          $('#simpan').on('click',function(){ 	
          	$.ajax({
-         		url: 'proses.php?aksi=nikah                              ',
+         		url: 'proses.php?aksi=cerai                              ',
          		type: 'POST',
          		dataType: 'HTML',
          		data: $('#modal_form').serialize(),
@@ -282,26 +282,26 @@ $header = "Data Pengajuan Pernikahan";
          })
 
          function edit(isi){
-         	$('#pnikah_id').val(isi);
+         	$('#pcerai_id').val(isi);
          	$('#edit').css('display','inline-block');
-         	$('#pnikah_kode').attr('readonly',true);
+         	$('#pcerai_kode').attr('readonly',true);
          	$('#penduduk').prop('readonly',true);
          	$('#simpan').css('display','none');
          			$.getJSON('data.php', {id: isi}, function(json) {
          				// console.log(json);
          				$('#tgl_reg').val(json.tgl_registrasi);
-         				$('#pnikah_kode').val(json.pnikah_kode);
+         				$('#pcerai_kode').val(json.pcerai_kode);
          				penduduk(json.nik_pemohon);
-         				$('#tgl_nikah').val(json.tgl_nikah);
-         				$('#pnikah_tempat').val(json.pnikah_tempat);
-         				$('#pnikah_keterangan').val(json.pnikah_keterangan);
+         				$('#tgl_cerai').val(json.tgl_cerai);
+         				$('#pcerai_tempat').val(json.pcerai_tempat);
+         				$('#pcerai_keterangan').val(json.pcerai_keterangan);
          	});
          }
 
          $('#edit').on('click',function(){
          	var isi = $('#modal_form').serialize();
          	$.ajax({
-         		url:'proses.php?aksi=nikah',
+         		url:'proses.php?aksi=cerai',
          		type:'POST',
          		dataType:'HTML',
          		data:$('#modal_form').serialize(),
@@ -322,7 +322,7 @@ $header = "Data Pengajuan Pernikahan";
 
          	if(n){
          	$.ajax({
-         		url:'proses.php?aksi=del_nikah',
+         		url:'proses.php?aksi=del_cerai',
          		type:'POST',
          		dataType:'HTML',
          		data: {id:isi},

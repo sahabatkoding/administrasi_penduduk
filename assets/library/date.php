@@ -16,7 +16,7 @@ function tanggal_indo($date){
        $bulan = substr($date, 5, 2);
        $tgl   = substr($date, 8, 2);
        $jam   = substr($date, 11, 5);
-       $result = $jam." ". $tgl . " " . $BulanIndo[(int)$bulan-1]. " ". $tahun;
+       $result =  $tgl . " " . $BulanIndo[(int)$bulan-1]. " ". $tahun. ", ". $jam;
        return($result);
        }
  ?>
