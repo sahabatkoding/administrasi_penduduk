@@ -2,7 +2,12 @@
 
 function query($query){
   global $koneksi;
-  return mysqli_query($koneksi, $query)or die(mysqli_error($koneksi));
+  $sql = $koneksi->query($query)or die($koneksi->error);
+  if($sql){
+    return $sql;
+  }else {
+    return false;
+  }
 }
 
 
@@ -62,5 +67,14 @@ function randomID(){
   return($m);  
 }
 
-
+function countData($query){
+  global $koneksi;
+  $sql   = mysqli_query($koneksi,$query)or die(mysqli_error($koneksi));
+  $count = mysqli_num_rows($sql)or die(mysqli_error($koneksi));
+  if($count==0){
+    return 0;
+  }else{
+    return $count;
+  }
+}
 ?>
