@@ -43,6 +43,23 @@ function select_all($table){
   return $values;
 }
 
+function fetch($query){
+  // global $koneksi;
+  $data = mysqli_fetch_array($query)or die(mysqli_error($koneksi));
+  return $data;
+}
+
+function numrows($query){
+  // if($query){
+  $count = mysqli_num_rows($query);
+  // }
+  if($count==0){
+    return 0;
+  }else{
+    return $count;
+  }
+}
+
 function lastID($table,$id){
   global $koneksi;
   $sql = "SELECT MAX($id) as last FROM $table";
@@ -67,14 +84,4 @@ function randomID(){
   return($m);  
 }
 
-function countData($query){
-  global $koneksi;
-  $sql   = mysqli_query($koneksi,$query)or die(mysqli_error($koneksi));
-  $count = mysqli_num_rows($sql)or die(mysqli_error($koneksi));
-  if($count==0){
-    return 0;
-  }else{
-    return $count;
-  }
-}
 ?>

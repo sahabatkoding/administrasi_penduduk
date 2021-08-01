@@ -7,30 +7,37 @@ if($admin==0){
   <?php
 }
 
-$pendidikan_nama = $_POST['pendidikan_nama'];
+// $kia_id         = anti_inject($_POST['kia_id'])  
+$kia_nik        = anti_inject($_POST['kia_anak']);
+$tgl_registrasi = anti_inject($_POST['tgl_registrasi']);
+$tgl_update     = anti_inject($_POST['tgl_update']);
+$kia_kode       = anti_inject($_POST['kia_kode']);
+$nik_orang_tua  = anti_inject($_POST['nik_orang_tua']);
+$kia_berlaku    = anti_inject($_POST['kia_berlaku']);
+$id_user        = anti_inject($_POST['id_user']);
 
-if($_GET['id']){
-  $tabel  = "ap_pendidikan";
-  $id     = "pendidikan_id = '".$_GET['id']."'";
-  $sql    = delete($tabel,$id);
-  query($sql);
-}else if($_POST['pendidikan_id']!=''){
-  $tabel  = "ap_pendidikan";
-  $id     = "pendidikan_id = '".$_POST['pendidikan_id']."'";
-  $data   = array(
-            "pendidikan_nama" => $pendidikan_nama,
-            );
-  $sql    = update($tabel,$data,$id);
-  query($sql);
-}else{
-  $tabel = "ap_pendidikan";
-  $data  = array(
-    "pendidikan_id" => newID($tabel,'pendidikan_id'), 
-    "pendidikan_nama" => $pendidikan_nama,
+
+switch ($_GET['aksi']) {
+  case 'simpan':
+  $table = 'ap_kia';
+  $kia_id = newID($table,'kia_id');
+  $data = array(
+    'kia_id' => $kia_id,
+    'kia_nik' => $kia_nik,
+    'tgl_registrasi' => $tgl_registrasi,
+    'kia_kode' => $kia_kode,
+    'nik_orang_tua' => $nik_orang_tua,
+    'kia_berlaku' => $kia_berlaku,
+    'id_user' => $id_user,
   );
-  $sql = insert($tabel,$data);
-  // echo $sql;
-  query($sql);
+  $sql = insert($table,$data);
+  echo $sql;
+
+  break;
+  
+  default:
+    // code...
+    break;
 }
 
 ?>

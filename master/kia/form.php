@@ -33,862 +33,120 @@ if($master=='0' && $kasi_2=='0'){
 						</div>
 					</div>
 					<!--  -->
-					<form>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">No ID Anak</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control" type="text" name="kia_nik" id="kia_nik">
-							</div>
-						</div>
+					<form action="<?php echo  ($_GET['kia_nik']) ? 'proses.php?aksi=edit&kia_nik='.$_GET['kia_nik']: 'proses.php?aksi=simpan' ?>" method="POST">
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">Tanggal Registrasi</label>
 							<div class="col-md-10 col-sm-12">
-								<input type="text" name="tgl_registrasi" class="form-control" id="kia_nik">
+								<input type="text" name="tgl_registrasi" class="form-control" id="tgl_registrasi" value="<?=date('Y-m-d H:i:s')?>" readonly>
 							</div>
 						</div>
+
+								<input hidden type="text" name="tgl_update" class="form-control" id="tgl_update" value="<?=date('Y-m-d H:i:s')?>" readonly>
+								<input type="hidden" name="id_user" id="id_user" value="<?php echo $dataAdm['user_id'] ?>">
+						
 						<div class="form-group row">
-							<label class="col-form-label col-md-2">KIA Kode</label>
+							<label class="col-form-label col-md-2">NIK - Nama Orang Tua</label>
 							<div class="col-md-10 col-sm-12">
-								<input type="text" name="kia_kode" id="kia_kode" class="form-control">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-form-label col-md-2">NIK Orang Tua</label>
-							<div class="col-md-10 col-sm-12">
-								<select class="form-control custom-select2" id="nik_orang_tua" name="nik_orang_tua" onchange="nik_orang_tua()" >	
+								<select class="form-control custom-select2" id="nik_orang_tua" name="nik_orang_tua" onchange="nik_ortu(this.value)" >
+									<!-- sql select data orang tua -->
+									<?php $sql = query("SELECT * FROM ap_penduduk where penduduk_status_keluarga != 'A' ");
+									foreach($sql as $dataOrtu): ?>
+										<option value="<?=$dataOrtu['nik']?>" <?php if($_POST['nik_orang_tua']==$dataOrtu['nik']) echo "selected" ?>><?=$dataOrtu['nik'].' - '.$dataOrtu['penduduk_nama']?></option>	
+									<?php endforeach; ?>	
 								</select>
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">No Kartu Keluarga</label>
 							<div class="col-md-10 col-sm-12">
-								<input type="text" name="no_kk" id="no_kk" class="form-control" readonly="readonly">
+								<input type="text" name="no_kk" id="no_kk" class="form-control" readonly="readonly" >
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Search</label>
+							<label class="col-sm-12 col-md-2 col-form-label">No ID Anak</label>
 							<div class="col-sm-12 col-md-10">
-								<input class="form-control" placeholder="Search Here" type="search">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Email</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control" value="bootstrap@example.com" type="email">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">URL</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control" value="https://getbootstrap.com" type="url">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Telephone</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control" value="1-(111)-111-1111" type="tel">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Password</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control" value="password" type="password">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Number</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control" value="100" type="number">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="example-datetime-local-input" class="col-sm-12 col-md-2 col-form-label">Date and time</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control datetimepicker" placeholder="Choose Date anf time" type="text">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Date</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control date-picker" placeholder="Select Date" type="text">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Month</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control month-picker" placeholder="Select Month" type="text">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Time</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control time-picker" placeholder="Select time" type="text">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Select</label>
-							<div class="col-sm-12 col-md-10">
-								<select class="custom-select col-12">
-									<option selected="">Choose...</option>
-									<option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
+								<!-- <input class="form-control" type="text" name="kia_nik" id="kia_nik"> -->
+								<select class="custom-select2 form-control" name="kia_anak" id="kia_anak" onchange="identitas_anak(this.value)">
+									
 								</select>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Color</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control" value="#563d7c" type="color">
+							<label class="col-form-label col-md-2">KIA Kode</label>
+							<div class="col-md-10 col-sm-12">
+								<input type="text" name="kia_kode" id="kia_kode" class="form-control" readonly>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-sm-12 col-md-2 col-form-label">Input Range</label>
-							<div class="col-sm-12 col-md-10">
-								<input class="form-control" value="50" type="range">
+							<label class="col-form-label col-md-2">Nama Anak</label>
+							<div class="col-md-10 col-sm-12">
+								<input type="text" name="nama_anak" id="nama_anak" class="form-control" readonly>
 							</div>
 						</div>
-					</form>
-					<div class="collapse collapse-box" id="basic-form1" >
-						<div class="code-box">
-							<div class="clearfix">
-								<a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left"  data-clipboard-target="#copy-pre"><i class="fa fa-clipboard"></i> Copy Code</a>
-								<a href="#basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y"  data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
-							</div>
-							<pre><code class="xml copy-pre" id="copy-pre">
-<form>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Text</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control" type="text" placeholder="Johnny Brown">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Search</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control" placeholder="Search Here" type="search">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Email</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control" value="bootstrap@example.com" type="email">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">URL</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control" value="https://getbootstrap.com" type="url">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Telephone</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control" value="1-(111)-111-1111" type="tel">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Password</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control" value="password" type="password">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Number</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control" value="100" type="number">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label for="example-datetime-local-input" class="col-sm-12 col-md-2 col-form-label">Date and time</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control datetimepicker" placeholder="Choose Date anf time" type="text">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Date</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control date-picker" placeholder="Select Date" type="text">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Month</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control month-picker" placeholder="Select Month" type="text">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Time</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control time-picker" placeholder="Select time" type="text">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Select</label>
-		<div class="col-sm-12 col-md-10">
-			<select class="custom-select col-12">
-				<option selected="">Choose...</option>
-				<option value="1">One</option>
-				<option value="2">Two</option>
-				<option value="3">Three</option>
-			</select>
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Color</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control" value="#563d7c" type="color">
-		</div>
-	</div>
-	<div class="form-group row">
-		<label class="col-sm-12 col-md-2 col-form-label">Input Range</label>
-		<div class="col-sm-12 col-md-10">
-			<input class="form-control" value="50" type="range">
-		</div>
-	</div>
-</form>
-							</code></pre>
-						</div>
-					</div>
-				</div>
-				<!-- Default Basic Forms End -->
-
-				<!-- horizontal Basic Forms Start -->
-				<div class="pd-20 card-box mb-30">
-					<div class="clearfix">
-						<div class="pull-left">
-							<h4 class="text-blue h4">horizontal Basic Forms</h4>
-							<p class="mb-30">All bootstrap element classies</p>
-						</div>
-						<div class="pull-right">
-							<a href="#horizontal-basic-form1" class="btn btn-primary btn-sm scroll-click" rel="content-y"  data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
-						</div>
-					</div>
-					<form>
-						<div class="form-group">
-							<label>Text</label>
-							<input class="form-control" type="text" placeholder="Johnny Brown">
-						</div>
-						<div class="form-group">
-							<label>Email</label>
-							<input class="form-control" value="bootstrap@example.com" type="email">
-						</div>
-						<div class="form-group">
-							<label>URL</label>
-							<input class="form-control" value="https://getbootstrap.com" type="url">
-						</div>
-						<div class="form-group">
-							<label>Telephone</label>
-							<input class="form-control" value="1-(111)-111-1111" type="tel">
-						</div>
-						<div class="form-group">
-							<label>Password</label>
-							<input class="form-control" value="password" type="password">
-						</div>
-						<div class="form-group">
-							<label>Readonly input</label>
-							<input class="form-control" type="text" placeholder="Readonly input here…" readonly>
-						</div>
-						<div class="form-group">
-							<label>Disabled input</label>
-							<input type="text" class="form-control" placeholder="Disabled input" disabled="">
-						</div>
-						<div class="form-group">
-							<div class="row">
-								<div class="col-md-6 col-sm-12">
-									<label class="weight-600">Custom Checkbox</label>
-									<div class="custom-control custom-checkbox mb-5">
-										<input type="checkbox" class="custom-control-input" id="customCheck1">
-										<label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
-									</div>
-									<div class="custom-control custom-checkbox mb-5">
-										<input type="checkbox" class="custom-control-input" id="customCheck2">
-										<label class="custom-control-label" for="customCheck2">Check this custom checkbox</label>
-									</div>
-									<div class="custom-control custom-checkbox mb-5">
-										<input type="checkbox" class="custom-control-input" id="customCheck3">
-										<label class="custom-control-label" for="customCheck3">Check this custom checkbox</label>
-									</div>
-									<div class="custom-control custom-checkbox mb-5">
-										<input type="checkbox" class="custom-control-input" id="customCheck4">
-										<label class="custom-control-label" for="customCheck4">Check this custom checkbox</label>
-									</div>
-								</div>
-								<div class="col-md-6 col-sm-12">
-									<label class="weight-600">Custom Radio</label>
-									<div class="custom-control custom-radio mb-5">
-										<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-										<label class="custom-control-label" for="customRadio1">Toggle this custom radio</label>
-									</div>
-									<div class="custom-control custom-radio mb-5">
-										<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-										<label class="custom-control-label" for="customRadio2">Or toggle this other custom radio</label>
-									</div>
-									<div class="custom-control custom-radio mb-5">
-										<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-										<label class="custom-control-label" for="customRadio3">Or toggle this other custom radio</label>
-									</div>
-								</div>
+						<div class="form-group row">
+							<label class="col-form-label col-md-2">Tempat Tanggal Lahir</label>
+							<div class="col-md-10 col-sm-12">
+								<input type="text" name="ttl_anak" id="ttl_anak" class="form-control" readonly>
 							</div>
 						</div>
-						<div class="form-group">
-							<label>Disabled select menu</label>
-							<select class="form-control" disabled="">
-								<option>Disabled select</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label>input plaintext</label>
-							<input type="text" readonly class="form-control-plaintext" value="email@example.com">
-						</div>
-						<div class="form-group">
-							<label>Textarea</label>
-							<textarea class="form-control"></textarea>
-						</div>
-						<div class="form-group">
-							<label>Help text</label>
-							<input type="text" class="form-control">
-							<small class="form-text text-muted">
-							  Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-							</small>
-						</div>
-						<div class="form-group">
-							<label>Example file input</label>
-							<input type="file" class="form-control-file form-control height-auto">
-						</div>
-						<div class="form-group">
-							<label>Custom file input</label>
-							<div class="custom-file">
-								<input type="file" class="custom-file-input">
-								<label class="custom-file-label">Choose file</label>
+						<div class="form-group row">
+							<label class="col-form-label col-md-2">Berlaku Sampai</label>
+							<div class="col-md-10 col-sm-12">
+								<input type="date" name="kia_berlaku" id="kia_berlaku" class="form-control">
 							</div>
 						</div>
-					</form>
-					<div class="collapse collapse-box" id="horizontal-basic-form1" >
-						<div class="code-box">
-							<div class="clearfix">
-								<a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left"  data-clipboard-target="#horizontal-basic"><i class="fa fa-clipboard"></i> Copy Code</a>
-								<a href="#horizontal-basic-form1" class="btn btn-primary btn-sm pull-right" rel="content-y"  data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
-							</div>
-							<pre><code class="xml copy-pre" id="horizontal-basic">
-<form>
-	<div class="form-group">
-		<label>Text</label>
-		<input class="form-control" type="text" placeholder="Johnny Brown">
-	</div>
-	<div class="form-group">
-		<label>Email</label>
-		<input class="form-control" value="bootstrap@example.com" type="email">
-	</div>
-	<div class="form-group">
-		<label>URL</label>
-		<input class="form-control" value="https://getbootstrap.com" type="url">
-	</div>
-	<div class="form-group">
-		<label>Telephone</label>
-		<input class="form-control" value="1-(111)-111-1111" type="tel">
-	</div>
-	<div class="form-group">
-		<label>Password</label>
-		<input class="form-control" value="password" type="password">
-	</div>
-	<div class="form-group">
-		<label>Readonly input</label>
-		<input class="form-control" type="text" placeholder="Readonly input here…" readonly>
-	</div>
-	<div class="form-group">
-		<label>Disabled input</label>
-		<input type="text" class="form-control" placeholder="Disabled input" disabled="">
-	</div>
-	<div class="form-group">
-		<div class="row">
-			<div class="col-md-6 col-sm-12">
-				<label class="weight-600">Custom Checkbox</label>
-				<div class="custom-control custom-checkbox mb-5">
-					<input type="checkbox" class="custom-control-input" id="customCheck1-1">
-					<label class="custom-control-label" for="customCheck1-1">Check this custom checkbox</label>
-				</div>
-				<div class="custom-control custom-checkbox mb-5">
-					<input type="checkbox" class="custom-control-input" id="customCheck2-1">
-					<label class="custom-control-label" for="customCheck2-1">Check this custom checkbox</label>
-				</div>
-				<div class="custom-control custom-checkbox mb-5">
-					<input type="checkbox" class="custom-control-input" id="customCheck3-1">
-					<label class="custom-control-label" for="customCheck3-1">Check this custom checkbox</label>
-				</div>
-				<div class="custom-control custom-checkbox mb-5">
-					<input type="checkbox" class="custom-control-input" id="customCheck4-1">
-					<label class="custom-control-label" for="customCheck4-1">Check this custom checkbox</label>
-				</div>
-			</div>
-			<div class="col-md-6 col-sm-12">
-				<label class="weight-600">Custom Radio</label>
-				<div class="custom-control custom-radio mb-5">
-					<input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
-					<label class="custom-control-label" for="customRadio4">Toggle this custom radio</label>
-				</div>
-				<div class="custom-control custom-radio mb-5">
-					<input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
-					<label class="custom-control-label" for="customRadio5">Or toggle this other custom radio</label>
-				</div>
-				<div class="custom-control custom-radio mb-5">
-					<input type="radio" id="customRadio6" name="customRadio" class="custom-control-input">
-					<label class="custom-control-label" for="customRadio6">Or toggle this other custom radio</label>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="form-group">
-		<label>Disabled select menu</label>
-		<select class="form-control" disabled="">
-			<option>Disabled select</option>
-		</select>
-	</div>
-	<div class="form-group">
-		<label>input plaintext</label>
-		<input type="text" readonly class="form-control-plaintext" value="email@example.com">
-	</div>
-	<div class="form-group">
-		<label>Textarea</label>
-		<textarea class="form-control"></textarea>
-	</div>
-	<div class="form-group">
-		<label>Help text</label>
-		<input type="text" class="form-control">
-		<small class="form-text text-muted">
-		  Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-		</small>
-	</div>
-	<div class="form-group">
-		<label>Example file input</label>
-		<input type="file" class="form-control-file form-control height-auto">
-	</div>
-	<div class="form-group">
-		<label>Custom file input</label>
-		<div class="custom-file">
-			<input type="file" class="custom-file-input">
-			<label class="custom-file-label">Choose file</label>
-		</div>
-	</div>
-</form>
-
-</code></pre>
-						</div>
-					</div>
-				</div>
-				<!-- horizontal Basic Forms End -->
-
-				<!-- Form grid Start -->
-				<div class="pd-20 card-box mb-30">
-					<div class="clearfix">
-						<div class="pull-left">
-							<h4 class="text-blue h4">Form grid</h4>
-							<p class="mb-30">All bootstrap element classies</p>
-						</div>
-						<div class="pull-right">
-							<a href="#form-grid-form" class="btn btn-primary btn-sm scroll-click" rel="content-y"  data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
-						</div>
-					</div>
-					<form>
-						<div class="row">
-							<div class="col-md-4 col-sm-12">
-								<div class="form-group">
-									<label>col-md-4</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-12">
-								<div class="form-group">
-									<label>col-md-4</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-12">
-								<div class="form-group">
-									<label>col-md-4</label>
-									<input type="text" class="form-control">
-								</div>
+						<div class="form-group row">
+							<label class="col-form-label col-md-2"></label>
+							<div class="col-md-10 col-sm-12">
+								<button type="submit" class="btn btn-success pull-right" name="simpan">Simpan</button>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-3 col-sm-12">
-								<div class="form-group">
-									<label>col-md-3</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-12">
-								<div class="form-group">
-									<label>col-md-3</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-12">
-								<div class="form-group">
-									<label>col-md-3</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-12">
-								<div class="form-group">
-									<label>col-md-3</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-12">
-								<div class="form-group">
-									<label>col-md-6</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-12">
-								<div class="form-group">
-									<label>col-md-6</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-12">
-								<div class="form-group">
-									<label>col-md-6</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-12">
-								<div class="form-group">
-									<label>col-md-3</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-12">
-								<div class="form-group">
-									<label>col-md-3</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12 col-sm-12">
-								<div class="form-group">
-									<label>col-md-12</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-2 col-sm-12">
-								<div class="form-group">
-									<label>col-md-2</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-2 col-sm-12">
-								<div class="form-group">
-									<label>col-md-2</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-2 col-sm-12">
-								<div class="form-group">
-									<label>col-md-2</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-2 col-sm-12">
-								<div class="form-group">
-									<label>col-md-2</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-2 col-sm-12">
-								<div class="form-group">
-									<label>col-md-2</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-2 col-sm-12">
-								<div class="form-group">
-									<label>col-md-2</label>
-									<input type="text" class="form-control">
-								</div>
-							</div>
-						</div>
-					</form>
-					<div class="collapse collapse-box" id="form-grid-form" >
-						<div class="code-box">
-							<div class="clearfix">
-								<a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left"  data-clipboard-target="#form-grid"><i class="fa fa-clipboard"></i> Copy Code</a>
-								<a href="#form-grid-form" class="btn btn-primary btn-sm pull-right" rel="content-y"  data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
-							</div>
-							<pre><code class="xml copy-pre" id="form-grid">
-<form>
-	<div class="row">
-		<div class="col-md-4 col-sm-12">
-			<div class="form-group">
-				<label>col-md-4</label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-		<div class="col-md-4 col-sm-12">
-			<div class="form-group">
-				<label>col-md-4</label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-		<div class="col-md-4 col-sm-12">
-			<div class="form-group">
-				<label>col-md-4</label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-3 col-sm-12">
-			<div class="form-group">
-				<label>col-md-3</label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-		<div class="col-md-3 col-sm-12">
-			<div class="form-group">
-				<label>col-md-3</label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-		<div class="col-md-3 col-sm-12">
-			<div class="form-group">
-				<label>col-md-3</label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-		<div class="col-md-3 col-sm-12">
-			<div class="form-group">
-				<label>col-md-3</label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-6 col-sm-12">
-			<div class="form-group">
-				<label>col-md-6</label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-		<div class="col-md-6 col-sm-12">
-			<div class="form-group">
-				<label>col-md-6</label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-6 col-sm-12">
-			<div class="form-group">
-				<label>col-md-6</label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-		<div class="col-md-3 col-sm-12">
-			<div class="form-group">
-				<label>col-md-3</label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-		<div class="col-md-3 col-sm-12">
-			<div class="form-group">
-				<label>col-md-3</label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12 col-sm-12">
-			<div class="form-group">
-				<label>col-md-12</label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2 col-sm-12">
-			<div class="form-group">
-				<label>col-md-2</label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-		<div class="col-md-2 col-sm-12">
-			<div class="form-group">
-				<label>col-md-2</label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-		<div class="col-md-2 col-sm-12">
-			<div class="form-group">
-				<label>col-md-2</label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-		<div class="col-md-2 col-sm-12">
-			<div class="form-group">
-				<label>col-md-2</label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-		<div class="col-md-2 col-sm-12">
-			<div class="form-group">
-				<label>col-md-2</label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-		<div class="col-md-2 col-sm-12">
-			<div class="form-group">
-				<label>col-md-2</label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-	</div>
-</form>
-							</code></pre>
-						</div>
-					</div>
-				</div>
-				<!-- Form grid End -->
-
-				<!-- Input Validation Start -->
-				<div class="pd-20 card-box mb-30">
-					<div class="clearfix">
-						<div class="pull-left">
-							<h4 class="text-blue h4">Input Validation</h4>
-							<p class="mb-30">Validation styles for error, warning, and success</p>
-						</div>
-						<div class="pull-right">
-							<a href="#input-validation-form" class="btn btn-primary btn-sm scroll-click" rel="content-y"  data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
-						</div>
-					</div>
-					<form>
-						<div class="row">
-							<div class="col-md-6 col-sm-12">
-								<div class="form-group has-success">
-									<label class="form-control-label">Input with success</label>
-									<input type="text" class="form-control form-control-success">
-									<div class="form-control-feedback">Success! You've done it.</div>
-									<small class="form-text text-muted">Example help text that remains unchanged.</small>
-								</div>
-								<div class="form-group has-warning">
-									<label class="form-control-label">Input with warning</label>
-									<input type="text" class="form-control form-control-warning">
-									<div class="form-control-feedback">Shucks, check the formatting of that and try again.</div>
-									<small class="form-text text-muted">Example help text that remains unchanged.</small>
-								</div>
-								<div class="form-group has-danger">
-									<label class="form-control-label">Input with danger</label>
-									<input type="text" class="form-control form-control-danger">
-									<div class="form-control-feedback">Sorry, that username's taken. Try another?</div>
-									<small class="form-text text-muted">Example help text that remains unchanged.</small>
-								</div>
-							</div>
-							<div class="col-md-6 col-sm-12">
-								<div class="form-group has-success row">
-									<label class="form-control-label col-sm-12 col-md-3 col-form-label">Input with success</label>
-									<div class="col-sm-12 col-md-9">
-										<input type="text" class="form-control form-control-success">
-										<div class="form-control-feedback">Success! You've done it.</div>
-										<small class="form-text text-muted">Example help text that remains unchanged.</small>
-									</div>
-								</div>
-								<div class="form-group has-warning row">
-									<label class="form-control-label col-sm-12 col-md-3 col-form-label">Input with warning</label>
-									<div class="col-sm-12 col-md-9">
-										<input type="text" class="form-control form-control-warning">
-										<div class="form-control-feedback">Shucks, check the formatting of that and try again.</div>
-										<small class="form-text text-muted">Example help text that remains unchanged.</small>
-									</div>
-								</div>
-								<div class="form-group has-danger row">
-									<label class="form-control-label col-sm-12 col-md-3 col-form-label">Input with danger</label>
-									<div class="col-sm-12 col-md-9">
-										<input type="text" class="form-control form-control-danger">
-										<div class="form-control-feedback">Sorry, that username's taken. Try another?</div>
-										<small class="form-text text-muted">Example help text that remains unchanged.</small>
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
-					<div class="collapse collapse-box" id="input-validation-form" >
-						<div class="code-box">
-							<div class="clearfix">
-								<a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left"  data-clipboard-target="#input-validation"><i class="fa fa-clipboard"></i> Copy Code</a>
-								<a href="#input-validation-form" class="btn btn-primary btn-sm pull-right" rel="content-y"  data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
-							</div>
-							<pre><code class="xml copy-pre" id="input-validation">
-<form>
-	<div class="row">
-		<div class="col-md-6 col-sm-12">
-			<div class="form-group has-success">
-				<label class="form-control-label">Input with success</label>
-				<input type="text" class="form-control form-control-success">
-				<div class="form-control-feedback">Success! You've done it.</div>
-				<small class="form-text text-muted">Example help text that remains unchanged.</small>
-			</div>
-			<div class="form-group has-warning">
-				<label class="form-control-label">Input with warning</label>
-				<input type="text" class="form-control form-control-warning">
-				<div class="form-control-feedback">Shucks, check the formatting of that and try again.</div>
-				<small class="form-text text-muted">Example help text that remains unchanged.</small>
-			</div>
-			<div class="form-group has-danger">
-				<label class="form-control-label">Input with danger</label>
-				<input type="text" class="form-control form-control-danger">
-				<div class="form-control-feedback">Sorry, that username's taken. Try another?</div>
-				<small class="form-text text-muted">Example help text that remains unchanged.</small>
-			</div>
-		</div>
-		<div class="col-md-6 col-sm-12">
-			<div class="form-group has-success row">
-				<label class="form-control-label col-sm-12 col-md-2 col-form-label">Input with success</label>
-				<div class="col-sm-12 col-md-10">
-					<input type="text" class="form-control form-control-success">
-					<div class="form-control-feedback">Success! You've done it.</div>
-					<small class="form-text text-muted">Example help text that remains unchanged.</small>
-				</div>
-			</div>
-			<div class="form-group has-warning row">
-				<label class="form-control-label col-sm-12 col-md-2 col-form-label">Input with warning</label>
-				<div class="col-sm-12 col-md-10">
-					<input type="text" class="form-control form-control-warning">
-					<div class="form-control-feedback">Shucks, check the formatting of that and try again.</div>
-					<small class="form-text text-muted">Example help text that remains unchanged.</small>
-				</div>
-			</div>
-			<div class="form-group has-danger row">
-				<label class="form-control-label col-sm-12 col-md-2 col-form-label">Input with danger</label>
-				<div class="col-sm-12 col-md-10">
-					<input type="text" class="form-control form-control-danger">
-					<div class="form-control-feedback">Sorry, that username's taken. Try another?</div>
-					<small class="form-text text-muted">Example help text that remains unchanged.</small>
-				</div>
-			</div>
-		</div>
-	</div>
-</form>
-							</code></pre>
-						</div>
-					</div>
-				</div>
 				<!-- Input Validation End -->
 
 			</div>
-			<div class="footer-wrap pd-20 mb-20 card-box">
-				DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit Hingarajiya</a>
-			</div>
+			<?php require $LAYOUT.'footer.php'; ?>
 		</div>
 	</div>
 	<!-- js -->
+	<script type="text/javascript">
+	function nik_ortu(data){
+		var nik_ortu = data;
+		$.getJSON('ap_data.php', {nik_ortu: nik_ortu ,aksi:'ortu'}, function(json) {
+			// console.log('test');
+			$('#no_kk').val(json.no_kk);
+			nik_anak(json.no_kk);
+		});
+	}
+
+function nik_anak(data){
+              var no_kk = data;
+              $.ajax({
+                type:"GET",
+                url:'ap_data.php?aksi=anak',
+                data:'no_kk='+no_kk ,
+                success:function(isi){
+                  $('#kia_anak').html(isi);
+                  // $('#penduduk').val(id_penduduk);
+                }
+              })
+            }
+
+            function identitas_anak(data){
+            	// console.log(data);
+            	var nik_anak = data;
+            	$.getJSON('ap_data.php', {aksi:'id_anak',nik_anak:nik_anak}, function(json) {
+            			/*optional stuff to do after success */
+            			// console.log(json);
+            			var tahun = json.penduduk_tanggal_lahir.split('-');
+            			// console.log(tahun);
+            			$('#kia_kode').val(tahun[0]+json.nik.split('').reverse().join(''));
+            			$('#nama_anak').val(json.penduduk_nama);
+            			$('#ttl_anak').val(json.penduduk_tempat_lahir+', '+json.penduduk_tanggal_lahir);
+
+            	});
+            }
+
+	</script>
 	<?php require_once($LAYOUT.'js.php'); ?>
 </body>
 </html>

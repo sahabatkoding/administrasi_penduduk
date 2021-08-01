@@ -19,3 +19,5 @@ DROP COLUMN `kia_tempat_lahir`,
 DROP COLUMN `kia_tgl_lahir`,
 DROP COLUMN `kia_jenis_kelamin`,
 DROP COLUMN `kia_agama`;
+MODIFY COLUMN `kia_id` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL FIRST,
+ADD PRIMARY KEY (`kia_id`);

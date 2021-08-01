@@ -8,41 +8,41 @@ if($_SESSION['level']==''){
 }
 
 // SQL COUNT DATA
-$sql = " SELECT count(nik) as jumlah FROM ap_penduduk ";
+$sql = " SELECT * FROM ap_penduduk ";
 $query =  query($sql);
-$penduduk = $query->fetch_array();
+$penduduk = numrows($query);
 // var_dump($penduduk);
 
-$sql = " SELECT count(pd_id) as jumlah FROM ap_pindah_datang ";
+$sql = " SELECT * FROM ap_pindah_datang ";
 $query =  query($sql);
-$datang = $query->fetch_array();
+$datang = numrows($query);
 // var_dump($penduduk);
 
-$sql = " SELECT count(pk_id) as jumlah FROM ap_pindah_keluar ";
+$sql = " SELECT * FROM ap_pindah_keluar ";
 $query =  query($sql);
-$keluar = $query->fetch_array();
+$keluar = numrows($query);
 // var_dump($penduduk);
 
-$sql = " SELECT count(pnikah_id) as jumlah FROM ap_permohonan_nikah ";
+$sql = " SELECT * FROM ap_permohonan_nikah ";
 $query =  query($sql);
-$nikah = $query->fetch_array();
+$nikah = numrows($query);
 // var_dump($penduduk);
 
-$sql = " SELECT count(pcerai_id) as jumlah FROM ap_permohonan_cerai ";
+$sql = " SELECT * FROM ap_permohonan_cerai ";
 $query =  query($sql);
-$cerai = $query->fetch_array();
+$cerai = numrows($query);
 
-$sql = " SELECT count(proposal_id) as jumlah FROM ap_proposal ";
+$sql = " SELECT * FROM ap_proposal ";
 $query =  query($sql);
-$proposal = $query->fetch_array();
+$proposal = numrows($query);
 
-$sql = " SELECT count(umkm_id) as jumlah FROM ap_umkm ";
+$sql = " SELECT * FROM ap_umkm ";
 $query =  query($sql);
-$umkm = $query->fetch_array();
+$umkm = numrows($query);
 
-$sql = " SELECT count(imb_id) as jumlah FROM ap_imb ";
+$sql = " SELECT * FROM ap_imb ";
 $query =  query($sql);
-$imb = $query->fetch_array();
+$imb = numrows($query);
 // var_dump($penduduk);
 
 
@@ -95,7 +95,7 @@ $imb = $query->fetch_array();
 								<div id="chart"></div>
 							</div>
 							<div class="widget-data">
-								<div class="h4 mb-0"><?=$penduduk['jumlah']?></div>
+								<div class="h4 mb-0"><?=$penduduk?></div>
 								<div class="weight-600 font-14">Penduduk</div>
 							</div>
 						</div>
@@ -108,7 +108,7 @@ $imb = $query->fetch_array();
 								<div id="chart2"></div>
 							</div>
 							<div class="widget-data">
-								<div class="h4 mb-0"><?=$datang['jumlah']?></div>
+								<div class="h4 mb-0"><?=$datang;?></div>
 								<div class="weight-600 font-14">Pindah Datang</div>
 							</div>
 						</div>
@@ -121,7 +121,7 @@ $imb = $query->fetch_array();
 								<div id="chart3"></div>
 							</div>
 							<div class="widget-data">
-								<div class="h4 mb-0"><?=$keluar['jumlah']?></div>
+								<div class="h4 mb-0"><?=$keluar;?></div>
 								<div class="weight-600 font-14">Pindah Keluar</div>
 							</div>
 						</div>
