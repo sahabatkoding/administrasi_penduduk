@@ -11,7 +11,7 @@ switch ($_GET['aksi']) {
     $sql = "SELECT no_kk FROM ap_penduduk WHERE nik = '".$_GET['nik_ortu']."' ";
     $query = query($sql);
     $data = fetch($query);
-    // echo json_encode($data);
+    echo json_encode($data);
     // var_dump($data)
     break;
   case 'anak':
