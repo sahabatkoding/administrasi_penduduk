@@ -4,9 +4,8 @@ require_once '../../database/config.php';
 require_once '../../assets/library/function.php';
 require_once '../../assets/library/data.php';
 require_once '../../assets/library/date.php';
-// require_once '../../assets/library/function_js.php';
 require_once '../../assets/library/session.php';
-// require_once '../../assets/library/date.php';
+
 
 $ROOT               = '../';
 $MASTER             = '../../';

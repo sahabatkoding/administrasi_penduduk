@@ -18,7 +18,6 @@
 <script src="<?= $ROOT ?>assets/src/plugins/datatables/js/vfs_fonts.js"></script>
 	<!-- Datatable Setting js -->
 <script src="<?= $ROOT ?>assets/vendors/scripts/datatable-setting.js"></script></body>
-<!-- <script src="../<?php echo $ROOT ?>assets/library/function_js.php"></script> -->
 <script type="text/javascript">
 	function hanyaAngka(evt) {
     var charCode = (evt.which) ? evt.which : event.keyCode
