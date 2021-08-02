@@ -11,30 +11,31 @@ switch ($_GET['aksi']) {
     $sql = "SELECT no_kk FROM ap_penduduk WHERE nik = '".$_GET['nik_ortu']."' ";
     $query = query($sql);
     $data = fetch($query);
-    echo json_encode($data);
+    // echo json_encode($data);
     // var_dump($data)
     break;
-    case 'anak':
+  case 'anak':
     $sql = "SELECT nik,penduduk_nama FROM ap_penduduk WHERE no_kk = '".$_GET['no_kk']."' AND penduduk_status_keluarga = 'A' ";
     $query = query($sql);
-    $data = $query->fetch_array();
+    $data = fetchall($query);
+    // echo json_encode($data);
     if($data == '' || $data == null) {
       echo '<option value=""> Tidak Ada Data </option>';
     }else{
       echo '<option value=""> Pilih NIK Anak </option>';
     }
    ?>
-        <?php foreach($query as $data){ ?>
-        <option  value="<?=$data['nik']?>"> <?=$data['nik']." - ".$data['penduduk_nama']?>&nbsp;</option>
+        <?php foreach($data as $value){ ?>
+        <option  value="<?=$value['nik']?>"> <?=$value['nik']." - ".$value['penduduk_nama']?>&nbsp;</option>
         <?php } ?>
    <?php
-    break;
-    case'id_anak':
+  break;
+  case'id_anak':
     $sql = "SELECT * FROM ap_penduduk WHERE nik = '".$_GET['nik_anak']."'";
     $query = query($sql);
     $data = fetch($query);
     echo json_encode($data);
-    break;
+  break;
   default:
     // code...
     break;

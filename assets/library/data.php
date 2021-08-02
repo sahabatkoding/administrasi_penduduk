@@ -49,6 +49,14 @@ function fetch($query){
   return $data;
 }
 
+function fetchall($query){
+  $values=array();
+    foreach($query as $key=>$value){
+      $values[]=$value;
+    }
+    return $values;
+}
+
 function numrows($query){
   // if($query){
   $count = mysqli_num_rows($query);
