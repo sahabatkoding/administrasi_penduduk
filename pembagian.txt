@@ -1,14 +1,24 @@
 pembagian menu :
+
 alif - 
-master
-data akun
+master - semua menu
+manajemen - data akun
+
 aji -
-liat penduduk master
-permintaan
+liat penduduk master - tambah liat penduduk
+permintaan - semua menu
+
 seno -
-pemohon
-instansi
+pemohon - semua menu
+manajemen - instansi
 
 pembagian warna sakarepmu 
 
+deadline 4 agustus 2021
+
 terserah laporan enek ora
+
+
+terima kasih untuk perjuangannya teman-teman... lain kali cari sing rodo akeh yaa!!!
+
+jaga kesehatan selalu..
