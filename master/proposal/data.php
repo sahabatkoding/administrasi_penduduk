@@ -28,7 +28,7 @@ if(isset($_GET['id'])){
     $isi['lokasi_kegiatan']=$value['proposal_lokasi_kegiatan'];
     $isi['tujuan_kegiatan']=$value['proposal_tujuan_kegiatan'];
     $isi['bentuk_bantuan']=$value['proposal_bantuan_bentuk'];
-    $isi['bantuan_uang']="Rp ".$value['proposal_bantuan_uang'];
+    $isi['bantuan_uang']=rupiah($value['proposal_bantuan_uang']);
     $isi['bantuan_barang']=$value['proposal_bantuan_barang'];
     $isi['status']=$value['proposal_status']; 
     $isi['keterangan']=$value['proposal_keterangan'];

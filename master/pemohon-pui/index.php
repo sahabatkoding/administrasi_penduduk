@@ -114,6 +114,8 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_agama");
                                 <div class="col-md-6">
                                   <label for="">NIK</label>
                                   <input type="text" name="pemohon_nik" id="pemohon_nik" class="form-control" required onkeydown="return hanyaAngka(event)">
+                                  <input type="text" name="pemohon_nik" id="pemohon_nik_b" disabled="disabled" class="form-control" required onkeydown="return hanyaAngka(event)">
+                                  
                                 </div>
                               </div>
                             </div> 
@@ -234,6 +236,8 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_agama");
            $('#modal_form')[0].reset();
            $('#edit').css('display','none');
            $('#simpan').css('display','inline-block');
+           $('#pemohon_nik').css('display','inline-block');
+           $('#pemohon_nik_b').css('display','none');
            $('#ijk').html('Silahkan Pilih');
            $('#ag').html('Silahkan Pilih');
          }
@@ -303,9 +307,11 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_agama");
          	$('#pemohon_id').val(isi);
          	$('#edit').css('display','inline-block');
          	$('#simpan').css('display','none');
+           $('#pemohon_nik').css('display','none');
+           $('#pemohon_nik_b').css('display','inline-block');
          	$.getJSON('data.php', {id: isi}, function(json) {
          			$('#pemohon_nama').val(json.pemohon_nama);
-              $('#pemohon_nik').val(json.pemohon_nik);
+              $('#pemohon_nik_b').val(json.pemohon_nik);
               $('#tempat_lahir').val(json.pemohon_tempat_lahir);
               $('#tgl_lahir').val(json.pemohon_tanggal_lahir);
               $('#alamat').val(json.pemohon_alamat);
