@@ -80,18 +80,27 @@
 						</a>
 						<ul class="submenu">
 							<li class="dropdown">
-								<a href="javascript:;" class="dropdown-toggle">Proses</a>
+								<a href="javascript:;" class="dropdown-toggle">Data</a>
 								<ul class="submenu">
 									<li><a href="<?= $ROOT ?>pemohon-pui/index.php">Data Pemohon</a></li>
+									
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="javascript:;" class="dropdown-toggle">Proses</a>
+								<ul class="submenu">
+									
 									<li><a href="<?= $ROOT ?>proposal/index.php">Proposal</a></li>
 									<li><a href="<?= $ROOT ?>UMKM/index.php">UMKM</a></li>
 									<li><a href="<?= $ROOT ?>IMB/index.php">Ijin Mendirikan Bangunan</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">
-								<a href="javascript:;" class="dropdown-toggle">Lapoaran</a>
+								<a href="javascript:;" class="dropdown-toggle">Laporan</a>
 								<ul class="submenu">
-									<li><a href="">Laporan mu......</a></li>
+									<li><a href="">Laporan Proposal</a></li>
+									<li><a href="">Laporan UMKM</a></li>
+									<li><a href="">Laporan Ijin Mendirikan Bangunan</a></li>
 								</ul>
 							</li>
 						</ul>
