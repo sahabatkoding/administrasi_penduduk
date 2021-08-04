@@ -12,6 +12,8 @@ seno -
 pemohon - semua menu
 manajemen - instansi
 
+tambah 1 crud buat agama , untuk menu udah buat
+
 pembagian warna sakarepmu 
 
 deadline 4 agustus 2021
