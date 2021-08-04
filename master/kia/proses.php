@@ -1,7 +1,7 @@
 <?php 
 require_once '../konektor.php';
 
-if($admin==0){
+if($admin==0 && $kasi_2==0){
   ?>
   <script>location.href="<?=$MASTER?>login/logout.php"</script>
   <?php
@@ -31,10 +31,33 @@ switch ($_GET['aksi']) {
     'id_user' => $id_user,
   );
   $sql = insert($table,$data);
-  echo $sql;
-
+  query($sql);
+  header('location:index.php');
   break;
-  
+  case'edit':
+  $table = 'ap_kia';
+  $kia_id = "kia_id = ".$_GET['kia_id'];
+  $data = array(
+    // 'kia_id' => $kia_id,
+    'kia_nik' => $kia_nik,
+    'tgl_update' => date('Y-m-d H:i:s'),
+    'kia_kode' => $kia_kode,
+    'nik_orang_tua' => $nik_orang_tua,
+    'kia_berlaku' => $kia_berlaku,
+    'id_user' => $id_user,
+  );
+  $sql = update($table,$data,$kia_id);
+  query($sql);
+  header('location:index.php');
+  break;  
+  case 'hapus':
+  $table='ap_kia';
+  $id = 'kia_id = '.$_GET['id'];
+  $sql = delete($table,$id);
+  // echo $sql;
+  query($sql);
+  header('location:index.php');
+  break;
   default:
     // code...
     break;

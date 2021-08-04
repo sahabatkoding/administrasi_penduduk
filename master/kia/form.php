@@ -4,13 +4,20 @@ if($master=='0' && $kasi_2=='0'){
 ?><script>location.href=<?php echo $MASTER?>"login/logout.php"</script>
 <?php
 }
+// untuk konfig select data;
+if($_GET['kia_id']){
+$sql = "SELECT a.kia_id,a.tgl_registrasi,a.kia_kode,a.kia_nik,a.nik_orang_tua,b.penduduk_nama AS `nama_anak`,b.penduduk_tempat_lahir,b.penduduk_tanggal_lahir,c.penduduk_nama AS 'nama_ortu',a.kia_berlaku,a.id_user,c.no_kk FROM ap_kia a LEFT JOIN ap_penduduk b ON a.kia_nik = b.nik LEFT JOIN ap_penduduk c on a.nik_orang_tua = c.nik WHERE kia_id = '".$_GET['kia_id']."'";
+$query = query($sql);
+$dataForm = fetch($query);
+}
+// echo json_encode($data);
  ?>
 <!DOCTYPE html>
 <html>
 <head>
 <?php require_once($LAYOUT.'head.php') ?>
 </head>
-<body>
+<body >
 	<?php require_once $LAYOUT.'header.php'; ?>
 	<?php require_once $LAYOUT.'sidebar.php'; ?>
 	
@@ -33,7 +40,8 @@ if($master=='0' && $kasi_2=='0'){
 						</div>
 					</div>
 					<!--  -->
-					<form action="<?php echo  ($_GET['kia_nik']) ? 'proses.php?aksi=edit&kia_nik='.$_GET['kia_nik']: 'proses.php?aksi=simpan' ?>" method="POST">
+					<form action="<?php echo  ($_GET['kia_id']) ? 'proses.php?aksi=edit&kia_id='.$_GET['kia_id']: 'proses.php?aksi=simpan' ?>" method="POST">
+						<input type="text" name="kia_id" id="kia_id" value="<?=($_GET['kia_id']) ? $_GET['kia_id']: ''?>">
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">Tanggal Registrasi</label>
 							<div class="col-md-10 col-sm-12">
@@ -51,7 +59,7 @@ if($master=='0' && $kasi_2=='0'){
 									<!-- sql select data orang tua -->
 									<?php $sql = query("SELECT * FROM ap_penduduk where penduduk_status_keluarga != 'A' ");
 									foreach($sql as $dataOrtu): ?>
-										<option value="<?=$dataOrtu['nik']?>" <?php if($_POST['nik_orang_tua']==$dataOrtu['nik']) echo "selected" ?>><?=$dataOrtu['nik'].' - '.$dataOrtu['penduduk_nama']?></option>	
+										<option value="<?=$dataOrtu['nik']?>" <?php if($dataForm['nik_orang_tua']==$dataOrtu['nik']) echo "selected" ?>><?=$dataOrtu['nik'].' - '.$dataOrtu['penduduk_nama']?></option>	
 									<?php endforeach; ?>	
 								</select>
 							</div>
@@ -59,7 +67,7 @@ if($master=='0' && $kasi_2=='0'){
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">No Kartu Keluarga</label>
 							<div class="col-md-10 col-sm-12">
-								<input type="text" name="no_kk" id="no_kk" class="form-control" readonly="readonly" >
+								<input type="text" name="no_kk" id="no_kk" class="form-control" readonly="readonly" value="<?php echo ($_GET['kia_id']) ? $dataForm['no_kk'] : '' ?>">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -74,25 +82,25 @@ if($master=='0' && $kasi_2=='0'){
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">KIA Kode</label>
 							<div class="col-md-10 col-sm-12">
-								<input type="text" name="kia_kode" id="kia_kode" class="form-control" readonly>
+								<input type="text" name="kia_kode" id="kia_kode" class="form-control" readonly value="<?php echo ($_GET['kia_id']) ? $dataForm['kia_kode'] : '' ?>">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">Nama Anak</label>
 							<div class="col-md-10 col-sm-12">
-								<input type="text" name="nama_anak" id="nama_anak" class="form-control" readonly>
+								<input type="text" name="nama_anak" id="nama_anak" class="form-control" readonly value="<?php echo ($_GET['kia_id']) ? $dataForm['nama_anak'] : '' ?>">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">Tempat Tanggal Lahir</label>
 							<div class="col-md-10 col-sm-12">
-								<input type="text" name="ttl_anak" id="ttl_anak" class="form-control" readonly>
+								<input type="text" name="ttl_anak" id="ttl_anak" class="form-control" readonly value="<?php echo ($_GET['kia_id']) ? $dataForm['penduduk_tempat_lahir'].', '.$dataForm['penduduk_tanggal_lahir'] : '' ?>">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">Berlaku Sampai</label>
 							<div class="col-md-10 col-sm-12">
-								<input type="date" name="kia_berlaku" id="kia_berlaku" class="form-control">
+								<input type="date" name="kia_berlaku" id="kia_berlaku" class="form-control" value="<?php echo ($_GET['kia_id']) ? $dataForm['kia_berlaku'] : '' ?>">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -118,16 +126,15 @@ if($master=='0' && $kasi_2=='0'){
 		});
 	}
 
-function nik_anak(data){
+function nik_anak(data,kia=null){
               var no_kk = data;
-              $.ajax({
-                type:"GET",
-                url:'ap_data.php?aksi=anak',
-                data:'no_kk='+no_kk ,
-                success:function(isi){
-                  $('#kia_anak').html(isi);
-                  // $('#penduduk').val(id_penduduk);
-                }
+              $.getJSON('ap_data.php',{no_kk:no_kk,aksi:'anak'},function(json){
+              	$('#kia_anak').html("<option value=''>Pilih Nik / Nama Anak</option>");
+              	$.each(json,function(index,val){
+              		console.log(val);
+              		$('#kia_anak').append("<option value="+val.nik+">"+val.nik+" - "+val.penduduk_nama+"</option>");
+              		$('#kia_anak').val(val.nik);
+              	})
               })
             }
 
@@ -143,8 +150,20 @@ function nik_anak(data){
             			$('#nama_anak').val(json.penduduk_nama);
             			$('#ttl_anak').val(json.penduduk_tempat_lahir+', '+json.penduduk_tanggal_lahir);
 
+
             	});
             }
+
+            window.onload=dataAnak();
+            function dataAnak(){
+            	var kia_id = $('#kia_id').val();
+            	$.getJSON('data_anak.php',{kia_id:kia_id},function(res){
+            		// console.log(r.kia_nik);
+            		nik_anak(res[0].no_kk,res[0].kia_nik);
+            	})
+            }
+
+
 
 	</script>
 	<?php require_once($LAYOUT.'js.php'); ?>

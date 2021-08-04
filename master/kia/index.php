@@ -1,7 +1,7 @@
 <?php 
 require_once '../konektor.php';
 
-if($admin==0){
+if($admin==0 && $kasi_2==0){
   ?>
   <script>location.href="<?=$MASTER?>login/logout.php"</script>
   <?php
@@ -43,13 +43,15 @@ $header = "Data Kartu Identitas Anak";
 								<tr>
 									<th>No</th>
 									<th>Registrasi</th>
-									<th>Update</th>
 									<th>Kode</th>
+									<th>KIA NIK</th>
 									<th>Nama Anak</th>
+									<th>Tempat, Tanggal Lahir</th>
 									<th>Orang Tua</th>
 									<th>Berlaku</th>
 									<th>Edit</th>
 									<th>Hapus</th>
+									<!-- <th>Detail</th> -->
 								</tr>
 							</thead>
 						</table>
@@ -100,11 +102,15 @@ $header = "Data Kartu Identitas Anak";
 	$(function () {
            /* Isi Table */
              $('#table').DataTable({
-           //   	   dom: "Bfrtip",
-       			 // buttons: [
-           //  'copy', 'csv', 'excel', 'pdf', 'print'
-       				// 	 ],
-               "scrollX": true,
+           	   dom: "Bfrtip",
+       			 buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+       					 ],
+               "scrollX": false,
+                "scrollCollapse": true,
+				        "autoWidth": false,
+				        "responsive": true,
+
              
                "ajax": {
                    "url": "data.php",
@@ -112,15 +118,16 @@ $header = "Data Kartu Identitas Anak";
                  },
                  "columns": [
                    	{"data":"no"},
-										{"data":"tgl_registrasi"},
-										{"data":"tgl_update"},
-										{"data":"kia_kode"},
+										{"data":"registrasi"},
+										{"data":"kode"},
 										{"data":"nik_anak"},
+										{"data":"nama_anak"},
+										{"data":"ttl_anak"},
 										{"data":"nik_orang_tua"},
 										{"data":"kia_berlaku"},
-										{"data":"id_user"},
 										{"data":"edit"},
 										{"data":"hapus"},
+										// {"data":"detail"},
                  ]
              });
            /* Isi Table */
@@ -180,7 +187,7 @@ $header = "Data Kartu Identitas Anak";
 
          	if(n){
          	$.ajax({
-         		url:'proses.php',
+         		url:'proses.php?aksi=hapus',
          		type:'GET',
          		dataType:'HTML',
          		data: {id:isi},
