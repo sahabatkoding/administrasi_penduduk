@@ -82,25 +82,25 @@ $dataForm = fetch($query);
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">KIA Kode</label>
 							<div class="col-md-10 col-sm-12">
-								<input type="text" name="kia_kode" id="kia_kode" class="form-control" readonly value="<?php echo ($_GET['kia_id']) ? $dataForm['kia_kode'] : '' ?>">
+								<input type="text" name="kia_kode" id="kia_kode" class="form-control" readonly >
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">Nama Anak</label>
 							<div class="col-md-10 col-sm-12">
-								<input type="text" name="nama_anak" id="nama_anak" class="form-control" readonly value="<?php echo ($_GET['kia_id']) ? $dataForm['nama_anak'] : '' ?>">
+								<input type="text" name="nama_anak" id="nama_anak" class="form-control" readonly >
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">Tempat Tanggal Lahir</label>
 							<div class="col-md-10 col-sm-12">
-								<input type="text" name="ttl_anak" id="ttl_anak" class="form-control" readonly value="<?php echo ($_GET['kia_id']) ? $dataForm['penduduk_tempat_lahir'].', '.$dataForm['penduduk_tanggal_lahir'] : '' ?>">
+								<input type="text" name="ttl_anak" id="ttl_anak" class="form-control" readonly >
 							</div>
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label col-md-2">Berlaku Sampai</label>
 							<div class="col-md-10 col-sm-12">
-								<input type="date" name="kia_berlaku" id="kia_berlaku" class="form-control" value="<?php echo ($_GET['kia_id']) ? $dataForm['kia_berlaku'] : '' ?>">
+								<input type="date" name="kia_berlaku" id="kia_berlaku" class="form-control" >
 							</div>
 						</div>
 						<div class="form-group row">
@@ -128,12 +128,14 @@ $dataForm = fetch($query);
 
 function nik_anak(data,kia=null){
               var no_kk = data;
+              var kia = kia;
+              // console.log(kia);
               $.getJSON('ap_data.php',{no_kk:no_kk,aksi:'anak'},function(json){
               	$('#kia_anak').html("<option value=''>Pilih Nik / Nama Anak</option>");
               	$.each(json,function(index,val){
-              		console.log(val);
+              		// console.log(json);
               		$('#kia_anak').append("<option value="+val.nik+">"+val.nik+" - "+val.penduduk_nama+"</option>");
-              		$('#kia_anak').val(val.nik);
+              		$('#kia_anak').val(kia);
               	})
               })
             }
@@ -142,6 +144,7 @@ function nik_anak(data,kia=null){
             	// console.log(data);
             	var nik_anak = data;
             	$.getJSON('ap_data.php', {aksi:'id_anak',nik_anak:nik_anak}, function(json) {
+            		// if(json!==''){
             			/*optional stuff to do after success */
             			// console.log(json);
             			var tahun = json.penduduk_tanggal_lahir.split('-');
@@ -149,8 +152,6 @@ function nik_anak(data,kia=null){
             			$('#kia_kode').val(tahun[0]+json.nik.split('').reverse().join(''));
             			$('#nama_anak').val(json.penduduk_nama);
             			$('#ttl_anak').val(json.penduduk_tempat_lahir+', '+json.penduduk_tanggal_lahir);
-
-
             	});
             }
 
@@ -158,8 +159,12 @@ function nik_anak(data,kia=null){
             function dataAnak(){
             	var kia_id = $('#kia_id').val();
             	$.getJSON('data_anak.php',{kia_id:kia_id},function(res){
-            		// console.log(r.kia_nik);
+            		console.log(res[0].kia_nik);
             		nik_anak(res[0].no_kk,res[0].kia_nik);
+            		$('#kia_kode').val(res[0].kia_kode);
+            		$('#nama_anak').val(res[0].nama_anak);
+            		$('#ttl_anak').val(res[0].ttl_anak);
+            		$('#kia_berlaku').val(res[0].kia_berlaku);
             	})
             }
 

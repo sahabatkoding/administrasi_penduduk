@@ -17,13 +17,13 @@ if($admin==0 && $kasi_2==0){
 	      array_push($data, [
 	          // 'tgl_registrasi'   => $value['tgl_registrasi'],
 	          // 'kia_id'   => $value['kia_id'],
-	          // 'kia_kode'   => $value['kia_kode'],
+	          'kia_kode'   => $value['kia_kode'],
 	          'no_kk'   => $value['no_kk'],
-	          'kia_nik'   => $value['kia_nik']
+	          'kia_nik'   => $value['kia_nik'],
 	          // 'nik'   => $value['nik'],
-	          // 'nama_anak'   => $value['nama_anak'],
-	          // 'ttl_anak'   => $value['penduduk_tempat_lahir'],
-	          // 'kia_berlaku'   => $value['kia_berlaku'],
+	          'nama_anak'   => $value['nama_anak'],
+	          'ttl_anak'   => $value['penduduk_tempat_lahir'].', '.$value['penduduk_tanggal_lahir'],
+	          'kia_berlaku'   => $value['kia_berlaku']
 	        ]);
 	    }
 	    echo json_encode($data);  
