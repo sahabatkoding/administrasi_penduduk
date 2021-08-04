@@ -9,7 +9,6 @@ if($admin==0){
 
 
 $header = "Data UMKM";
-$dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
 
  ?>
 
@@ -112,12 +111,17 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
                                      <option id="atas">Silahkan Pilih</option>
                                      
 
-                                     <?php while($vale=mysqli_fetch_array($dt_option)){
-                                      ?>
+                                     <?php 
+                                    
+                                      $select_dt = "SELECT * FROM ap_pemohon ORDER BY pemohon_nik ASC";
+                                      $data_pemohon = $koneksi->query($select_dt);
+                                      foreach ($data_pemohon as $key => $value):
+                                     
+                                       ?>
                                       <option >
-                                        <?= $vale['pemohon_nik']." - ".$vale['pemohon_nama'];?>
+                                        <?= $value['pemohon_nik']." - ".$value['pemohon_nama'];?>
                                       </option>
-                                    <?php } ?>
+                                    <?php endforeach ?>
                                    
                                   </select>
                                   
@@ -208,7 +212,7 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
 
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" id="simpan">Simpan</button>
+                                <button type="submit" class="btn btn-primary" id="simpan">Simpan</button>
                                 <button type="button" class="btn btn-success" id="edit" style="display:none">Edit</button>
                               </div>
                             </form>
@@ -275,22 +279,23 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
          	kosong();
          })
 
-         $('#simpan').on('click',function(){
-         	$.ajax({
-         		url: 'proses.php',
-         		type: 'POST',
-         		dataType: 'HTML',
-         		data: $('#modal_form').serialize(),
-         		// console.log(data);
-         		success:function(isi){
-         		$('#modal').modal('hide');
+         $('#modal_form').submit(function(e){
+          e.preventDefault();
+          $.ajax({
+            url: 'proses.php',
+            type: 'POST',
+            dataType: 'HTML',
+            data: $(this).serialize(),
+            // console.log(data);
+            success:function(isi){
+            $('#modal').modal('hide');
                 kosong();
                 $('#table').DataTable().ajax.reload();
-         		}
-         	})
-         	.fail(function() {
-         		console.log("error");
-         	})         	
+            }
+          })
+          .fail(function() {
+            console.log("error");
+          })          
          })
 
          function edit(isi){

@@ -9,7 +9,6 @@ if($admin==0){
 
 
 $header = "Data Ijin Mendirikan Bangunan";
-$dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
 
  ?>
 
@@ -71,7 +70,6 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
 								<tr>
 									<th>No</th>
                   <th>Kode IMB</th>
-									<th>Nama Bangunan</th>
                   <th>Jenis Bangunan</th>
                   <th>Pendiri</th>
                   <th>Lokasi</th>
@@ -112,12 +110,17 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
                                      <option id="atas">Silahkan Pilih</option>
                                      
 
-                                     <?php while($vale=mysqli_fetch_array($dt_option)){
-                                      ?>
+                                     <?php 
+                                    
+                                      $select_dt = "SELECT * FROM ap_pemohon ORDER BY pemohon_nik ASC";
+                                      $data_pemohon = $koneksi->query($select_dt);
+                                      foreach ($data_pemohon as $key => $value):
+                                     
+                                       ?>
                                       <option >
-                                        <?= $vale['pemohon_nik']." - ".$vale['pemohon_nama'];?>
+                                        <?= $value['pemohon_nik']." - ".$value['pemohon_nama'];?>
                                       </option>
-                                    <?php } ?>
+                                    <?php endforeach ?>
                                    
                                   </select>
                                   
@@ -131,13 +134,14 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
 
                             <div class="modal-body">  
                               <div class="row">  
-                                <div class="col-md-6">
-                                  <label for="">Nama Bangunan</label>
-                                  <input type="text" name="nama_bangunan" id="nama_bangunan" class="form-control" required>
-                                </div>
+                                
                                 <div class="col-md-6">
                                   <label for="">Jenis Bangunan</label>
                                   <input type="text" name="jenis_bangunan" id="jenis_bangunan" class="form-control" required="">
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="">Lokasi Bangunan</label>
+                                  <input type="text" name="lokasi" id="lokasi" class="form-control" required>
                                 </div>
                                 
                                 </div>
@@ -145,27 +149,28 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
                             <div class="modal-body">  
                               <div class="row">  
                                 
-                                <div class="col-md-6">
-                                  <label for="">Lokasi Bangunan</label>
-                                  <input type="text" name="lokasi" id="lokasi" class="form-control" required>
-                                </div>
+                                
                                 <div class="col-md-6">
                                   <label for="">Pemberi Ijin</label>
                                   <input type="text" name="pemberi_ijin" id="pemberi_ijin" class="form-control" required="">
                                 </div>
-                                
+                                <div class="col-md-6">
+                                  <label for="">Jenis Perijinan</label>
+                                  <input type="text" name="jenis_ijin" id="jenis_ijin" class="form-control" required>
+                                </div>
                                 </div>
                             </div>
                             <div class="modal-body">  
                               <div class="row">  
                                 
-                                <div class="col-md-6">
-                                  <label for="">Jenis Perijinan</label>
-                                  <input type="text" name="jenis_ijin" id="jenis_ijin" class="form-control" required>
-                                </div>
+                                
                                 <div class="col-md-6">
                                   <label for="">Tahun Perijinan</label>
                                   <input type="text" name="tahun" id="tahun" class="form-control" required onkeydown="return hanyaAngka(event)">
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="">Masa Berlaku Sampai</label>
+                                  <input type="date" name="masa_berlaku" id="masa_berlaku" class="form-control" required >
                                 </div>
                                 
                                 </div>
@@ -174,22 +179,12 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
                               <div class="row">
                                 
                                 
-                                <div class="col-md-6">
-                                  <label for="">Masa Berlaku Sampai</label>
-                                  <input type="date" name="masa_berlaku" id="masa_berlaku" class="form-control" required >
-                                </div>
+                                
                                 <div class="col-md-6">
                                   <label for="">Keterangan</label>
                                   <input type="text"  name="keterangan" id="keterangan" class="form-control" required >
                                 </div>
-                              </div>
-                            </div>
-
                              
-                            <div class="modal-body" > 
-                            <div class="row">   
-                                
-                                
 
                                 <div class="col-md-6" id="stts" style="display:none">
                                   <label for="">Status IMB</label>
@@ -208,7 +203,7 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
 
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" id="simpan">Simpan</button>
+                                <button type="submit" class="btn btn-primary" id="simpan">Simpan</button>
                                 <button type="button" class="btn btn-success" id="edit" style="display:none">Edit</button>
                               </div>
                             </form>
@@ -248,7 +243,7 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
                  "columns": [
                    {"data": "no"},
                    {"data": "imb_kode"},
-                   {"data": "nama_bangunan"},
+                   
                    {"data": "jenis_bangunan"},
                    {"data": "pemohon_nama"},
                    
@@ -275,22 +270,23 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
          	kosong();
          })
 
-         $('#simpan').on('click',function(){
-         	$.ajax({
-         		url: 'proses.php',
-         		type: 'POST',
-         		dataType: 'HTML',
-         		data: $('#modal_form').serialize(),
-         		// console.log(data);
-         		success:function(isi){
-         		$('#modal').modal('hide');
+         $('#modal_form').submit(function(e){
+          e.preventDefault();
+          $.ajax({
+            url: 'proses.php',
+            type: 'POST',
+            dataType: 'HTML',
+            data: $(this).serialize(),
+            // console.log(data);
+            success:function(isi){
+            $('#modal').modal('hide');
                 kosong();
                 $('#table').DataTable().ajax.reload();
-         		}
-         	})
-         	.fail(function() {
-         		console.log("error");
-         	})         	
+            }
+          })
+          .fail(function() {
+            console.log("error");
+          })          
          })
 
          function edit(isi){
@@ -303,7 +299,7 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
               
          			
               $('#imb_kode').val(json.imb_kode);
-              $('#nama_bangunan').val(json.imb_nama_bangunan);
+              //$('#nama_bangunan').val(json.imb_nama_bangunan);
               $('#jenis_bangunan').val(json.imb_jenis_bangunan);
               $('#lokasi').val(json.imb_lokasi_bangunan);
               $('#tahun').val(json.imb_tahun_perijinan);

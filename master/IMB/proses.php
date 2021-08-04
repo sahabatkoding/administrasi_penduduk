@@ -10,7 +10,6 @@ if($admin==0){
 $tgl_sekarang=date('y-m-d H:i:s');
 
 $pemohon= pn($_POST['pemohon']);
-$nama = $_POST['nama_bangunan'];
 $jenis = $_POST['jenis_bangunan'];
 $lokasi = $_POST['lokasi'];
 $tahun = $_POST['tahun'];
@@ -37,7 +36,6 @@ if($_GET['id']){
   $data   = array(
             
     "nik_pemohon" => $pemohon,
-    "imb_nama_bangunan" => $nama,
     "imb_kode" => $imb_kode,
     "imb_lokasi_bangunan" => $lokasi,
     "imb_jenis_bangunan"=> $jenis,  
@@ -55,24 +53,27 @@ if($_GET['id']){
 }else{
   $tabel = "ap_imb";
   $data  = array(
-    "imb_id" => newID($tabel,'imb_id'), 
+    "imb_id" => newID($tabel,'imb_id'),
+
+    "tgl_registrasi"=> $tgl_sekarang,
+    "tgl_update"=> $tgl_sekarang, 
     "nik_pemohon" => $pemohon,
-    "imb_nama_bangunan" => $nama,
     "imb_kode" => $imb_kode,
     "imb_lokasi_bangunan" => $lokasi,
-    "imb_jenis_bangunan"=> $jenis,  
+    
+    "imb_jenis_bangunan"=> $jenis, 
+    "imb_jenis_perijinan"=> $jenis_ijin, 
     "imb_pemberi_ijin"=> $pemberi_ijin,
-    "imb_jenis_perijinan"=> $jenis_ijin,
+    
     "imb_tahun_perijinan"=> $tahun,
     "imb_berlaku_sampai"=> $berlaku,
     "imb_status_persetujuan"=> $status,
     "imb_keterangan"=>$keterangan,
-    "tgl_update"=> $tgl_sekarang,
-    "tgl_registrasi"=> $tgl_sekarang,
+    
     "id_user"=>$id_user,
   );
   $sql = insert($tabel,$data);
-  // echo $sql;
+   echo $sql;
   query($sql);
 }
 ?>

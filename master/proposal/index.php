@@ -9,7 +9,6 @@ if($admin==0){
 
 
 $header = "Data Proposal";
-$dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
 
  ?>
 
@@ -76,7 +75,8 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
                   <th>Penyelenggara</th>
                   <th>Tgl Kegiatan</th>
                   <th>Lokasi</th>
-                  <th>Tujuan</th>
+                  <th>Tujuan Kegiatan</th>
+                  <th>Tujuan Proposal</th>
                   <th>Bentuk Bantuan</th>
                   <th>Uang</th>
                   <th>Barang</th>
@@ -113,12 +113,17 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
                                      <option id="atas">Silahkan Pilih</option>
                                      
 
-                                     <?php while($vale=mysqli_fetch_array($dt_option)){
-                                      ?>
+                                     <?php 
+                                    
+                                      $select_dt = "SELECT * FROM ap_pemohon ORDER BY pemohon_nik ASC";
+                                      $data_pemohon = $koneksi->query($select_dt);
+                                      foreach ($data_pemohon as $key => $value):
+                                     
+                                       ?>
                                       <option >
-                                        <?= $vale['pemohon_nik']." - ".$vale['pemohon_nama'];?>
+                                        <?= $value['pemohon_nik']." - ".$value['pemohon_nama'];?>
                                       </option>
-                                    <?php } ?>
+                                    <?php endforeach ?>
                                    
                                   </select>
                                   
@@ -164,38 +169,48 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
                                   <input type="text" name="tujuan_kegiatan" id="tujuan_kegiatan" class="form-control" required="">
                                 </div>
                                 <div class="col-md-6">
+                                  <label for="">Tujuan Proposal</label>
+                                  <select class="form-control" name="tujuan_proposal"  id="tujuan_proposal">
+                                    <option id="tp">Silahkan Pilih</option>
+                                    <option>Bupati</option>
+                                    <option>Gubernur</option>
+                                    <option>Kementrian</option>
+                                  </select>
+                                </div>
+                                
+                              </div>
+                            </div>
+                              <div class="modal-body">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <label for="">Keterangan</label>
+                                  <input type="text"  name="keterangan" id="keterangan" class="form-control" required >
+                                </div>
+                            <div class="col-md-6">
+
                                   <label for="">Permohonan Bantuan</label>
-                                  <select class="form-control" name="bantuan_bentuk" id="bantuan_bentuk">
+                                  <select class="form-control" name="bantuan_bentuk" onchange="permohonanBantuan(this.value)" id="bantuan_bentuk">
                                     <option id="pb">Silahkan Pilih</option>
-                                     
                                     <option>Uang</option>
                                     <option>Barang</option>
                                     <option>Uang dan Barang</option>
                                   </select>
                                 </div>
-                              </div>
-                            </div>
-
+                              </div></div>
                             <div class="modal-body">
                               <div class="row">
                                 
-                                <div class="col-md-6">
+                                <div class="col-md-6" id="form_bantuan_uang">
                                   <label for="">Bantuan Uang</label>
-                                  <input type="text" name="bantuan_uang" id="bantuan_uang" class="form-control" required onkeydown="return hanyaAngka(event)">
+                                  <input type="text" name="bantuan_uang" id="bantuan_uang" class="form-control" onkeydown="return hanyaAngka(event)">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6" id="form_bantuan_barang">
                                   <label for="">Bantuan Barang</label>
-                                  <input type="text" name="bantuan_barang" id="bantuan_barang" class="form-control" required>
+                                  <input type="text" name="bantuan_barang" id="bantuan_barang" class="form-control">
                                 </div>
-                              </div>
-                            </div>  
-                            <div class="modal-body"> 
-                            <div class="row">   
+                              
                                 
-                                <div class="col-md-6">
-                                  <label for="">Keterangan</label>
-                                  <input type="text"  name="keterangan" id="keterangan" class="form-control" required >
-                                </div>
+                                
 
                                 <div class="col-md-6" id="stts" style="display:none">
                                   <label for="">Status Proposal</label>
@@ -214,7 +229,7 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
 
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" id="simpan">Simpan</button>
+                                <button type="submit" class="btn btn-primary" id="simpan">Simpan</button>
                                 <button type="button" class="btn btn-success" id="edit" style="display:none">Edit</button>
                               </div>
                             </form>
@@ -234,11 +249,25 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
            $('#edit').css('display','none');
            $('#simpan').css('display','inline-block');
           $('#pb').html('Silahkan Pilih');
+          $('#tp').html('Silahkan Pilih');
           $('#atas').html('Silahkan Pilih');
            $('#stts').css('display','none');
          }
 
+         function permohonanBantuan(value){
 
+          if (value == 'Uang') {
+            $('#form_bantuan_barang').css('display', 'none');
+            $('#form_bantuan_uang').css('display', 'inline-block');
+          }else if(value == 'Barang'){
+            $('#form_bantuan_barang').css('display', 'inline-block');
+            $('#form_bantuan_uang').css('display', 'none');
+          }else if(value == 'Uang dan Barang'){
+            $('#form_bantuan_barang').css('display', 'inline-block');
+            $('#form_bantuan_uang').css('display', 'inline-block');
+          }
+
+         }
 	$(function () {
            /* Isi Table */
              $('#table').DataTable({
@@ -261,6 +290,7 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
                    
                    {"data": "lokasi_kegiatan"},
                    {"data": "tujuan_kegiatan"},
+                   {"data": "tujuan_proposal"},
                    
                    {"data": "bentuk_bantuan"},
                    {"data": "bantuan_uang"},
@@ -285,24 +315,23 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
             
         }
 
-         $('#simpan').on('click',function(){
-         	
+          $('#modal_form').submit(function(e){
+          e.preventDefault();
           $.ajax({
-         		url: 'proses.php',
-         		type: 'POST',
-         		dataType: 'HTML',
-         		data: $('#modal_form').serialize(),
-         		// console.log(data);
-
-         		success:function(isi){
-         		$('#modal').modal('hide');
+            url: 'proses.php',
+            type: 'POST',
+            dataType: 'HTML',
+            data: $(this).serialize(),
+            // console.log(data);
+            success:function(isi){
+            $('#modal').modal('hide');
                 kosong();
                 $('#table').DataTable().ajax.reload();
-         		}
-         	})
-         	.fail(function() {
-         		console.log("error");
-         	})         	
+            }
+          })
+          .fail(function() {
+            console.log("error");
+          })          
          })
 
          function edit(isi){
@@ -313,7 +342,7 @@ $dt_option=mysqli_query($koneksi,"SELECT * FROM ap_pemohon");
           //var select = document.getElementById('pemohon');
          	$.getJSON('data.php', {id: isi}, function(json) {
               $('#pb').html(json.proposal_bantuan_bentuk);
-         			
+         			$('#tp').html(json.proposal_tujuan);
               $('#proposal_kode').val(json.proposal_kode);
               $('#nama_kegiatan').val(json.proposal_nama_kegiatan);
               $('#jenis_kegiatan').val(json.proposal_jenis_kegiatan);

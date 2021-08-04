@@ -23,7 +23,7 @@ if(isset($_GET['id'])){
    
     $isi['pemohon_nama']=$value['pemohon_nama'];
     $isi['imb_kode']=$value['imb_kode'];
-    $isi['nama_bangunan']=$value['imb_nama_bangunan'];
+    //$isi['nama_bangunan']=$value['imb_nama_bangunan'];
     $isi['jenis_bangunan']=$value['imb_jenis_bangunan'];
     $isi['lokasi_bangunan']=$value['imb_lokasi_bangunan'];
     $isi['jenis_perijinan']=$value['imb_jenis_perijinan'];
