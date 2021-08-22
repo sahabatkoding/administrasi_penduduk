@@ -2,11 +2,12 @@
 <?php 
 require_once '../konektor.php';
 
-if($admin==0){
+if(@$admin==0 && @$kasi_3==0){
   ?>
   <script>location.href="<?=$MASTER?>login/logout.php"</script>
   <?php
 }
+
 $tgl_sekarang=date('y-m-d H:i:s');
 
 $pemohon= pn($_POST['pemohon']);

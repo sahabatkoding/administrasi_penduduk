@@ -1,5 +1,5 @@
 <!-- sidebar untuk admin -->
-<?php if($admin=='1'): ?>
+<?php if($_SESSION['level']=='admin'): ?>
 <div class="left-side-bar">
 		<div class="brand-logo">
 			<a href="<?= $ROOT ?>">
@@ -124,8 +124,8 @@
 	</div>
 <?php endif; ?>
 	<!-- sidebar untuk kasi_1 -->
-<?php if($kasi_1=='1'): ?>
-<div class="left-side-bar">
+<?php if($_SESSION['level']=='kasi_1'): ?>
+<div class="left-side-bar bg-info">
 		<div class="brand-logo">
 			<a href="<?= $ROOT ?>">
 				SI Administrasi
@@ -180,7 +180,7 @@
 		</div>
 	</div>
 <?php endif; ?>
-<?php if($kasi_2=='1'): ?>
+<?php if($_SESSION['level']=='kasi_2'): ?>
 	<div class="left-side-bar">
 		<div class="brand-logo">
 			<a href="<?= $ROOT ?>">
@@ -231,8 +231,8 @@
 		</div>
 	</div>
 <?php endif; ?>
-<?php if($kasi_3=='1'): ?>
-<div class="left-side-bar">
+<?php if($_SESSION['level']=='kasi_3'): ?>
+<div class="left-side-bar bg-primary">
 		<div class="brand-logo">
 			<a href="<?= $ROOT ?>">
 				SI Administrasi

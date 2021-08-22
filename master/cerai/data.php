@@ -2,7 +2,7 @@
 require_once '../konektor.php';
   
 
-if($admin==0 && $kasi_2==0){
+if(@$admin==0 && @$kasi_2==0){
   ?>
   <script>location.href="<?=$MASTER?>login/logout.php"</script>
   <?php
@@ -12,9 +12,9 @@ $hasil = array();
 
 $sql = "SELECT a.* , b.penduduk_nama , b.penduduk_tempat_lahir , b.penduduk_tanggal_lahir , 
 		b.penduduk_pekerjaan , b.penduduk_alamat FROM ap_permohonan_cerai a LEFT JOIN ap_penduduk b ON a.nik_pemohon = b.nik  ";
-if($_GET['id']!='') $sql .= " WHERE pcerai_id = '".$_GET['id']."'";
+if(@$_GET['id']!='') $sql .= " WHERE pcerai_id = '".@$_GET['id']."'";
 $data = $koneksi->query($sql)or die($koneksi->error);
-if($_GET['id']){
+if(@$_GET['id']){
   $hasil = $data->fetch_array();
 }else{
   foreach($data as $key=>$value){
@@ -24,7 +24,7 @@ if($_GET['id']){
 	// $isi["tanggal_acara"] = tanggal_indo($value["tgl_nikah"]); 
 	$isi["nik"] = $value["nik_pemohon"]; 
 	$isi["nama"] = $value["penduduk_nama"]; 
-	$isi["ttl"] = $value["penduduk_tempat_lahir"].", ".tanggal_indo($value['penduduk_tanggal_lahir']); 
+	$isi["ttl"] = $value["penduduk_tempat_lahir"].", ".@tanggal_indo($value['penduduk_tanggal_lahir']); 
 	$isi["pekerjaan"] = $value["penduduk_pekerjaan"]; 
 	$isi["alamat"] = $value["penduduk_alamat"]; 
 	$isi["tempat"] = $value["pcerai_tempat"]; 

@@ -2,7 +2,8 @@
 require_once '../konektor.php';
 
 
-if($admin==0){
+
+if(@$admin==0 && @$kasi_1 == 0){
   ?>
   <script>location.href="<?=$MASTER?>login/logout.php"</script>
   <?php

@@ -1,8 +1,17 @@
+<!-- kelahiran_id tgl_registrasi	tgl_update	kelahiran_kode	nik_pemohon	kelahiran_nama	kelahiran_jk	kelahiran_alamat	kelahiran_agama	kelahiran_tempat_lahir	kelahiran_tanggal_lahir	id_user -->
+
 <?php 
 require_once '../konektor.php';
 
+if(@$admin==0 && @$kasi_1 == 0){
+  ?>
+  <script>location.href="<?=$MASTER?>login/logout.php"</script>
+  <?php
+}
 
-$header = "Data Penduduk";
+
+
+$header = "Data Pindah Datang";
 
  ?>
 
@@ -24,9 +33,8 @@ $header = "Data Penduduk";
 				<div class="card-box mb-30">
 					<div class="pd-20">
 						<h4 class="text-blue h4"><?= $header ?>
-
 						<span class="pull-right">
-							<a href="<?= $MASTER ?>master/penduduk/tambah.php" class="btn btn-primary" name="tambah">Tambah</a>
+							<a href="<?= $MASTER ?>master/pindah_datang/tambah.php" class="btn btn-primary" name="tambah">Tambah</a>
 						</span>
 						</h4>
 					</div>
@@ -36,33 +44,16 @@ $header = "Data Penduduk";
 							<table class="table hover stripe nowrap table-bordered" id="table" width="100%">
 							<thead>
 								<tr>
+									<th>KODE</th>
+									<th>TGL REGISTRASI</th>
+									<th>TGL DATANG</th>
 									<th>NIK</th>
-									<th>NO KK</th>
-									<th>NO AKTA</th>
-									<th>NAMA LENGKAP</th>
-									<th>TEMPAT, TANGGAL LAHIR</th>
+									<th>NAMA</th>
 									<th>JENIS KELAMIN</th>
-									<th>GOL.DARAH</th>
-									<th>ALAMAT</th>
-									<th>RT/RW</th>
-									<th>KELURAHAN</th>
-									<th>KECAMATAN</th>
-									<th>KABUPATEN</th>
-									<th>PROVINSI</th>
 									<th>AGAMA</th>
-									<th>STATUS PERKAWINAN</th>
-									<th>PENDIDIKAN</th>
-									<th>PEKERJAAN</th>
-									<th>KEWARGANEGARAAN</th>
-									<th>NO PASSPORT</th>
-									<th>NO KITAS</th>
-									<th>NAMA AYAH</th>
-									<th>NAMA IBU</th>
-									<th>STATUS KELUARGA</th>
-									<th>STATUS</th>
-									<th>TELEPHONE</th>
-									<th>PHOTO</th>
-									<th>USER INPUT</th>
+									<th>TEMPAT TANGGAL LAHIR</th>
+									<th>ALAMAT ASAL</th>
+									<th>ALASAN PINDAH</th>
 									<th>EDIT</th>
 									<th>HAPUS</th>
 								</tr>
@@ -78,14 +69,14 @@ $header = "Data Penduduk";
 	<script>
    $(function () {
      /* Isi Table */
-       $('#table').DataTable({
-        "scrollX": true,
-         "ajax": {
-             "url": "data.php",
-             "dataSrc": ""
-           },
-       });
-   });
+	    $('#table').DataTable({
+	        "scrollX": true,
+	         "ajax": {
+	             "url": "data.php",
+	             "dataSrc": ""
+	           },
+	       });
+	   });
 
 
          function hapus(isi){

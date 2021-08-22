@@ -2,12 +2,6 @@
 require_once '../konektor.php';
 
 
-if($admin==0){
-  ?>
-  <script>location.href="<?=$MASTER?>login/logout.php"</script>
-  <?php
-}
-
 $hasil = array();
 
 $sql = "SELECT * FROM ap_penduduk 
@@ -18,12 +12,9 @@ $sql = "SELECT * FROM ap_penduduk
   LEFT JOIN ap_agama ON ap_agama.agama_id=ap_penduduk.id_agama
   LEFT JOIN ap_pendidikan ON ap_pendidikan.pendidikan_id=ap_penduduk.id_pendidikan 
   LEFT JOIN ap_user ON ap_user.user_id=ap_penduduk.id_user ";
-if(@$_GET['id']!='') $sql .= " WHERE nik = '".$_GET['id']."'";
+if(@$_GET['id']!='') $sql .= " WHERE nik = '".@$_GET['id']."'";
 
 $data = $koneksi->query($sql);
-
-// var_dump($data);
-// die;
 
 if(isset($_GET['id'])){
   $hasil = $data->fetch_array();

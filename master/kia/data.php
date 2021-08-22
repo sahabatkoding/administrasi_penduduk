@@ -1,20 +1,14 @@
 <?php 
 require_once '../konektor.php';
   
-if($admin==0 && $kasi_2==0){
-  ?>
-  <script>location.href="<?=$MASTER?>login/logout.php"</script>
-  <?php
-}
-
 
 $hasil = array();
 
 $sql = "SELECT a.kia_id,a.tgl_registrasi,a.kia_kode,a.kia_nik,b.penduduk_nama AS `nama_anak`,b.penduduk_tempat_lahir,b.penduduk_tanggal_lahir,c.penduduk_nama AS 'nama_ortu',a.kia_berlaku,a.id_user FROM ap_kia a LEFT JOIN ap_penduduk b ON a.kia_nik = b.nik LEFT JOIN ap_penduduk c on a.nik_orang_tua = c.nik";
-if($_GET['id']!='') $sql .= " WHERE kia_id = '".$_GET['kia_id']."'";
+if(@$_GET['id']!='') $sql .= " WHERE kia_id = '".@$_GET['kia_id']."'";
 $data = query($sql);
  // die();
-if($_GET['id']){
+if(@$_GET['id']){
   $hasil = fetch($data);
 }else{
   foreach($data as $key=>$value){

@@ -10,14 +10,14 @@ if($admin==0){
 
 $hasil = array();
 
-switch($_GET['data']){
+switch(@$_GET['data']){
   case 'provinsi':
     $sql = "SELECT * FROM ap_provinsi ";
-    if($_GET['id']!='') $sql .= " WHERE provinsi_id = '".$_GET['id']."'";
+    if(@$_GET['id']!='') $sql .= " WHERE provinsi_id = '".@$_GET['id']."'";
 
     $data = $koneksi->query($sql);
 
-    if($_GET['id']){
+    if(@$_GET['id']){
       $hasil = $data->fetch_array();
     }else{
       foreach($data as $key=>$value){
@@ -35,11 +35,11 @@ switch($_GET['data']){
    $where = '1=1';
    $sql = "SELECT * FROM ap_kabupaten WHERE id_provinsi='".$_GET['id_provinsi']."'";
 
-    if($_GET['id']!='') $sql .= " AND kabupaten_id = '".$_GET['id']."'";
+    if(@$_GET['id']!='') $sql .= " AND kabupaten_id = '".@$_GET['id']."'";
 
     $data = $koneksi->query($sql);
 // var_dump($sql);
-    if($_GET['id']){
+    if(@$_GET['id']){
       $hasil = $data->fetch_array();
     }else{
       foreach($data as $key=>$value){
@@ -55,11 +55,11 @@ switch($_GET['data']){
     break;
     case 'kecamatan';
       $where = '1=1';
-      $sql = "SELECT * FROM ap_kecamatan WHERE id_kabupaten='".$_GET['id_kabupaten']."'";
-      if($_GET['id']!='') $sql .= " AND kecamatan_id = '".$_GET['id']."'";
+      $sql = "SELECT * FROM ap_kecamatan WHERE id_kabupaten='".@$_GET['id_kabupaten']."'";
+      if(@$_GET['id']!='') $sql .= " AND kecamatan_id = '".@$_GET['id']."'";
         $data = $koneksi->query($sql);
     // var_dump($sql);
-        if($_GET['id']){
+        if(@$_GET['id']){
           $hasil = $data->fetch_array();
         }else{
           foreach($data as $key=>$value){
@@ -75,11 +75,11 @@ switch($_GET['data']){
     break;
     case 'kelurahan';
       $where = '1=1';
-      $sql = "SELECT * FROM ap_kelurahan WHERE id_kecamatan='".$_GET['id_kecamatan']."'";
-      if($_GET['id']!='') $sql .= " AND kelurahan_id = '".$_GET['id']."'";
+      $sql = "SELECT * FROM ap_kelurahan WHERE id_kecamatan='".@$_GET['id_kecamatan']."'";
+      if(@$_GET['id']!='') $sql .= " AND kelurahan_id = '".@$_GET['id']."'";
         $data = $koneksi->query($sql);
     // var_dump($sql);
-        if($_GET['id']){
+        if(@$_GET['id']){
           $hasil = $data->fetch_array();
         }else{
           foreach($data as $key=>$value){

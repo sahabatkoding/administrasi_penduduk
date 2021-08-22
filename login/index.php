@@ -14,12 +14,6 @@ $data = $result->fetch_array();
 	<!-- Basic Page Info -->
 	<meta charset="utf-8">
 	<title>Login</title>
-
-	<!-- Site favicon -->
-<!-- 	<link rel="apple-touch-icon" sizes="180x180" href="../assets/vendors/images/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="../assets/vendors/images/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="../assets/vendors/images/favicon-16x16.png">
- -->
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -56,10 +50,10 @@ $data = $result->fetch_array();
 	<div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
 		<div class="container">
 			<div class="row align-items-center">
-				<div class="col-md-6 col-lg-7">
-					<img src="../assets/vendors/images/login-page-img.png" alt="">
+				<div class="col-lg-4">
+					<!-- <img src="../assets/vendors/images/login-page-img.png" alt=""> -->
 				</div>
-				<div class="col-md-6 col-lg-5">
+				<div class="col-lg-5">
 					<div class="login-box bg-white box-shadow border-radius-10">
 						<div class="login-title">
 							<h2 class="text-center text-primary">SI ADMINISTRASI KECAMATAN</h2>

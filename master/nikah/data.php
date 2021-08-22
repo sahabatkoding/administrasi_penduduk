@@ -1,8 +1,8 @@
 <?php 
 require_once '../konektor.php';
-  
 
-if($admin==0 && $kasi_2==0){
+
+if(@$admin==0 && @$kasi_2==0){
   ?>
   <script>location.href="<?=$MASTER?>login/logout.php"</script>
   <?php
@@ -12,9 +12,9 @@ $hasil = array();
 
 $sql = "SELECT a.* , b.penduduk_nama , b.penduduk_tempat_lahir , b.penduduk_tanggal_lahir , 
 		b.penduduk_pekerjaan , b.penduduk_alamat FROM ap_permohonan_nikah a LEFT JOIN ap_penduduk b ON a.nik_pemohon = b.nik  ";
-if($_GET['id']!='') $sql .= " WHERE pnikah_id = '".$_GET['id']."'";
+if(@$_GET['id']!='') $sql .= " WHERE pnikah_id = '".@$_GET['id']."'";
 $data = $koneksi->query($sql)or die($koneksi->error);
-if($_GET['id']){
+if(@$_GET['id']){
   $hasil = $data->fetch_array();
 }else{
   foreach($data as $key=>$value){

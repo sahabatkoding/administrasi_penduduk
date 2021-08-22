@@ -1,11 +1,13 @@
 <?php  
 require_once '../konektor.php';
 
-if($admin==0){
+
+if(@$admin==0 && @$kasi_1 == 0){
   ?>
   <script>location.href="<?=$MASTER?>login/logout.php"</script>
   <?php
 }
+
 
 if ($_GET['action'] == 'simpan' ) {
 
@@ -232,7 +234,7 @@ if ($_GET['action'] == 'edit') {
     "id_user" => $id_user
   );
 
-  $sql    = update($tabel,$data,$id);
+  $sql    = update($tabel,$data,'nik='.$id);
   query($sql);
 
   if ($query) {
